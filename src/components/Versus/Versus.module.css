@@ -1,0 +1,12 @@
+.Versus {
+  /* position: absolute;
+  top: 50%;
+  right: -7.5%;
+  transform: translate3d(-50%,-50%,0);
+  z-index: 1000; */
+  width: 2.5%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+
+
+
+.square {}
+
+.square.entering {
+  animation: square 1000ms ease-out forwards;
+}
+
+.square.exiting {
+  animation: square 501ms ease-in alternate-reverse;
+}
+
+.square.exited {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+@keyframes square {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(30px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+
+}
+
+
+.os-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.os-exit-active {
+  transform: translateX(100px);
+  transition: transform 1s, opacity 500ms;
+
+  opacity: 0;
+}
+
+.os-exit-done {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.os-enter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.os-enter-active {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: transform 1s, opacity 500ms;
+}
+
+.os-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+.as-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.as-exit-active {
+  transform: translateX(-100px);
+  transition: transform 1s, opacity 500ms;
+
+  opacity: 0;
+}
+
+.as-exit-done {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.as-enter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.as-enter-active {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: transform 1s, opacity 500ms;
+}
+
+.os-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
