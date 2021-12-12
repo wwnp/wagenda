@@ -117,3 +117,13 @@ code {
   opacity: 1;
   transform: translateX(0);
 }
+
+
+
+
+.form-check-input {
+}
+.form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
+}

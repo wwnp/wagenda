@@ -91,6 +91,7 @@ class Compare extends Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.arrayFirst.length !== this.state.arraySecond.length) {
       throw new Error('arrays length doesn\'t match')
     }

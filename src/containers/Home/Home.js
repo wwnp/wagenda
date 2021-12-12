@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Component } from 'react';
+import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom'
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux'
@@ -9,85 +11,158 @@ import { fetchCountries } from '../../redux/actions/homeAction';
 import { delay } from '../../dox';
 import { startLoading, hideLoading } from '../../redux/actions/loadingAction';
 import Loader from '../../components/Loader/Loader'
-const Home = (props) => {
-  console.log(props)
-  const [inProp, setInProp] = useState(true);
-  const [choosedContries, setCountries] = useState([])
-  const modalButton = {
-    // backgroundImage: 'url(' + countriesFlags.france + ')',
-    backgroundSize: 'contain',
-    height: '79px',
-    width: '119px',
-    backgroundRepeat: 'no-repeat',
-    marginLeft: '10px',
-    marginRight: '10px',
+import Button from '../../components/Button/Button';
+const duration = 500;
+const modalButton = {
+  backgroundImage: 'url(' + countriesFlags.france + ')',
+}
+class Home extends Component {
+  // state = {
+  //   choosedCountries: [],
+  //   choosedElements: [],
+  // }
+
+  // chooseHandler = (e) => {
+  //   this.state.choosedElements.forEach((el) => {
+  //     el.classList.remove('active')
+  //   })
+  //   e.preventDefault()
+  //   this.setState({
+  //     choosedCountries : [...this.state.choosedCountries, e.target.dataset.country],
+  //     choosedElements : [...this.state.choosedElements, e.target],
+  //   })
+  //   e.target.classList.add('active')
+  // }
+  state = {
+    countryOne: null,
+    countryTwo: null,
   }
-  const chooseHandler = (e) => {
-    if (choosedContries.length >= 2) {
-      choosedContries.push(e.target.dataset.country)
-    } else {
-      choosedContries.push(e.target.dataset.country)
+  chooseHandler = e => {
+    e.preventDefault()
+    if (!this.state.countryOne) {
+      this.setState({
+        countryOne: {
+          name: e.target.dataset.country,
+          element: e.target
+        }
+      })
+      e.target.classList.add('active')
+    } else if (!this.state.countryTwo) {
+      this.setState({
+        countryTwo: {
+          name: e.target.dataset.country,
+          element: e.target
+        }
+      })
+      e.target.classList.add('active')
+    }
+    // else {
+    //   this.setState({
+    // countryOne: null,
+    // countryTwo: null,
+    //   })
+    //   e.target.classList.remove('active')
+    // }
+  }
+  resetCountries(e) {
+    e.preventDefault()
+    this.setState({
+      countryOne: null,
+      countryTwo: null,
+    })
+    if (this.state.countryOne) {
+      this.state.countryOne.element.classList.remove('active')
+    }
+    if (this.state.countryOne && this.state.countryTwo) {
+      this.state.countryOne.element.classList.remove('active')
+      this.state.countryTwo.element.classList.remove('active')
     }
   }
-  const duration = 500;
 
-  const test = (e) => {
-    const targetCountry = e.target.dataset.country
-    if (targetCountry) {
-      console.log(targetCountry)
-    }
+  componentDidMount() {
+    this.props.startLoading()
+    // await delay(800)
+
+    this.props.fetchCountries()
+
+    this.props.hideLoading()
   }
 
-  useEffect(() => {
-    (async () => {
-      props.startLoading()
-      await delay(800)
+  render() {
+    console.log(this.state)
+    // const navigate = useNavigate()
+    return (
+      <Container>
+        <h1 className='text-center'>Choose two countries to compare:</h1>
 
-      props.fetchCountries()
-
-      props.hideLoading()
-    })()
-  }, [])
-  return (
-    <Container>
-      <h1 className='text-center'>Choose two countries to compare:</h1>
-
-      {props.loading
-        ? <Loader></Loader>
-        : <form className={classes.formCountries} onClick={(e) => test(e)}>
-          {props.countries.map((country, index) => {
-            return <Col
-              key={index}
-              xs='4'
-              className='text-center my-5'
-            >
+        {this.props.loading
+          ? <Loader></Loader>
+          : <React.Fragment>
+            <form className={classes.formCountries}>
+              {this.props.countries.map((country, index) => {
+                return <Col
+                  key={index}
+                  xs='4'
+                  className='text-center my-5'
+                >
+                  <CSSTransition
+                    timeout={500}
+                    classNames='os'
+                  >
+                    {state => (
+                      <Button
+                        state={state}
+                        country={country}
+                        onCLick={(e) => this.chooseHandler(e)}
+                        customStyle={modalButton}
+                      >
+                      </Button>
+                    )}
+                  </CSSTransition>
+                </Col>
+              })}
+              <hr />
               <CSSTransition
-                in={inProp}
                 timeout={500}
                 classNames='os'
               >
                 {state => (
-                  <Button
-                    className={`${state}`}
-                    style={modalButton}
-                    data-country={country}
-                  >
-                    {country}
-                  </Button>
+                  <div>
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked readOnly />
+                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                        Capital
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                      <label className="form-check-label" htmlFor="flexRadioDefault2">
+                        Province
+                      </label>
+                    </div>
+                  </div>
                 )}
               </CSSTransition>
-            </Col>
-          })}
-        </form>
-      }
 
-      <button className='btn btn-secondary' onClick={() => setInProp(!inProp)}>
-        Click to Enter
-      </button>
-      <Link to='/compare'>Compare</Link>
-    </Container>
-  )
+
+            </form>
+            <div className="text-center"><button className='btn btn-sm bg-warning' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
+            <hr />
+            <div className="text-center">
+              <button className='btn btn-success btn-lg' onClick={() => this.props.navigate('/compare', { state: { test: 'sex' }, replace: false })}>
+                Start
+              </button>
+            </div>
+          </React.Fragment>
+        }
+
+
+
+      </Container>
+    )
+  }
 }
+
 function mapStateToProps(state) {
   return {
     test: state.test.test,
@@ -103,3 +178,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// export default function () {
+//   const navigate = useNavigate()
+//   return connect(mapStateToProps, mapDispatchToProps)(Home)
+// }
