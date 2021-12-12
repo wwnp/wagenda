@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Component } from 'react';
-import { useNavigate } from "react-router-dom"
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
@@ -11,31 +10,19 @@ import { fetchCountries } from '../../redux/actions/homeAction';
 import { delay } from '../../dox';
 import { startLoading, hideLoading } from '../../redux/actions/loadingAction';
 import Loader from '../../components/Loader/Loader'
-import Button from '../../components/Button/Button';
+import Button from '../../components/CountryButton/CountryButton';
 const duration = 500;
 const modalButton = {
-  backgroundImage: 'url(' + countriesFlags.france + ')',
+  backgroundImage: 'url(https://cdn.britannica.com/42/3842-004-F47B77BC/Flag-Russia.jpg)',
+  // backgroundImage: 'url(' + countriesFlags.france + ')',
 }
+const CAPITAL = 'capital'
+const PROVINCE = 'province'
 class Home extends Component {
-  // state = {
-  //   choosedCountries: [],
-  //   choosedElements: [],
-  // }
-
-  // chooseHandler = (e) => {
-  //   this.state.choosedElements.forEach((el) => {
-  //     el.classList.remove('active')
-  //   })
-  //   e.preventDefault()
-  //   this.setState({
-  //     choosedCountries : [...this.state.choosedCountries, e.target.dataset.country],
-  //     choosedElements : [...this.state.choosedElements, e.target],
-  //   })
-  //   e.target.classList.add('active')
-  // }
   state = {
     countryOne: null,
     countryTwo: null,
+    typeRadio: CAPITAL
   }
   chooseHandler = e => {
     e.preventDefault()
@@ -56,13 +43,6 @@ class Home extends Component {
       })
       e.target.classList.add('active')
     }
-    // else {
-    //   this.setState({
-    // countryOne: null,
-    // countryTwo: null,
-    //   })
-    //   e.target.classList.remove('active')
-    // }
   }
   resetCountries(e) {
     e.preventDefault()
@@ -79,9 +59,9 @@ class Home extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.startLoading()
-    // await delay(800)
+    await delay(800)
 
     this.props.fetchCountries()
 
@@ -90,11 +70,10 @@ class Home extends Component {
 
   render() {
     console.log(this.state)
-    // const navigate = useNavigate()
+    const cls = [classes['bg-shadow'], classes['container-custom'], 'p-4']
     return (
-      <Container>
+      <Container className={cls.join(' ')}>
         <h1 className='text-center'>Choose two countries to compare:</h1>
-
         {this.props.loading
           ? <Loader></Loader>
           : <React.Fragment>
@@ -129,13 +108,13 @@ class Home extends Component {
                 {state => (
                   <div>
                     <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked readOnly />
+                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" defaultChecked onClick={() => this.setState({ typeRadio: CAPITAL })} />
                       <label className="form-check-label" htmlFor="flexRadioDefault1">
                         Capital
                       </label>
                     </div>
                     <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                      <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={() => this.setState({ typeRadio: PROVINCE })} />
                       <label className="form-check-label" htmlFor="flexRadioDefault2">
                         Province
                       </label>
@@ -146,7 +125,7 @@ class Home extends Component {
 
 
             </form>
-            <div className="text-center"><button className='btn btn-sm bg-warning' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
+            <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
             <hr />
             <div className="text-center">
               <button className='btn btn-success btn-lg' onClick={() => this.props.navigate('/compare', { state: { test: 'sex' }, replace: false })}>

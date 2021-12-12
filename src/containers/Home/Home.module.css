@@ -6,3 +6,11 @@
   flex-wrap: wrap;
 }
 
+.bg-shadow {
+  background: rgba(0,0,0,0.2);
+  /* background-color: rgb(155, 32, 32); */
+}
+
+.container-custom {
+  max-width: 800px;
+}
