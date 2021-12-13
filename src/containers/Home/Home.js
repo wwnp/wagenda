@@ -7,15 +7,13 @@ import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux'
 import classes from './Home.module.css'
 import { fetchCountries } from '../../redux/actions/homeAction';
-import { delay } from '../../dox';
-import { startLoading, hideLoading } from '../../redux/actions/loadingAction';
 import Loader from '../../components/Loader/Loader'
-import Button from '../../components/CountryButton/CountryButton';
-const duration = 500;
-const modalButton = {
-  backgroundImage: 'url(https://cdn.britannica.com/42/3842-004-F47B77BC/Flag-Russia.jpg)',
-  // backgroundImage: 'url(' + countriesFlags.france + ')',
-}
+import CountryButton from '../../components/CountryButton/CountryButton';
+import Button from '../../components/Button/Button';
+import { setComparedCountries } from '../../redux/actions/homeAction';
+import { bindActionCreators } from 'redux'
+import { useNavigate } from 'react-router-dom';
+// const duration = 500;
 const CAPITAL = 'capital'
 const PROVINCE = 'province'
 class Home extends Component {
@@ -58,22 +56,20 @@ class Home extends Component {
       this.state.countryTwo.element.classList.remove('active')
     }
   }
-
-  async componentDidMount() {
-    this.props.startLoading()
-    await delay(800)
-
-    this.props.fetchCountries()
-
-    this.props.hideLoading()
-  }
-
+  // startCompare = async e => {
+  //   await this.props.fetchLocations()
+  //   await delay(2000)
+  // }
   render() {
-    console.log(this.state)
-    const cls = [classes['bg-shadow'], classes['container-custom'], 'p-4']
+    console.log(this.props)
+    const clsContainer = [classes['bg-shadow'], classes['container-custom'], 'p-4']
+    const clsButton = ['btn-lg', 'btn-success',]
+    if (!(this.state.countryOne && this.state.countryTwo)) {
+      clsButton.push('disabled')
+    }
     return (
-      <Container className={cls.join(' ')}>
-        <h1 className='text-center'>Choose two countries to compare:</h1>
+      <Container className={clsContainer.join(' ')}>
+        <h6 className='display-6 text-center'>Choose two countries to compare:</h6>
         {this.props.loading
           ? <Loader></Loader>
           : <React.Fragment>
@@ -89,13 +85,14 @@ class Home extends Component {
                     classNames='os'
                   >
                     {state => (
-                      <Button
+                      <CountryButton
                         state={state}
                         country={country}
                         onCLick={(e) => this.chooseHandler(e)}
-                        customStyle={modalButton}
+                        // customStyle={modalButton}
+                        urlFlag={countriesFlags[country.toLowerCase()]}
                       >
-                      </Button>
+                      </CountryButton>
                     )}
                   </CSSTransition>
                 </Col>
@@ -128,23 +125,21 @@ class Home extends Component {
             <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
             <hr />
             <div className="text-center">
-              <button className='btn btn-success btn-lg' onClick={() => this.props.navigate('/compare', { state: { test: 'sex' }, replace: false })}>
-                Start
-              </button>
+              {/* <Button classAdd={clsButton.join(' ')} navTo='/compare'></Button> */}
+              <Button classAdd={clsButton.join(' ')} onClick={() => this.props.setComparedCountries(this.state.countryOne.name,this.state.countryTwo.name)} navTo='/compare'></Button>
             </div>
           </React.Fragment>
         }
-
-
-
       </Container>
     )
+  }
+  async componentDidMount() {
+    await this.props.fetchCountries()
   }
 }
 
 function mapStateToProps(state) {
   return {
-    test: state.test.test,
     countries: state.home.countries,
     loading: state.loading.loading,
   }
@@ -152,12 +147,15 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCountries: () => { dispatch(fetchCountries()) },
-    startLoading: () => { dispatch(startLoading()) },
-    hideLoading: () => { dispatch(hideLoading()) },
+    setComparedCountries: bindActionCreators(setComparedCountries,dispatch)  
+    // startLoading: () => { dispatch(startLoading()) },
+    // hideLoading: () => { dispatch(hideLoading()) },
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
-// export default function () {
-//   const navigate = useNavigate()
-//   return connect(mapStateToProps, mapDispatchToProps)(Home)
-// }
+ function withRouter(Component) {
+  return ( props ) => {
+    const navigate = useNavigate();
+    return <Component { ...props } navigate={ navigate } />;
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home))

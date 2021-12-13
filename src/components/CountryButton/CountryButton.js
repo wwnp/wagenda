@@ -2,13 +2,16 @@ import React from 'react'
 import './CountryButton.css'
 import { useNavigate } from "react-router-dom"
 
-const Button = props => {
+const CountryButton = props => {
   const navigate = useNavigate()
+  const modalButton = {
+    backgroundImage: 'url(' + props.urlFlag + ')',
+  }
   return (
     <div className='CountryWrapper'>
       <button
         className={'CountryButton ' + props.state}
-        style={props.customStyle}
+        style={modalButton}
         data-country={props.country}
         onClick={props.onCLick}
       >
@@ -17,4 +20,4 @@ const Button = props => {
     </div>
   )
 }
-export default Button
+export default CountryButton

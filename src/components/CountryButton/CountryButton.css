@@ -4,13 +4,16 @@
 .CountryButton {
   background-size: contain;
   height: 79px;
-  width: 119px;
-  /* background-repeat: no-repeat; */
+  width: 118px;
+  background-repeat: no-repeat;
   margin-left: 10px;
   margin-right: 10px;
+  transition: border .15s, box-shadow .15s;
+  border: 1px solid black ;
 }
 .CountryButton.active {
-  border: 2px solid #00ff00;
+  border: 1px solid #00ff00;
+  box-shadow: 1px 2px 3px #00ff00;
 }
 
 
