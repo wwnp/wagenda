@@ -3055,6 +3055,11 @@ babylon@^6.18.0:
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
   integrity sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
 
+background-cover@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/background-cover/-/background-cover-0.1.1.tgz#947e4440f12fd2b7c2a93d40fdcab53468acdf88"
+  integrity sha512-JXa8vLJdCk5IQtbFBmdgRjdmNA7rwKWXw5VFn4fxahW8kLMLtBvgzczkaMANYddbAMZdtNQLjkW+elac2qLqXw==
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -6253,6 +6258,11 @@ ini@^1.3.5:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
+insert-rule@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/insert-rule/-/insert-rule-2.1.0.tgz#7ba24387031ac24b567c254daa7c9df036191f5a"
+  integrity sha1-e6JDhwMawktWfCVNqnyd8DYZH1o=
+
 internal-ip@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-4.3.0.tgz#845452baad9d2ca3b69c635a137acb9a0dad0907"
@@ -6269,6 +6279,11 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
+
+intervalometer@^1.0.4:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/intervalometer/-/intervalometer-1.0.5.tgz#f43a16d223d0cf09624e35617934c930adc5e577"
+  integrity sha512-JzEThNp7ZB26jJYQTTLZ0SCSr5cfOKS5EBOJ77ff6ba66IW59hRD3P66Ailv82XAG+ISsMGGNQohC1fOYjjeWw==
 
 invariant@2.2.4, invariant@^2.2.4:
   version "2.2.4"
@@ -6291,6 +6306,14 @@ ipaddr.js@1.9.1, ipaddr.js@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+
+iphone-inline-video@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/iphone-inline-video/-/iphone-inline-video-2.2.2.tgz#b5cd8d53d0c60fbcb1248cfdbbe44d36ff610fb2"
+  integrity sha1-tc2NU9DGD7yxJIz9u+RNNv9hD7I=
+  dependencies:
+    intervalometer "^1.0.4"
+    poor-mans-symbol "^1.0.1"
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
@@ -8567,6 +8590,11 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
+poor-mans-symbol@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/poor-mans-symbol/-/poor-mans-symbol-1.0.1.tgz#0c1b65ff1d49c07402b2235e562077d120671d0c"
+  integrity sha1-DBtl/x1JwHQCsiNeViB30SBnHQw=
+
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -9540,6 +9568,18 @@ react-background-button@^1.0.1:
   dependencies:
     styled-components "^5.2.1"
 
+react-background-video-player@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/react-background-video-player/-/react-background-video-player-1.1.8.tgz#3a3d5407b855a1ee3355b0458beefd7ad7eaacdc"
+  integrity sha512-stGl6dNhcybOIdbMq5nnKQ15AAvEBqdBMc4r+EfBnUuUH7bBWhs7/JK++NmviFHjgVgQJoGraqFCKnreGWpUWg==
+  dependencies:
+    background-cover "0.1.1"
+    insert-rule "^2.1.0"
+    iphone-inline-video "^2.2.2"
+    prop-types "^15.7.2"
+    react "^16.3.2"
+    react-dom "^16.14.0"
+
 react-bootstrap@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.0.3.tgz#a53ee96aa5e1c205d46e73ae78c374a43017df74"
@@ -9592,6 +9632,16 @@ react-dev-utils@^11.0.3:
     shell-quote "1.7.2"
     strip-ansi "6.0.0"
     text-table "0.2.0"
+
+react-dom@^16.14.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
 
 react-dom@^17.0.2:
   version "17.0.2"
@@ -9758,6 +9808,15 @@ react-transition-group@^4.4.1, react-transition-group@^4.4.2:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@^16.3.2:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@^17.0.2:
@@ -10300,6 +10359,14 @@ saxes@^5.0.0:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.20.2:
   version "0.20.2"

@@ -12,118 +12,141 @@ code {
     monospace;
 }
 
+  
 
 
 
 
+  .square {}
 
-.square {}
+  .square.entering {
+    animation: square 1000ms ease-out forwards;
+  }
 
-.square.entering {
-  animation: square 1000ms ease-out forwards;
-}
+  .square.exiting {
+    animation: square 501ms ease-in alternate-reverse;
+  }
 
-.square.exiting {
-  animation: square 501ms ease-in alternate-reverse;
-}
-
-.square.exited {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-@keyframes square {
-  0% {
+  .square.exited {
     opacity: 0;
     transform: translateX(-100px);
   }
 
-  50% {
-    opacity: 1;
-    transform: translateX(30px);
+  @keyframes square {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+
+    50% {
+      opacity: 1;
+      transform: translateX(30px);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+
   }
 
-  100% {
+
+  .os-exit {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .os-exit-active {
+    transform: translateX(100px);
+    transition: transform 1s, opacity 500ms;
+
+    opacity: 0;
+  }
+
+  .os-exit-done {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .os-enter {
+    opacity: 1;
     transform: translateX(0);
   }
 
+  .os-enter-active {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: transform 1s, opacity 500ms;
+  }
+
+  .os-enter-done {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+
+
+  .as-exit {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .as-exit-active {
+    transform: translateX(-100px);
+    transition: transform 1s, opacity 500ms;
+
+    opacity: 0;
+  }
+
+  .as-exit-done {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .as-enter {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .as-enter-active {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: transform 1s, opacity 500ms;
+  }
+
+  .os-enter-done {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+
+
+
+  .form-check-input {
+  }
+  .form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+  }
+ 
+
+
+
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+.App {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
 }
-
-
-.os-exit {
-  transform: translateX(0);
-  opacity: 1;
+.input {
+  border-radius: 15px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  height: 6vh;
+  width: 40vw;
 }
-
-.os-exit-active {
-  transform: translateX(100px);
-  transition: transform 1s, opacity 500ms;
-
-  opacity: 0;
-}
-
-.os-exit-done {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.os-enter {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.os-enter-active {
-  opacity: 0;
-  transform: translateX(100px);
-  transition: transform 1s, opacity 500ms;
-}
-
-.os-enter-done {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-
-
-.as-exit {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.as-exit-active {
-  transform: translateX(-100px);
-  transition: transform 1s, opacity 500ms;
-
-  opacity: 0;
-}
-
-.as-exit-done {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.as-enter {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.as-enter-active {
-  opacity: 0;
-  transform: translateX(-100px);
-  transition: transform 1s, opacity 500ms;
-}
-
-.os-enter-done {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-
-
-
-.form-check-input {
-}
-.form-check-input:checked {
-  background-color: #198754;
-  border-color: #198754;
+.mainInput {
+  position: relative;
+  margin-top: 50%;
 }

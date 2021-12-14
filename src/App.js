@@ -10,7 +10,7 @@ export default function App() {
   const [width, setWidth] = useState(window.innerWidth);
 
   const isMobile = width <= 768;
-  useEffect( () => {
+  useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
@@ -21,13 +21,16 @@ export default function App() {
   }
 
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/compare' element={<Compare isMobile={isMobile}/>}></Route>
-        <Route path='*' element={<NotFound />}></Route>
-      </Route>
-    </Routes>
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/compare' element={<Compare isMobile={isMobile} />}></Route>
+          <Route path='*' element={<NotFound />}></Route>
+        </Route>
+      </Routes>
+    </div>
+
   )
 }
 

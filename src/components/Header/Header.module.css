@@ -3,4 +3,8 @@
   border-bottom: 1px solid rgb(59, 59, 59);
 
   margin-bottom: 30px;
+
+  position: relative;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.2);
 }
