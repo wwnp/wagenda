@@ -63,7 +63,6 @@ class Home extends Component {
   //   await delay(2000)
   // }
   render() {
-    console.log(this.props)
     const clsContainer = [classes['bg-shadow'], classes['container-custom'], 'p-4']
     const clsButton = ['btn-lg', 'btn-success',]
     if (!(this.state.countryOne && this.state.countryTwo)) {
@@ -110,8 +109,14 @@ class Home extends Component {
                     </CSSTransition>
                   </Col>
                 })}
-                <hr />
-                <CSSTransition
+
+
+
+              </form>
+              <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
+                <br />
+              <form>
+              <CSSTransition
                   timeout={500}
                   classNames='os'
                 >
@@ -119,27 +124,25 @@ class Home extends Component {
                     <div>
                       <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" defaultChecked onClick={() => this.setState({ typeRadio: CAPITAL })} />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
+                        <label className="form-check-label float-left" htmlFor="flexRadioDefault1">
                           Capital
                         </label>
                       </div>
                       <div className="form-check">
                         <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={() => this.setState({ typeRadio: PROVINCE })} />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
+                        <label className="form-check-label float-left" htmlFor="flexRadioDefault2">
                           Province
                         </label>
                       </div>
                     </div>
                   )}
                 </CSSTransition>
-
-
               </form>
-              <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
+
               <hr />
               <div className="text-center">
-                {/* <Button classAdd={clsButton.join(' ')} navTo='/compare'></Button> */}
-                <Button classAdd={clsButton.join(' ')} onClick={() => this.props.setComparedCountries(this.state.countryOne.name, this.state.countryTwo.name)} navTo='/compare'></Button>
+                <Button classAdd={clsButton.join(' ')} onClick={() => this.saveComparedCounries(this.state.countryOne.name, this.state.countryTwo.name)} navTo='/compare'></Button>
+                {/* <Button classAdd={clsButton.join(' ')} onClick={() => this.props.setComparedCountries(this.state.countryOne.name, this.state.countryTwo.name)} navTo='/compare'></Button> */}
               </div>
             </React.Fragment>
           }
@@ -147,11 +150,14 @@ class Home extends Component {
       </React.Fragment>
     )
   }
+  saveComparedCounries(countryOne,countryTwo){
+    localStorage.setItem('countryOne', countryOne)
+    localStorage.setItem('countryTwo', countryTwo)
+  }
   async componentDidMount() {
     await this.props.fetchCountries()
   }
 }
-
 function mapStateToProps(state) {
   return {
     countries: state.home.countries,
@@ -161,7 +167,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCountries: () => { dispatch(fetchCountries()) },
-    setComparedCountries: bindActionCreators(setComparedCountries, dispatch)
+    // setComparedCountries: bindActionCreators(setComparedCountries, dispatch)
     // startLoading: () => { dispatch(startLoading()) },
     // hideLoading: () => { dispatch(hideLoading()) },
   }

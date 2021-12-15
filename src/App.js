@@ -9,7 +9,7 @@ import { Transition } from 'react-transition-group';
 export default function App() {
   const [width, setWidth] = useState(window.innerWidth);
 
-  const isMobile = width <= 768;
+  const isMobile = width <= 960;
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {

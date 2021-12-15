@@ -10,9 +10,7 @@ export default class Layout extends Component {
     return (
       <div className={classes.Layout}>
         <Header></Header>
-
         <Container fluid>
-
           <Outlet></Outlet>
         </Container>
         <Footer></Footer>

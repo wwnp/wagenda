@@ -12,126 +12,126 @@ code {
     monospace;
 }
 
-  
 
 
 
 
-  .square {}
 
-  .square.entering {
-    animation: square 1000ms ease-out forwards;
-  }
+.square {}
 
-  .square.exiting {
-    animation: square 501ms ease-in alternate-reverse;
-  }
+.square.entering {
+  animation: square 1000ms ease-out forwards;
+}
 
-  .square.exited {
+.square.exiting {
+  animation: square 501ms ease-in alternate-reverse;
+}
+
+.square.exited {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+@keyframes square {
+  0% {
     opacity: 0;
     transform: translateX(-100px);
   }
 
-  @keyframes square {
-    0% {
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-
-    50% {
-      opacity: 1;
-      transform: translateX(30px);
-    }
-
-    100% {
-      transform: translateX(0);
-    }
-
-  }
-
-
-  .os-exit {
-    transform: translateX(0);
+  50% {
     opacity: 1;
+    transform: translateX(30px);
   }
 
-  .os-exit-active {
-    transform: translateX(100px);
-    transition: transform 1s, opacity 500ms;
-
-    opacity: 0;
-  }
-
-  .os-exit-done {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  .os-enter {
-    opacity: 1;
+  100% {
     transform: translateX(0);
   }
 
-  .os-enter-active {
-    opacity: 0;
-    transform: translateX(100px);
-    transition: transform 1s, opacity 500ms;
-  }
-
-  .os-enter-done {
-    opacity: 1;
-    transform: translateX(0);
-  }
+}
 
 
+.os-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
 
-  .as-exit {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.os-exit-active {
+  transform: translateX(100px);
+  transition: transform 1s, opacity 500ms;
 
-  .as-exit-active {
-    transform: translateX(-100px);
-    transition: transform 1s, opacity 500ms;
+  opacity: 0;
+}
 
-    opacity: 0;
-  }
+.os-exit-done {
+  transform: translateX(0);
+  opacity: 1;
+}
 
-  .as-exit-done {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.os-enter {
+  opacity: 1;
+  transform: translateX(0);
+}
 
-  .as-enter {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.os-enter-active {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: transform 1s, opacity 500ms;
+}
 
-  .as-enter-active {
-    opacity: 0;
-    transform: translateX(-100px);
-    transition: transform 1s, opacity 500ms;
-  }
-
-  .os-enter-done {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.os-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 
 
+.as-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
 
-  .form-check-input {
-  }
-  .form-check-input:checked {
-    background-color: #198754;
-    border-color: #198754;
-  }
- 
+.as-exit-active {
+  transform: translateX(-100px);
+  transition: transform 1s, opacity 500ms;
+
+  opacity: 0;
+}
+
+.as-exit-done {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.as-enter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.as-enter-active {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: transform 1s, opacity 500ms;
+}
+
+.os-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 
 
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+.form-check-input {}
+
+.form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+
+
+
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 
 .App {
   font-family: "Open Sans", sans-serif;
@@ -149,4 +149,4 @@ code {
 .mainInput {
   position: relative;
   margin-top: 50%;
-}
+} */
