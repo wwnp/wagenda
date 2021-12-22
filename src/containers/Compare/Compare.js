@@ -56,6 +56,7 @@ class Compare extends Component {
     this.setState({ toggle2: !this.state.toggle2 })
   }
   render() {
+    console.log(this.props)
     if (this.props.isMobile) {
       return <h1>Unavailable on mobile devices</h1>
     }

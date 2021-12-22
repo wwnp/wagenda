@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./HOC/Layout/Layout.js";
+import Layout from "./components/Layout/Layout.js";
 import Home from "./containers/Home/Home.js";
 import NotFound from "./containers/NotFound/NotFound.js";
 import Compare from "./containers/Compare/Compare.js";
-import { Transition } from 'react-transition-group';
 export default function App() {
   const [width, setWidth] = useState(window.innerWidth);
-
   const isMobile = width <= 960;
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
@@ -19,7 +16,6 @@ export default function App() {
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
-
   return (
     <div className="App">
       <Routes>
@@ -30,7 +26,6 @@ export default function App() {
         </Route>
       </Routes>
     </div>
-
   )
 }
 
