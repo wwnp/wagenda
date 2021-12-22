@@ -20,29 +20,65 @@ import axios from 'axios';
 import { HookCountySetter } from './HookCountySetter';
 import { delay } from '../../dox';
 import { HookFetchCountries } from './HookFetchCountries';
+import { countryButtonHandler } from './HookCountySetter';
 //refactor class to functional
 export default function Home(props) {
-  
   const {
     countryOne,
     countryTwo,
-    typeRadio,
     setCountryOne,
-    setCountryTwo,
-    setTypeRadio,
-    testHits,
-    setTestHits
+    setCountryTwo
   } = HookCountySetter()
-
-  const {countries ,loading } = HookFetchCountries()
+  console.log(countryOne)
+  console.log(countryTwo)
+  const { countries, loading } = HookFetchCountries()
   return (
     <React.Fragment>
       {loading
-      ? <Loader></Loader>
-      : countries.map((country,index) => {
-        return <p key={index}>{country}</p>
-      })
+        ? <Loader></Loader>
+        : <React.Fragment>
+          <form className={classes.formCountries}>
+            {countries.map((country, index) => {
+              return <Col
+                key={index}
+                xs='4'
+                className='text-center my-5'
+              >
+                <CSSTransition
+                  timeout={500}
+                  classNames='os'
+                >
+                  {state => (
+                    <CountryButton
+                      // state={state}
+                      country={country}
+                      // onCLick={(event) => {
+                      // event.preventDefault()
+                      // const country = event.target.dataset.country
+                      // if(!countryOne){
+                      //   setCountryOne(country)
+                      // }else if (!countryTwo){
+                      //   setCountryTwo(country)
+                      // }
+                      // }}
+                      onCLick={(event) => countryButtonHandler(event, {
+                        countryOne,
+                        countryTwo,
+                        setCountryOne,
+                        setCountryTwo
+                      })}
+                      // customStyle={modalButton}
+                      urlFlag={countriesFlags[country.toLowerCase()]}
+                    >
+                    </CountryButton>
+                  )}
+                </CSSTransition>
+              </Col>
+            })}
+          </form>
+        </React.Fragment>
       }
+
     </React.Fragment>
   )
   // return (

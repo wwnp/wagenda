@@ -1,21 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 const CAPITAL = 'capital'
 const PROVINCE = 'province'
 export function HookCountySetter() {
   const [countryOne, setCountryOne] = useState(null)
   const [countryTwo, setCountryTwo] = useState(null)
-  const [typeRadio, setTypeRadio] = useState(CAPITAL)
-  
-  const [testHits, setTestHits] = useState([])
   return {
     countryOne,
     countryTwo,
-    typeRadio,
     setCountryOne,
-    setCountryTwo,
-    setTypeRadio,
-    //
-    testHits,
-    setTestHits
+    setCountryTwo
+  }
+}
+export function countryButtonHandler(event, props) {
+  event.preventDefault()
+  const {
+    countryOne,
+    countryTwo,
+    setCountryOne,
+    setCountryTwo
+  } = props
+  const country = event.target.dataset.country
+  if (!countryOne) {
+    setCountryOne(country)
+  } else if (!countryTwo) {
+    setCountryTwo(country)
   }
 }

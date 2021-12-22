@@ -1,9 +1,9 @@
 import React from 'react'
 import './CountryButton.css'
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 
 const CountryButton = props => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const modalButton = {
     backgroundImage: 'url(' + props.urlFlag + ')',
   }
