@@ -5,8 +5,8 @@ import Home from "./containers/Home/Home.js";
 import NotFound from "./containers/NotFound/NotFound.js";
 import Compare from "./containers/Compare/Compare.js";
 export default function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const isMobile = width <= 960;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isMobile = windowWidth <= 1400;
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
@@ -14,13 +14,13 @@ export default function App() {
     }
   })
   function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
+    setWindowWidth(window.innerWidth);
   }
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Layout isMobile={isMobile} />}>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/' element={<Home windowWidth={windowWidth}/>}></Route>
           <Route path='/compare' element={<Compare isMobile={isMobile} />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Route>

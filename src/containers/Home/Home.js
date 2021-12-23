@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Component } from 'react';
-import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux'
 import classes from './Home.module.css'
-import { fetchCountries } from '../../redux/actions/homeAction';
 import Loader from '../../components/Loader/Loader'
 import CountryButton from '../../components/CountryButton/CountryButton';
-// import Button from '../../components/Button/Button';
-import { setComparedCountries } from '../../redux/actions/homeAction';
-import { bindActionCreators } from 'redux'
-import { useNavigate } from 'react-router-dom';
-import video from '../../2.mp4'
-import axios from 'axios';
-// const duration = 500;
 import { HookCountySetter } from './HookCountySetter';
-import { delay } from '../../dox';
 import { HookFetchCountries } from './HookFetchCountries';
 import { countryButtonHandler } from './HookCountySetter';
 import { resetCountries } from './HookCountySetter';
 import noImage from '../../images/noImage.png'
-import {Video} from '../../components/Video/Video'
-
+import { Video } from '../../components/Video/Video'
+import { beforeCompare } from './HookCountySetter';
+import { useNavigate } from "react-router-dom"
 const CAPITAL = 'capital'
 const PROVINCE = 'province'
 export default function Home(props) {
@@ -36,25 +26,26 @@ export default function Home(props) {
     setTypeRadio
   } = HookCountySetter()
   const { countries, loading } = HookFetchCountries()
+  const navigate = useNavigate()
   return (
     <React.Fragment>
-      <Video></Video>
+      <Video windowWidth={props.windowWidth}></Video>
       <div className={classes.formWrapper}>
         {loading
           ? <Loader></Loader>
-          : <div style={{padding:'10px'}}>
+          : <div style={{ padding: '15px' }}>
             <form className={classes.formCountries}>
               {countries.map((country, index) => {
                 return <Col
                   key={index}
                   xs='4'
-                  className='text-center my-5'
+                  className='text-center my-3'
                 >
-                  <CSSTransition
-                    timeout={500}
-                    classNames='os'
-                  >
-                    {state => (
+                  {/* <CSSTransition */}
+                    {/* timeout={500} */}
+                    {/* classNames='os' */}
+                  {/* > */}
+                    {/* {state => ( */}
                       <CountryButton
                         country={country}
                         onCLick={(event) => countryButtonHandler(event, {
@@ -65,19 +56,19 @@ export default function Home(props) {
                         })}
                         urlFlag={
                           countriesFlags[country.toLowerCase()]
-                          ? countriesFlags[country.toLowerCase()]
-                          : noImage
+                            ? countriesFlags[country.toLowerCase()]
+                            : noImage
                         }
                       >
                       </CountryButton>
-                    )}
-                  </CSSTransition>
+                    {/* )} */}
+                  {/* </CSSTransition> */}
                 </Col>
               })}
             </form>
             <div className="text-center">
               <Button
-                className='btn btn-sm btn-warning text-white'
+                className='btn btn-sm btn-warning text-white mt-5'
                 onClick={(e) => resetCountries(e, {
                   countryOne,
                   countryTwo,
@@ -129,8 +120,9 @@ export default function Home(props) {
             </form>
             <div className="text-center">
               <Button
-                className='btn btn-success btn-lg'
-              // navTo='/compare'
+                className='btn btn-dark btn-lg'
+                disabled={!(countryOne && countryTwo)}
+                onClick={e => beforeCompare(e,countryOne,countryTwo,navigate)}
               >
                 Start
               </Button>

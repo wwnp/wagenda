@@ -43,7 +43,6 @@ export function resetCountries(event, props) {
     setTypeRadio
   } = props
   if (countryOne !== null) {
-    console.log(123)
     countryOne.el.classList.remove('active')
   }
   if (countryTwo !== null) {
@@ -52,4 +51,16 @@ export function resetCountries(event, props) {
   setCountryOne(null)
   setCountryTwo(null)
   setTypeRadio(CAPITAL)
+}
+export function beforeCompare(event,countryOne,countryTwo,navigate) {
+  event.preventDefault()
+  if(!(countryOne,countryTwo)){
+    alert('Choose countries!')
+  }else{
+    localStorage.setItem('countryOne',countryOne.country)
+    localStorage.setItem('countryTwo',countryTwo.country)
+    navigate('/compare')
+  }
+  
+
 }

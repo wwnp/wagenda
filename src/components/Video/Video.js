@@ -1,5 +1,7 @@
 import video from '../../2.mp4'
-export function Video() {
+export function Video(props) {
+  const windowWidth = props.windowWidth
+  const { widthVideo, heightVideo } = chooseSizesVideo(windowWidth)
   return (
     <div
       className="BackgroundVideo video"
@@ -17,24 +19,47 @@ export function Video() {
       }}
     >
       <video
-        autoPlay 
-        loop 
+        autoPlay
+        loop
         muted
         src={video}
         preload="auto"
         playsInline=""
-        width="1920"
-        height="1080"
         style={{
           position: 'absolute',
           top: '0',
           left: '50%',
-          width: '1920px',
-          height: '1080px',
+          width: widthVideo + 'px',
+          height: heightVideo + 'px',
           transform: 'translateX(-50%)'
         }}
       >
       </video>
     </div>
   )
+}
+function chooseSizesVideo(windowWidth) {
+  if (windowWidth > 2000) {
+    return {
+      widthVideo: windowWidth,
+      heightVideo: windowWidth / 1.77777777777777777777
+    }
+  } else {
+    return {
+      widthVideo: 1920,
+      heightVideo: 1080
+    }
+  }
+  // switch (windowWidth) {
+  //   case (windowWidth > 2000):
+  //     return {
+  //       widthVideo: windowWidth,
+  //       heightVideo: 1520
+  //     }
+  //   default:
+  // return {
+  //   widthVideo: 1920,
+  //   heightVideo: 1080
+  // }
+  // }
 }

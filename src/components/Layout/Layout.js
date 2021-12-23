@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer'
 import Header from '../Header/Header';
 import { Container } from 'react-bootstrap';
 import VideoPlayer from "react-background-video-player";
-import video from '../../1.mp4'
+import video from '../../3.mp4'
 import { Video } from '../Video/Video';
 export default class Layout extends Component {
   render() {
@@ -22,11 +22,10 @@ export default class Layout extends Component {
           muted={true}
         /> */}
         <div className={classes.Layout}>
-
           <Header></Header>
           <Container fluid>
             {this.props.isMobile
-              ? <div className="text-center"><h1>Unavailable on mobile version</h1></div>
+              ? <div className="text-center display-6"><h6>Unavailable on mobile version</h6></div>
               : <Outlet></Outlet>
             }
           </Container>
