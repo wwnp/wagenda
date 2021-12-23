@@ -4,11 +4,14 @@ const PROVINCE = 'province'
 export function HookCountySetter() {
   const [countryOne, setCountryOne] = useState(null)
   const [countryTwo, setCountryTwo] = useState(null)
+  const [typeRadio, setTypeRadio] = useState(CAPITAL)
   return {
     countryOne,
     countryTwo,
     setCountryOne,
-    setCountryTwo
+    setCountryTwo,
+    typeRadio,
+    setTypeRadio
   }
 }
 
@@ -24,9 +27,9 @@ export function countryButtonHandler(event, props) {
   if (!countryOne || !countryTwo) {
     event.target.classList.add('active')
     if (!countryOne) {
-      setCountryOne({country,el:event.target})
-    } else if (!countryTwo) {
-      setCountryTwo({country,el:event.target})
+      setCountryOne({ country, el: event.target })
+    } else if (!countryTwo && country !== countryOne.country) {
+      setCountryTwo({ country, el: event.target })
     }
   }
 }
@@ -36,10 +39,17 @@ export function resetCountries(event, props) {
     countryOne,
     countryTwo,
     setCountryOne,
-    setCountryTwo
+    setCountryTwo,
+    setTypeRadio
   } = props
-  countryOne.el.classList.remove('active')
-  countryTwo.el.classList.remove('active')
+  if (countryOne !== null) {
+    console.log(123)
+    countryOne.el.classList.remove('active')
+  }
+  if (countryTwo !== null) {
+    countryTwo.el.classList.remove('active')
+  }
   setCountryOne(null)
   setCountryTwo(null)
+  setTypeRadio(CAPITAL)
 }

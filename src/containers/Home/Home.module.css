@@ -1,15 +1,18 @@
-.formCountries {
+.formWrapper {
   max-width: 600px;
   margin: 0 auto;
-
+  position: relative;
+  z-index: 100;
+  background: rgb(0, 0, 0,0.65);
+}
+.formCountries {
   display: flex;
   flex-wrap: wrap;
 }
 
-.bg-shadow {
+/* .bg-shadow {
   background: rgba(0,0,0,0.2);
-  /* background-color: rgb(155, 32, 32); */
-}
+} */
 
 .container-custom {
   max-width: 800px;
