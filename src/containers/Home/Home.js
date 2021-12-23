@@ -21,6 +21,7 @@ import { HookCountySetter } from './HookCountySetter';
 import { delay } from '../../dox';
 import { HookFetchCountries } from './HookFetchCountries';
 import { countryButtonHandler } from './HookCountySetter';
+import { resetCountries } from './HookCountySetter';
 //refactor class to functional
 export default function Home(props) {
   const {
@@ -29,8 +30,8 @@ export default function Home(props) {
     setCountryOne,
     setCountryTwo
   } = HookCountySetter()
-  console.log(countryOne)
-  console.log(countryTwo)
+  // console.log(countryOne)
+  // console.log(countryTwo)
   const { countries, loading } = HookFetchCountries()
   return (
     <React.Fragment>
@@ -50,24 +51,13 @@ export default function Home(props) {
                 >
                   {state => (
                     <CountryButton
-                      // state={state}
                       country={country}
-                      // onCLick={(event) => {
-                      // event.preventDefault()
-                      // const country = event.target.dataset.country
-                      // if(!countryOne){
-                      //   setCountryOne(country)
-                      // }else if (!countryTwo){
-                      //   setCountryTwo(country)
-                      // }
-                      // }}
                       onCLick={(event) => countryButtonHandler(event, {
                         countryOne,
                         countryTwo,
                         setCountryOne,
                         setCountryTwo
                       })}
-                      // customStyle={modalButton}
                       urlFlag={countriesFlags[country.toLowerCase()]}
                     >
                     </CountryButton>
@@ -76,9 +66,21 @@ export default function Home(props) {
               </Col>
             })}
           </form>
+          <div className="text-center">
+            <button
+              className='btn btn-sm btn-warning text-white'
+              onClick={(e) => resetCountries(e, {
+                countryOne,
+                countryTwo,
+                setCountryOne,
+                setCountryTwo
+              })}
+            >
+              Reset
+            </button>
+          </div>
         </React.Fragment>
       }
-
     </React.Fragment>
   )
   // return (
@@ -113,7 +115,7 @@ export default function Home(props) {
   //               </Col>
   //             })}
   //           </form>
-  //           <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
+  // <div className="text-center"><button className='btn btn-sm btn-warning text-white' onClick={(e) => this.resetCountries(e)}>Reset</button></div>
   //           <br />
   //           <form>
   //             <CSSTransition

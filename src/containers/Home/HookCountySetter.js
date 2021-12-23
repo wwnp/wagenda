@@ -11,6 +11,7 @@ export function HookCountySetter() {
     setCountryTwo
   }
 }
+
 export function countryButtonHandler(event, props) {
   event.preventDefault()
   const {
@@ -20,9 +21,25 @@ export function countryButtonHandler(event, props) {
     setCountryTwo
   } = props
   const country = event.target.dataset.country
-  if (!countryOne) {
-    setCountryOne(country)
-  } else if (!countryTwo) {
-    setCountryTwo(country)
+  if (!countryOne || !countryTwo) {
+    event.target.classList.add('active')
+    if (!countryOne) {
+      setCountryOne({country,el:event.target})
+    } else if (!countryTwo) {
+      setCountryTwo({country,el:event.target})
+    }
   }
+}
+export function resetCountries(event, props) {
+  event.preventDefault()
+  const {
+    countryOne,
+    countryTwo,
+    setCountryOne,
+    setCountryTwo
+  } = props
+  countryOne.el.classList.remove('active')
+  countryTwo.el.classList.remove('active')
+  setCountryOne(null)
+  setCountryTwo(null)
 }
