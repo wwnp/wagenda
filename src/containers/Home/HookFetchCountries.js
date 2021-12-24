@@ -1,28 +1,29 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function HookLoading(boolean){
+export function HookLoading(boolean){
   const [loading, setLoading] = useState(boolean)
   return {
     loading,
     setLoading
   }
 }
-export function HookFetchCountries() {
+export function HookFetchCountries(props) {
+  console.log(props)
   const [countries, setCountries] = useState()
-  const {loading, setLoading} = HookLoading(true)
+  // const {loading, setLoading} = HookLoading(true)
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const { data } = response
       setCountries(data)
-      setLoading(false)
+      props.setLoading(false)
     }
     fetchData()
   }, []);
   return {
     countries,
-    loading
+    // loading
   }
 
 

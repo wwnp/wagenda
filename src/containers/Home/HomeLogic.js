@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 const CAPITAL = 'capital'
-const PROVINCE = 'province'
+// const PROVINCE = 'province'
 export function HookCountySetter() {
   const [countryOne, setCountryOne] = useState(null)
   const [countryTwo, setCountryTwo] = useState(null)
@@ -14,7 +14,6 @@ export function HookCountySetter() {
     setTypeRadio
   }
 }
-
 export function countryButtonHandler(event, props) {
   event.preventDefault()
   const {
@@ -52,15 +51,13 @@ export function resetCountries(event, props) {
   setCountryTwo(null)
   setTypeRadio(CAPITAL)
 }
-export function beforeCompare(event,countryOne,countryTwo,navigate) {
+export function beforeCompare(event, countryOne, countryTwo, navigate) {
   event.preventDefault()
-  if(!(countryOne,countryTwo)){
+  if (!(countryOne, countryTwo)) {
     alert('Choose countries!')
-  }else{
-    localStorage.setItem('countryOne',countryOne.country)
-    localStorage.setItem('countryTwo',countryTwo.country)
+  } else {
+    localStorage.setItem('countryOne', countryOne.country)
+    localStorage.setItem('countryTwo', countryTwo.country)
     navigate('/compare')
   }
-  
-
 }
