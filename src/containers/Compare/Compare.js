@@ -15,6 +15,9 @@ import { delay } from '../../dox';
 import { HookFetchLocation } from './CompareLogic';
 import { HookLoading } from '../Home/HookFetchCountries';
 import Map1 from '../../components/map'
+import { ChangeQuestion } from './CompareLogic';
+import { btnHandlerOne } from './CompareLogic';
+import { btnHandlerTwo } from './CompareLogic';
 // import Streetview from 'react-google-streetview';
 // import Streetview from 'react-google-streetview';
 // import ReactStreetview from 'react-streetview';
@@ -23,14 +26,23 @@ import Map1 from '../../components/map'
 const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 // const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 export default function Compare(props) {
+  const [toggle1, setToggle1] = useState(true)
+  const [toggle2, setToggle2] = useState(true)
+  const { loading, setLoading } = HookLoading(true)
+  const [locOne, locTwo, countryOne, countryTwo] = HookFetchLocation({ setLoading })
+  const { activeQuestion, setActiveQuestion } = ChangeQuestion()
+  console.log(activeQuestion)
   if (props.isMobile) {
     return <h1>Unavailable on mobile devices</h1>
   }
-  const { loading, setLoading } = HookLoading(true)
-  const [locOne, locTwo, countryOne, countryTwo] = HookFetchLocation({ setLoading })
+  let addressOne,addressTwo
   if (locOne.length !== 0) {
-    const address = Object.values(locOne[0]).join(' ')
-    // console.log(locOne[0].join(''))
+    addressOne = Object.values(locOne[activeQuestion])
+    console.log(addressOne)
+  }
+  if (locTwo.length !== 0) {
+    addressTwo = Object.values(locTwo[activeQuestion])
+    console.log(addressTwo)
   }
   return (
     <React.Fragment>
@@ -50,7 +62,7 @@ export default function Compare(props) {
               paddingRight: '5px',
             }}
             >
-              <Map1 lat={37.5247596} lng={-122.2583719}></Map1>
+              <Map1 lat={addressOne[0]} lng={addressOne[1]}></Map1>
             </div>
             <Versus></Versus>
             <div style={{
@@ -64,20 +76,20 @@ export default function Compare(props) {
               paddingRight: '5px',
             }}
             >
-              <Map1 lat={45.0191444273517} lng={39.206566174020054}></Map1>
+              <Map1 lat={addressTwo[0]} lng={addressTwo[1]}></Map1>
             </div>
           </div>
           <Row>
             <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
               <CSSTransition
-                // in={this.state.toggle1}
+                in={toggle1}
                 timeout={500}
                 classNames='os'
               >
                 <Button
                   className={classes.modalButton}
                   variant="primary"
-                  // onClick={() => { this.incFirst() }}
+                  onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) }}
                   style={countryOne
                     ? {
                       backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
@@ -88,14 +100,14 @@ export default function Compare(props) {
                 </Button>
               </CSSTransition>
               <CSSTransition
-                // in={this.state.toggle2}
+                in={toggle2}
                 timeout={500}
                 classNames='as'
               >
                 <Button
                   className={classes.modalButton}
                   variant="primary"
-                  // onClick={() => { this.incSecond() }}
+                  onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) }}
                   style={countryTwo
                     ? {
                       backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'

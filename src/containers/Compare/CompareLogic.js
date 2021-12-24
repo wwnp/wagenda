@@ -28,6 +28,18 @@ export function HookFetchLocation(props) {
     countryTwo
   ]
 }
-export function nextQuestion() {
-
+export function ChangeQuestion() {
+  const [activeQuestion, setActiveQuestion] = useState(0)
+  return {
+    activeQuestion,
+    setActiveQuestion
+  }
+}
+export function btnHandlerOne(setToggle1,toggle1,setActiveQuestion,activeQuestion) {
+  setToggle1(!toggle1)
+  setActiveQuestion(activeQuestion+1)
+}
+export function btnHandlerTwo(setToggle2,toggle2,setActiveQuestion,activeQuestion) {
+  setToggle2(!toggle2)
+  setActiveQuestion(activeQuestion+1)
 }
