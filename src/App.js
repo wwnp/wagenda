@@ -4,6 +4,7 @@ import Layout from "./components/Layout/Layout.js";
 import Home from "./containers/Home/Home.js";
 import NotFound from "./containers/NotFound/NotFound.js";
 import Compare from "./containers/Compare/Compare.js";
+import Add from "./containers/Add/Add.js";
 export default function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const isMobile = windowWidth <= 1400;
@@ -22,6 +23,7 @@ export default function App() {
         <Route path='/' element={<Layout isMobile={isMobile} />}>
           <Route path='/' element={<Home windowWidth={windowWidth}/>}></Route>
           <Route path='/compare' element={<Compare isMobile={isMobile} />}></Route>
+          <Route path='/add' element={<Add />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Route>
       </Routes>

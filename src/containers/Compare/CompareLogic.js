@@ -11,8 +11,8 @@ export function HookFetchLocation(props) {
         const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
         const response2 = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryTwo}/Capital.json`)
 
-        setLocOne(response.data)
-        setLocTwo(response2.data)
+        await setLocOne(response.data)
+        await setLocTwo(response2.data)
 
         props.setLoading(false)
       } catch (error) {

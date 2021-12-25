@@ -32,6 +32,7 @@ let Map1 = class Map1 extends React.Component {
           >
             <div style={{ height: "600px", width: "400px" }}>
               <StreetViewPanorama
+                // position={'50.370583508903415, 4.996455283910837'}
                 position={this.state.center}
                 enableCloseButton={false}
                 linksControl={false}

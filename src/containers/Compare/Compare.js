@@ -31,98 +31,131 @@ export default function Compare(props) {
   const { loading, setLoading } = HookLoading(true)
   const [locOne, locTwo, countryOne, countryTwo] = HookFetchLocation({ setLoading })
   const { activeQuestion, setActiveQuestion } = ChangeQuestion()
-  console.log(activeQuestion)
   if (props.isMobile) {
     return <h1>Unavailable on mobile devices</h1>
   }
-  let addressOne,addressTwo
+  let addressOne, addressTwo
+  let addressThree, addressFour
   if (locOne.length !== 0) {
-    addressOne = Object.values(locOne[activeQuestion])
-    console.log(addressOne)
+    addressOne = parseInt(Object.values(locOne)[0][0].split(',')[0])
+    addressTwo = parseInt(Object.values(locOne)[0][0].split(',')[1])
   }
   if (locTwo.length !== 0) {
-    addressTwo = Object.values(locTwo[activeQuestion])
-    console.log(addressTwo)
+    addressThree = parseInt(Object.values(locTwo)[0][0].split(',')[0])
+    addressFour = parseInt(Object.values(locTwo)[0][0].split(',')[1])
   }
   return (
     <React.Fragment>
+      <h1>Compare</h1>
       {loading
         ? <h1>Loading</h1>
-        :
-        <React.Fragment>
-          <div className='d-flex'>
-            <div style={{
-              width: '45%',
-              height: '600px',
-              border: '1px solid rgb(0, 0, 0)',
-              position: 'relative',
-              overflow: 'hidden',
-              margin: '0 auto',
-              paddingLeft: '5px',
-              paddingRight: '5px',
-            }}
-            >
-              <Map1 lat={addressOne[0]} lng={addressOne[1]}></Map1>
-            </div>
-            <Versus></Versus>
-            <div style={{
-              width: '45%',
-              height: '600px',
-              border: '1px solid rgb(0, 0, 0)',
-              position: 'relative',
-              overflow: 'hidden',
-              margin: '0 auto',
-              paddingLeft: '5px',
-              paddingRight: '5px',
-            }}
-            >
-              <Map1 lat={addressTwo[0]} lng={addressTwo[1]}></Map1>
-            </div>
-          </div>
-          <Row>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
-              <CSSTransition
-                in={toggle1}
-                timeout={500}
-                classNames='os'
-              >
-                <Button
-                  className={classes.modalButton}
-                  variant="primary"
-                  onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) }}
-                  style={countryOne
-                    ? {
-                      backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
-                    }
-                    : null
-                  }
-                >
-                </Button>
-              </CSSTransition>
-              <CSSTransition
-                in={toggle2}
-                timeout={500}
-                classNames='as'
-              >
-                <Button
-                  className={classes.modalButton}
-                  variant="primary"
-                  onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) }}
-                  style={countryTwo
-                    ? {
-                      backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
-                    }
-                    : null
-                  }
-                >
-                </Button>
-              </CSSTransition>
-            </div>
-          </Row>
-        </React.Fragment>
-      }
 
+        : <div className='d-flex'>
+          <div style={{
+            width: '45%',
+            height: '600px',
+            border: '1px solid rgb(0, 0, 0)',
+            position: 'relative',
+            overflow: 'hidden',
+            margin: '0 auto',
+            paddingLeft: '5px',
+            paddingRight: '5px',
+          }}>
+            <Map1 lat={addressOne} lng={addressTwo}></Map1>
+          </div>
+          <div style={{
+            width: '45%',
+            height: '600px',
+            border: '1px solid rgb(0, 0, 0)',
+            position: 'relative',
+            overflow: 'hidden',
+            margin: '0 auto',
+            paddingLeft: '5px',
+            paddingRight: '5px',
+          }}>
+            <Map1 lat={addressThree} lng={addressFour}></Map1>
+          </div>
+        </div>
+      }
     </React.Fragment>
+    // <React.Fragment>
+    //   {loading
+    //     ? <h1>Loading</h1>
+    //     :
+    //     <React.Fragment>
+    //       <div className='d-flex'>
+    //         <div style={{
+    //           width: '45%',
+    //           height: '600px',
+    //           border: '1px solid rgb(0, 0, 0)',
+    //           position: 'relative',
+    //           overflow: 'hidden',
+    //           margin: '0 auto',
+    //           paddingLeft: '5px',
+    //           paddingRight: '5px',
+    //         }}
+    //         >
+    //           <Map1 lat={addressOne[0]} lng={addressOne[1]}></Map1>
+    //         </div>
+    //         <Versus></Versus>
+    // <div style={{
+    //   width: '45%',
+    //   height: '600px',
+    //   border: '1px solid rgb(0, 0, 0)',
+    //   position: 'relative',
+    //   overflow: 'hidden',
+    //   margin: '0 auto',
+    //   paddingLeft: '5px',
+    //   paddingRight: '5px',
+    // }}
+    // >
+    //   <Map1 lat={addressTwo[0]} lng={addressTwo[1]}></Map1>
+    // </div>
+    //       </div>
+    //       <Row>
+    //         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
+    //           <CSSTransition
+    //             in={toggle1}
+    //             timeout={500}
+    //             classNames='os'
+    //           >
+    //             <Button
+    //               className={classes.modalButton}
+    //               variant="primary"
+    //               onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) }}
+    //               style={countryOne
+    //                 ? {
+    //                   backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
+    //                 }
+    //                 : null
+    //               }
+    //             >
+    //             </Button>
+    //           </CSSTransition>
+    //           <CSSTransition
+    //             in={toggle2}
+    //             timeout={500}
+    //             classNames='as'
+    //           >
+    //             <Button
+    //               className={classes.modalButton}
+    //               variant="primary"
+    //               onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) }}
+    //               style={countryTwo
+    //                 ? {
+    //                   backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
+    //                 }
+    //                 : null
+    //               }
+    //             >
+    //             </Button>
+    //           </CSSTransition>
+    //         </div>
+    //       </Row>
+    //     </React.Fragment>
+    //   }
+
+    // </React.Fragment>
   )
 }
   //   this.isFinished()
