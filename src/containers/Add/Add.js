@@ -6,6 +6,7 @@ import { HandleLocation } from './AddLogic'
 import { AddHook } from './AddLogic'
 import { AddError } from './AddLogic'
 import { HandleItems } from './AddLogic'
+import { finishLocations } from './AddLogic'
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
@@ -13,7 +14,7 @@ const Add = props => {
   const { urbanType, setUrbanType } = HandleRadio()
   const { location, setLocation } = HandleLocation()
   const { error, setError } = AddError()
-  const {items,setItems} = HandleItems()
+  const { items, setItems } = HandleItems()
   return (
     <div className={classes.Add}>
       <h1 className='text-center'>Add</h1>
@@ -88,13 +89,21 @@ const Add = props => {
             </div>
             <div className="form-group mt-3 pb-3 border-bottom">
               <button
-                className="btn btn-warning"
+                className="btn btn-warning mr-4"
                 onClick={(e) => {
                   e.preventDefault()
-                  AddHook(country, urbanType, location, setError,setItems,items)
+                  AddHook(country, urbanType, location, setError, setItems, items)
                 }}
+
               >
                 Add
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={(e) => setItems([])}
+
+              >
+                Reset
               </button>
             </div>
             <div className="form-group mt-3 text-center">
@@ -102,8 +111,9 @@ const Add = props => {
                 className="btn btn-success"
                 onClick={e => {
                   e.preventDefault()
-                  console.log(456)
+                  finishLocations(items,setItems,setLocation)
                 }}
+                disabled={items.length === 0}
               >
                 Submit
               </button>
@@ -113,7 +123,7 @@ const Add = props => {
         }
         {
           Object.values(error).length !== 0
-            ? Object.values(error).map((errorItem,index) => {
+            ? Object.values(error).map((errorItem, index) => {
               return <p className={classes.not} key={index}>{errorItem}</p>
             })
             : null

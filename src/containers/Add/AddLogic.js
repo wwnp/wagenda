@@ -44,18 +44,27 @@ export function HandleLocation() {
 }
 export function AddHook(country, urbanType, location, setError, setItems, items) {
   const errorLog = {}
-  setError(null)
+  // let isSame = true
+  setError({})
+  items.forEach(item => {
+    if (item.location === location) {
+      errorLog['locError'] = 'Same locations in items'
+    }
+  })
   if (!urbanType) {
     errorLog['radioError'] = 'Select urban type'
   }
   if (location.trim().length === 0) {
     errorLog['locationError'] = 'Type location'
   }
-  else {
+  if (Object.keys(errorLog).length === 0) {
+    console.log(Object.keys(errorLog).length)
     const itemsNew = [...items, { country, urbanType, location }]
     setItems(itemsNew)
+  } else {
+    setError(errorLog)
   }
-  setError(errorLog)
+
 }
 export function AddError() {
   const [error, setError] = useState({})
@@ -70,4 +79,17 @@ export function HandleItems() {
     items,
     setItems
   }
+}
+export async function finishLocations(items,setItems,setLocation) {
+  console.log(items)
+
+  items.forEach(item => {
+    async function helpFetch() {
+      const url = (`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${item.country}/${item.urbanType}.json`)
+      await axios.post(url, JSON.stringify(item.location))
+      setItems([])
+      setLocation('')
+    }
+    helpFetch()
+  })
 }

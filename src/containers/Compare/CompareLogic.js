@@ -35,11 +35,24 @@ export function ChangeQuestion() {
     setActiveQuestion
   }
 }
-export function btnHandlerOne(setToggle1,toggle1,setActiveQuestion,activeQuestion) {
+export function btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) {
   setToggle1(!toggle1)
-  setActiveQuestion(activeQuestion+1)
+  setActiveQuestion(activeQuestion + 1)
 }
-export function btnHandlerTwo(setToggle2,toggle2,setActiveQuestion,activeQuestion) {
+export function btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) {
   setToggle2(!toggle2)
-  setActiveQuestion(activeQuestion+1)
+  setActiveQuestion(activeQuestion + 1)
+}
+export function isFinished(locOne, activeQuestion) {
+  return activeQuestion + 1 === locOne.length
+}
+export function HookFinished(locOne,activeQuestion) {
+  console.log(activeQuestion)
+  const [finished, setFinished] = useState(false)
+  if (activeQuestion + 1 === locOne.length) {
+    setFinished(true)
+  }
+  return {
+    finished
+  }
 }
