@@ -18,13 +18,36 @@ import Map1 from '../../components/map'
 import { ChangeQuestion } from './CompareLogic';
 import { btnHandlerOne } from './CompareLogic';
 import { btnHandlerTwo } from './CompareLogic';
-import { isFinished } from './CompareLogic';
+// import { isFinished } from './CompareLogic';
+
+import {
+  GoogleMap,
+  LoadScript,
+  LoadScriptNext,
+  useGoogleMap,
+  StreetViewPanorama
+} from "@react-google-maps/api";
+import { FRAMES_NUMBER } from './CompareLogic';
+import { Finished } from '../../components/Finished/Finished';
 // import Streetview from 'react-google-streetview';
 // import Streetview from 'react-google-streetview';
 // import ReactStreetview from 'react-streetview';
 // import ReactStreetview from 'react-streetview';
 // const API_KEY = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
-const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
+const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw" // NOT MY API
+const APIkey2 = "AIzaSyCBv6uUPVyWju4JjN3yXbuB22jJYXNVZPE"
+const APIkey3 = "AIzaSyBHzw-IPrltI7NxKgUOFRyULZjven31Trk"
+const mapContainerStyle = {
+  width: '45%',
+  background: 'rgb(255, 255, 255)',
+  height: '600px',
+  border: '1px solid rgb(0, 0, 0)',
+  position: 'relative',
+  overflow: 'hidden',
+  margin: '0 auto',
+  paddingLeft: '5px',
+  paddingRight: '5px',
+}
 // const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 export default function Compare(props) {
   const [toggle1, setToggle1] = useState(true)
@@ -32,78 +55,86 @@ export default function Compare(props) {
   const { loading, setLoading } = HookLoading(true)
   const [locOne, locTwo, countryOne, countryTwo] = HookFetchLocation({ setLoading })
   const { activeQuestion, setActiveQuestion } = ChangeQuestion()
+  // const [activeQuestion, setActiveQuestion] = useState(0)
   // const {finished} = HookFinished(Object.values(locOne),activeQuestion)
   // console.log(finished)
   const [finished, setFinished] = useState(false)
-  if (activeQuestion + 1 === Object.values(locOne).length) {
-    setFinished(true)
-  }
-  console.log(finished)
-  console.log(activeQuestion)
+
   if (props.isMobile) {
     return <h1>Unavailable on mobile devices</h1>
   }
-  // let addressOne, addressTwo
+  let latOne, lngOne
   // let addressThree, addressFour
-  // if (locOne.length !== 0) {
-  // console.log('locOne',Object.values(locOne))
-  // addressOne = parseFloat(Object.values(locOne)[0].split(',')[0])
-  // addressTwo = parseFloat(Object.values(locOne)[1].split(',')[1])
-  // }
+  if (locOne.length !== 0) {
+    // console.log(Object.values(locOne)[activeQuestion])
+    latOne = parseFloat(Object.values(locOne)[activeQuestion].split(',')[0])
+    lngOne = parseFloat(Object.values(locOne)[activeQuestion].split(',')[1])
+  }
   // if (locTwo.length !== 0) {
   // console.log('locTwo',Object.values(locTwo))
   // addressThree = parseFloat(Object.values(locTwo)[0].split(',')[0])
   // addressFour = parseFloat(Object.values(locTwo)[1].split(',')[1])
   // }
+
   return (
     <React.Fragment>
       {finished
-        ? <h1>Finished</h1>
+        ? <Finished></Finished>
         : <React.Fragment>
           {loading
             ? <h1>Loading</h1>
             :
             <React.Fragment>
-              <div className='d-flex'>
-                <div style={{
-                  width: '45%',
-                  height: '600px',
-                  border: '1px solid rgb(0, 0, 0)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  margin: '0 auto',
-                  paddingLeft: '5px',
-                  paddingRight: '5px',
-                }}>
-                  <Map1
-                    lat={parseFloat(Object.values(locOne)[0].split(',')[0])}
-                    lng={parseFloat(Object.values(locOne)[1].split(',')[1])}
-                  // lat={addressOne} 
-                  // lng={addressTwo}
-                  >
-                  </Map1>
-                </div>
-                <Versus></Versus>
-                <div style={{
-                  width: '45%',
-                  height: '600px',
-                  border: '1px solid rgb(0, 0, 0)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  margin: '0 auto',
-                  paddingLeft: '5px',
-                  paddingRight: '5px',
-                }}>
-                  <Map1
-                    lat={parseFloat(Object.values(locTwo)[0].split(',')[0])}
-                    lng={parseFloat(Object.values(locTwo)[1].split(',')[1])}
-                  // lat={addressThree}
-                  // lng={addressFour}
-                  >
-                  </Map1>
-                </div>
-              </div>
+              {/* <StreetView address={Object.values(locOne)[activeQuestion]} APIkey={APIkey} streetView zoomLevel={15}/>   */}
+              {/* IT"S WORKED WITH APIkey 26.12.21 WITHOUT DEVELOPMENT SIGH; ALSO CHANGED MAP WHEN CLICK BTN ONE  */}
+
               <Row>
+                {/* <div style={{
+                  width: '45%',
+                  height: '600px',
+                  border: '1px solid rgb(0, 0, 0)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  margin: '0 auto',
+                  paddingLeft: '5px',
+                  paddingRight: '5px',
+                }}> */}
+                <StreetView
+                  address={Object.values(locOne)[activeQuestion]}
+                  APIkey={APIkey2}
+                  streetView
+                  zoomLevel={15}
+                  mapStyle={mapContainerStyle}
+                />
+                {/* </div> */}
+                <Versus></Versus>
+                {/* <div style={{
+                  width: '45%',
+                  height: '600px',
+                  border: '1px solid rgb(0, 0, 0)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  margin: '0 auto',
+                  paddingLeft: '5px',
+                  paddingRight: '5px',
+                }}> */}
+                <StreetView
+                  address={Object.values(locTwo)[activeQuestion]}
+                  APIkey={APIkey2}
+                  streetView
+                  zoomLevel={15}
+                  mapStyle={mapContainerStyle}
+                />
+                {/* </div> */}
+              </Row>
+              <Row className='mt-2'>
+                <Col>
+                  <div className="text-center">
+                    {activeQuestion} frames of {FRAMES_NUMBER}
+                  </div>
+                </Col>
+              </Row>
+              < Row >
                 <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
                   <CSSTransition
                     in={toggle1}
@@ -113,7 +144,7 @@ export default function Compare(props) {
                     <Button
                       className={classes.modalButton}
                       variant="primary"
-                      onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) }}
+                      onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion, locOne, setFinished) }}
                       style={countryOne
                         ? {
                           backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
@@ -131,7 +162,7 @@ export default function Compare(props) {
                     <Button
                       className={classes.modalButton}
                       variant="primary"
-                      onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) }}
+                      onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion, locOne, setFinished) }}
                       style={countryTwo
                         ? {
                           backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
@@ -143,11 +174,12 @@ export default function Compare(props) {
                   </CSSTransition>
                 </div>
               </Row>
-            </React.Fragment>
+
+            </React.Fragment >
           }
-        </React.Fragment>
+        </React.Fragment >
       }
-    </React.Fragment>
+    </React.Fragment >
 
   )
 }

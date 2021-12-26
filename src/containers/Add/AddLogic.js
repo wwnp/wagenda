@@ -42,7 +42,7 @@ export function HandleLocation() {
     setLocation
   }
 }
-export function AddHook(country, urbanType, location, setError, setItems, items) {
+export function AddHook(country, urbanType, location, setError, setItems, items,setLocation) {
   const errorLog = {}
   // let isSame = true
   setError({})
@@ -61,6 +61,7 @@ export function AddHook(country, urbanType, location, setError, setItems, items)
     console.log(Object.keys(errorLog).length)
     const itemsNew = [...items, { country, urbanType, location }]
     setItems(itemsNew)
+    setLocation('')
   } else {
     setError(errorLog)
   }

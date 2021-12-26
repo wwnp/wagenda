@@ -9,11 +9,12 @@ import {
 import asyncLoading from "react-async-loader";
 import GoogleStreetview from "react-google-streetview";
 
-const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw"
+const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gX"
+// const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw"
 let Map1 = class Map1 extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   state = {
     center: {
       lat: this.props.lat,
@@ -24,7 +25,7 @@ let Map1 = class Map1 extends React.Component {
   render() {
     return (
       <div id="total">
-        <LoadScriptNext key={APIkey}>
+        {/* <LoadScriptNext key={APIkey2}> */}
           <GoogleMap
             key={APIkey}
             visible={true}
@@ -44,7 +45,7 @@ let Map1 = class Map1 extends React.Component {
               />
             </div>
           </GoogleMap>
-        </LoadScriptNext>
+        {/* </LoadScriptNext> */}
       </div>
     );
   }

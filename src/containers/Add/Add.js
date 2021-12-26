@@ -7,6 +7,7 @@ import { AddHook } from './AddLogic'
 import { AddError } from './AddLogic'
 import { HandleItems } from './AddLogic'
 import { finishLocations } from './AddLogic'
+import Loader from '../../components/Loader/Loader'
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
@@ -20,7 +21,7 @@ const Add = props => {
       <h1 className='text-center'>Add</h1>
       <form>
         {loading
-          ? <h1>Loading</h1>
+          ? <Loader></Loader>
           :
           <React.Fragment>
             <div className='form-group mb-3'>
@@ -92,7 +93,7 @@ const Add = props => {
                 className="btn btn-warning mr-4"
                 onClick={(e) => {
                   e.preventDefault()
-                  AddHook(country, urbanType, location, setError, setItems, items)
+                  AddHook(country, urbanType, location, setError, setItems, items,setLocation)
                 }}
 
               >

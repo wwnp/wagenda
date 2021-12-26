@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+export const FRAMES_NUMBER = 2
 export function HookFetchLocation(props) {
   const countryOne = localStorage.getItem('countryOne')
   const countryTwo = localStorage.getItem('countryTwo')
@@ -35,24 +36,27 @@ export function ChangeQuestion() {
     setActiveQuestion
   }
 }
-export function btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion) {
+export function btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion, locOne, setFinished) {
   setToggle1(!toggle1)
   setActiveQuestion(activeQuestion + 1)
-}
-export function btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion) {
-  setToggle2(!toggle2)
-  setActiveQuestion(activeQuestion + 1)
-}
-export function isFinished(locOne, activeQuestion) {
-  return activeQuestion + 1 === locOne.length
-}
-export function HookFinished(locOne,activeQuestion) {
-  console.log(activeQuestion)
-  const [finished, setFinished] = useState(false)
-  if (activeQuestion + 1 === locOne.length) {
+  if (activeQuestion + 1 === FRAMES_NUMBER) {
+  // if (activeQuestion + 1 === (Object.values(locOne).length === 5)) {
     setFinished(true)
   }
-  return {
-    finished
+}
+export function btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion, locOne, setFinished) {
+  setToggle2(!toggle2)
+  setActiveQuestion(activeQuestion + 1)
+  if (activeQuestion + 1 === FRAMES_NUMBER) {
+    setFinished(true)
   }
 }
+// export function isFinished(locOne, activeQuestion) {
+//   return activeQuestion + 1 === (locOne.length === 10)
+// }
+// export function HookFinished(locOne,activeQuestion) {
+//   console.log(activeQuestion)
+//   if (activeQuestion + 1 === locOne.length) {
+//     setFinished(true)
+//   }
+// }
