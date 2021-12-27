@@ -1,43 +1,34 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { delay } from "../../dox"
 export const FRAMES_NUMBER = 5
 export function HookFetchLocation(props) {
+  const [loading, setLoading] = useState(true)
   const countryOne = localStorage.getItem('countryOne')
   const countryTwo = localStorage.getItem('countryTwo')
   const [locOne, setLocOne] = useState([])
   const [locTwo, setLocTwo] = useState([])
-  const [locations, setLocations] = useState({})
   useEffect(() => {
-    async function fetchLocations() {
+    async function abc() {
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
       const response2 = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryTwo}/Capital.json`)
       const temp1 = Object.values(response.data)
       const temp2 = Object.values(response2.data)
       setLocOne(temp1)
-      // setLocTwo(temp2)
-
-      // setLocations({
-      //   first: response.data,
-      //   second: response2.data,
-      //   loading:false
-      // })
-      // const { first, second } = locations
-      // const locOne = Object.values(first)
-      // const locTwo = Object.values(second)
-
-
-      return function cleanup() {
-        props.setLoading(false)
-      };
-      // setLoading(false)
-      // loading = false
+      setLocTwo(temp2)
+      await delay(1000)
+      setLoading(false)
     }
-    fetchLocations()
-  })
+    abc()
+  }, [countryOne, setLoading])
   return [
     // locations,
     // loading
     locOne,
+    locTwo,
+    loading,
+    countryOne,
+    countryTwo
     // locTwo
   ]
 }
