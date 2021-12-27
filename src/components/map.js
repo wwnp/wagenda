@@ -25,7 +25,7 @@ let Map1 = class Map1 extends React.Component {
   render() {
     return (
       <div id="total">
-        {/* <LoadScriptNext key={APIkey2}> */}
+        <LoadScriptNext key={APIkey}>
           <GoogleMap
             key={APIkey}
             visible={true}
@@ -45,7 +45,7 @@ let Map1 = class Map1 extends React.Component {
               />
             </div>
           </GoogleMap>
-        {/* </LoadScriptNext> */}
+        </LoadScriptNext>
       </div>
     );
   }

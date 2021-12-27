@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, } from 'react'
+import { useEffect } from 'react';
+import axios from 'axios';
 import classes from './Compare.module.css'
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
@@ -19,7 +21,7 @@ import { ChangeQuestion } from './CompareLogic';
 import { btnHandlerOne } from './CompareLogic';
 import { btnHandlerTwo } from './CompareLogic';
 // import { isFinished } from './CompareLogic';
-
+import Street from '../../components/Street/Street';
 import {
   GoogleMap,
   LoadScript,
@@ -50,138 +52,224 @@ const mapContainerStyle = {
 }
 // const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 export default function Compare(props) {
+  const countryOne = localStorage.getItem('countryOne')
+  const countryTwo = localStorage.getItem('countryTwo')
+  const [locOne, setLocOne] = useState([])
+  const [locTwo, setLocTwo] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const [activeQuestion, setActiveQuestion] = useState(0)
   const [toggle1, setToggle1] = useState(true)
   const [toggle2, setToggle2] = useState(true)
-  const { loading, setLoading } = HookLoading(true)
-  const [locOne, locTwo, countryOne, countryTwo] = HookFetchLocation({ setLoading })
-  const { activeQuestion, setActiveQuestion } = ChangeQuestion()
-  // const [activeQuestion, setActiveQuestion] = useState(0)
-  // const {finished} = HookFinished(Object.values(locOne),activeQuestion)
-  // console.log(finished)
+  // const { loading, setLoading } = HookLoading(true)
+  // const [locOne, locTwo] = HookFetchLocation({ setLoading })
   const [finished, setFinished] = useState(false)
-
-  if (props.isMobile) {
-    return <h1>Unavailable on mobile devices</h1>
-  }
-  let latOne, lngOne
-  // let addressThree, addressFour
-  if (locOne.length !== 0) {
-    // console.log(Object.values(locOne)[activeQuestion])
-    latOne = parseFloat(Object.values(locOne)[activeQuestion].split(',')[0])
-    lngOne = parseFloat(Object.values(locOne)[activeQuestion].split(',')[1])
-  }
-  // if (locTwo.length !== 0) {
-  // console.log('locTwo',Object.values(locTwo))
-  // addressThree = parseFloat(Object.values(locTwo)[0].split(',')[0])
-  // addressFour = parseFloat(Object.values(locTwo)[1].split(',')[1])
+  const [start, setStart] = useState(false)
+  // if (props.isMobile) {
+  //   return <h1>Unavailable on mobile devices</h1>
   // }
-
+  useEffect(() => {
+    async function abc() {
+      const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
+      const response2 = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryTwo}/Capital.json`)
+      const temp1 = Object.values(response.data)
+      const temp2 = Object.values(response2.data)
+      // const temp2 = Object.values(response2.data)
+      setLocOne(temp1)
+      setLocTwo(temp2)
+      await delay(1000)
+      setLoading(false)
+    }
+    abc()
+  }, [countryOne, setLoading])
   return (
-    <React.Fragment>
-      {finished
-        ? <Finished></Finished>
-        : <React.Fragment>
-          {loading
-            ? <h1>Loading</h1>
-            :
-            <React.Fragment>
-              {/* <StreetView address={Object.values(locOne)[activeQuestion]} APIkey={APIkey} streetView zoomLevel={15}/>   */}
-              {/* IT"S WORKED WITH APIkey 26.12.21 WITHOUT DEVELOPMENT SIGH; ALSO CHANGED MAP WHEN CLICK BTN ONE  */}
+    finished
+      ? <h1>Finished</h1>
+      :
+      loading
+        ? <h1>Loading</h1>
+        :
+        activeQuestion === 0
+          ?
+          <div>
+            <StreetView
+              address={locOne[activeQuestion]}
+              APIkey={APIkey}
+              streetView
+              zoomLevel={15}
+              mapStyle={{ display: 'none' }}
+            />
+            <div className="text-center">
+              <button
+                className='btn btn-success btn-lg'
+                onClick={e => setActiveQuestion(activeQuestion + 1)}
+              >GO
+              </button>
+            </div>
+          </div>
+          :
+          <React.Fragment>
+            <div style={{ display: 'flex' }}>
+              <StreetView
+                address={locOne[activeQuestion]}
+                APIkey={APIkey2}
+                streetView
+                mapStyle={mapContainerStyle}
+              />
+              <Versus></Versus>
+              <StreetView
+                // address={Object.values(locations.second)[activeQuestion]}
+                address={locTwo[activeQuestion]}
+                APIkey={APIkey}
+                streetView
+                // zoomLevel={15}
+                mapStyle={mapContainerStyle}
+              />
 
-              <Row>
-                {/* <div style={{
-                  width: '45%',
-                  height: '600px',
-                  border: '1px solid rgb(0, 0, 0)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  margin: '0 auto',
-                  paddingLeft: '5px',
-                  paddingRight: '5px',
-                }}> */}
-                <StreetView
-                  address={Object.values(locOne)[activeQuestion]}
-                  APIkey={APIkey2}
-                  streetView
-                  zoomLevel={15}
-                  mapStyle={mapContainerStyle}
-                />
-                {/* </div> */}
-                <Versus></Versus>
-                {/* <div style={{
-                  width: '45%',
-                  height: '600px',
-                  border: '1px solid rgb(0, 0, 0)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  margin: '0 auto',
-                  paddingLeft: '5px',
-                  paddingRight: '5px',
-                }}> */}
-                <StreetView
-                  address={Object.values(locTwo)[activeQuestion]}
-                  APIkey={APIkey2}
-                  streetView
-                  zoomLevel={15}
-                  mapStyle={mapContainerStyle}
-                />
-                {/* </div> */}
-              </Row>
-              <Row className='mt-2'>
-                <Col>
-                  <div className="text-center">
-                    {activeQuestion} frames of {FRAMES_NUMBER}
-                  </div>
-                </Col>
-              </Row>
-              < Row >
-                <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
-                  <CSSTransition
-                    in={toggle1}
-                    timeout={500}
-                    classNames='os'
-                  >
-                    <Button
-                      className={classes.modalButton}
-                      variant="primary"
-                      onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion, locOne, setFinished) }}
-                      style={countryOne
-                        ? {
-                          backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
-                        }
-                        : null
-                      }
-                    >
-                    </Button>
-                  </CSSTransition>
-                  <CSSTransition
-                    in={toggle2}
-                    timeout={500}
-                    classNames='as'
-                  >
-                    <Button
-                      className={classes.modalButton}
-                      variant="primary"
-                      onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion, locOne, setFinished) }}
-                      style={countryTwo
-                        ? {
-                          backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
-                        }
-                        : null
-                      }
-                    >
-                    </Button>
-                  </CSSTransition>
+            </div>
+            <div style={{ display: 'flex' }} className='mt-2'>
+              <Col>
+                <div className="text-center">
+                  {activeQuestion} frames of {FRAMES_NUMBER}
                 </div>
-              </Row>
-
-            </React.Fragment >
-          }
-        </React.Fragment >
-      }
-    </React.Fragment >
-
+              </Col>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
+              <CSSTransition
+                in={toggle1}
+                timeout={500}
+                classNames='os'
+              >
+                <Button
+                  className={classes.modalButton}
+                  variant="primary"
+                  onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion, setFinished) }}
+                  // onClick={e => setActiveQuestion(activeQuestion + 1)}
+                  style={countryOne
+                    ? {
+                      backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
+                    }
+                    : null
+                  }
+                >
+                </Button>
+              </CSSTransition>
+              <CSSTransition
+                in={toggle2}
+                timeout={500}
+                classNames='as'
+              >
+                <Button
+                  className={classes.modalButton}
+                  variant="primary"
+                  onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion, setFinished) }}
+                  // onClick={e => setActiveQuestion(activeQuestion + 1)}
+                  style={countryTwo
+                    ? {
+                      backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
+                    }
+                    : null
+                  }
+                >
+                </Button>
+              </CSSTransition>
+            </div>
+          </React.Fragment>
   )
+  // return (
+  //   loading
+  //     ? <h1>Loading</h1>
+  //     :
+  //     activeQuestion === 0
+  //       ? <div>
+  //         <StreetView
+  //           address={locOne[activeQuestion]}
+  //           APIkey={APIkey}
+  //           streetView
+  //           zoomLevel={15}
+  //           mapStyle={{ display: 'none' }}
+  //         />
+  //         {/* <div className="text-center"> */}
+  //         <button onClick={e => { setActiveQuestion(activeQuestion + 1) }}>
+
+  //         </button>
+  //         {/* </div> */}
+  //       </div>
+  //       :
+  //       <div>
+  //         {/* <StreetView address={Object.values(locOne)[activeQuestion]} APIkey={APIkey} streetView zoomLevel={15}/>   */}
+  //         {/* IT"S WORKED WITH APIkey 26.12.21 WITHOUT DEVELOPMENT SIGH; ALSO CHANGED MAP WHEN CLICK BTN ONE  */}
+  // <Row>
+  //   <StreetView
+  //     address={locOne[activeQuestion]}
+  //     APIkey={APIkey}
+  //     streetView
+  //     mapStyle={mapContainerStyle}
+  //   />
+  //   <Versus></Versus>
+  //   {/* <StreetView
+  //           // address={Object.values(locations.second)[activeQuestion]}
+  //           address={locTwo[activeQuestion]}
+  //           APIkey={APIkey}
+  //           streetView
+  //           // zoomLevel={15}
+  //           mapStyle={mapContainerStyle}
+  //         /> */}
+  //   {/* </div> */}
+  // </Row>
+  // <Row className='mt-2'>
+  //   <Col>
+  //     <div className="text-center">
+  //       {activeQuestion} frames of {FRAMES_NUMBER}
+  //     </div>
+  //   </Col>
+  // </Row>
+  // < Row >
+  //   <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
+  //     <CSSTransition
+  //       in={toggle1}
+  //       timeout={500}
+  //       classNames='os'
+  //     >
+  //       <Button
+  //         className={classes.modalButton}
+  //         variant="primary"
+  //         // onClick={() => { btnHandlerOne(setToggle1, toggle1, setActiveQuestion, activeQuestion, setFinished) }}
+  //         onClick={e => setActiveQuestion(activeQuestion + 1)}
+  //         style={countryOne
+  //           ? {
+  //             backgroundImage: 'url(' + countriesFlags[countryOne.toLowerCase()] + ')'
+  //           }
+  //           : null
+  //         }
+  //       >
+  //       </Button>
+  //     </CSSTransition>
+  //     <CSSTransition
+  //       in={toggle2}
+  //       timeout={500}
+  //       classNames='as'
+  //     >
+  //       <Button
+  //         className={classes.modalButton}
+  //         variant="primary"
+  //         // onClick={() => { btnHandlerTwo(setToggle2, toggle2, setActiveQuestion, activeQuestion, setFinished) }}
+  //         onClick={e => setActiveQuestion(activeQuestion + 1)}
+  //         style={countryTwo
+  //           ? {
+  //             backgroundImage: 'url(' + countriesFlags[countryTwo.toLowerCase()] + ')'
+  //           }
+  //           : null
+  //         }
+  //       >
+  //       </Button>
+  //     </CSSTransition>
+  //   </div>
+  // </Row>
+
+  //       </div >
+
+  // )
 }
   //   this.isFinished()
   //   ? <h1>Finish</h1>
