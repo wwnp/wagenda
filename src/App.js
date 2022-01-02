@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./HOC/Layout/Layout.js";
+import Layout from "./components/Layout/Layout.js";
 import Home from "./containers/Home/Home.js";
 import NotFound from "./containers/NotFound/NotFound.js";
 import Compare from "./containers/Compare/Compare.js";
-import { Transition } from 'react-transition-group';
+import Add from "./containers/Add/Add.js";
 export default function App() {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  const isMobile = width <= 768;
-  useEffect( () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isMobile = windowWidth <= 1400;
+  useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     }
   })
   function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
+    setWindowWidth(window.innerWidth);
   }
-
   return (
-    <Routes>
-      <Route path='/' element={<Layout />}>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/compare' element={<Compare isMobile={isMobile}/>}></Route>
-        <Route path='*' element={<NotFound />}></Route>
-      </Route>
-    </Routes>
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<Layout isMobile={isMobile} />}>
+          <Route path='/' element={<Home windowWidth={windowWidth}/>}></Route>
+          <Route path='/compare' element={<Compare isMobile={isMobile} />}></Route>
+          <Route path='/add' element={<Add />}></Route>
+          <Route path='*' element={<NotFound />}></Route>
+        </Route>
+      </Routes>
+    </div>
   )
 }
 

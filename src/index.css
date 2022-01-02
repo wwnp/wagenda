@@ -117,3 +117,36 @@ code {
   opacity: 1;
   transform: translateX(0);
 }
+
+
+
+
+.form-check-input {}
+
+.form-check-input:checked {
+  background-color: #a2312816;
+  border-color: #a23128;
+}
+
+
+
+
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+.App {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+.input {
+  border-radius: 15px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  height: 6vh;
+  width: 40vw;
+}
+.mainInput {
+  position: relative;
+  margin-top: 50%;
+} */

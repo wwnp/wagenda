@@ -1,7 +1,0 @@
-.Layout {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(rgb(27, 27, 27),rgb(37, 37, 53));
-  color: #fff;
-}

@@ -1,105 +1,151 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import React from 'react'
+import { Component } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux'
 import classes from './Home.module.css'
-import { fetchCountries } from '../../redux/actions/homeAction';
-import { delay } from '../../dox';
-import { startLoading, hideLoading } from '../../redux/actions/loadingAction';
 import Loader from '../../components/Loader/Loader'
-const Home = (props) => {
-  console.log(props)
-  const [inProp, setInProp] = useState(true);
-  const [choosedContries, setCountries] = useState([])
-  const modalButton = {
-    // backgroundImage: 'url(' + countriesFlags.france + ')',
-    backgroundSize: 'contain',
-    height: '79px',
-    width: '119px',
-    backgroundRepeat: 'no-repeat',
-    marginLeft: '10px',
-    marginRight: '10px',
-  }
-  const chooseHandler = (e) => {
-    if (choosedContries.length >= 2) {
-      choosedContries.push(e.target.dataset.country)
-    } else {
-      choosedContries.push(e.target.dataset.country)
-    }
-  }
-  const duration = 500;
-
-  const test = (e) => {
-    const targetCountry = e.target.dataset.country
-    if (targetCountry) {
-      console.log(targetCountry)
-    }
-  }
-
-  useEffect(() => {
-    (async () => {
-      props.startLoading()
-      await delay(800)
-
-      props.fetchCountries()
-
-      props.hideLoading()
-    })()
-  }, [])
+import CountryButton from '../../components/CountryButton/CountryButton';
+import { HookCountySetter } from './HomeLogic';
+import { HookFetchCountries } from './HookFetchCountries';
+import { countryButtonHandler } from './HomeLogic';
+import { resetCountries } from './HomeLogic';
+import noImage from '../../images/noImage.png'
+import { Video } from '../../components/Video/Video'
+import { beforeCompare } from './HomeLogic';
+import { useNavigate } from "react-router-dom"
+import { HookLoading } from './HookFetchCountries';
+const CAPITAL = 'capital'
+const PROVINCE = 'province'
+export default function Home(props) {
+  const { countryOne, countryTwo, setCountryOne, setCountryTwo, typeRadio, setTypeRadio } = HookCountySetter()
+  const { loading, setLoading } = HookLoading(true)
+  const { countries } = HookFetchCountries({setLoading})
+  const navigate = useNavigate()
   return (
-    <Container>
-      <h1 className='text-center'>Choose two countries to compare:</h1>
-
-      {props.loading
-        ? <Loader></Loader>
-        : <form className={classes.formCountries} onClick={(e) => test(e)}>
-          {props.countries.map((country, index) => {
-            return <Col
-              key={index}
-              xs='4'
-              className='text-center my-5'
-            >
+    <React.Fragment>
+      <Video windowWidth={props.windowWidth}></Video>
+      <div className={classes.formWrapper}>
+        {loading
+          ? <Loader></Loader>
+          : <div style={{ padding: '15px' }}>
+            <form className={classes.formCountries}>
+              {countries.map((country, index) => {
+                return <Col
+                  key={index}
+                  xs='4'
+                  className='text-center my-3'
+                >
+                  {/* <CSSTransition */}
+                  {/* timeout={500} */}
+                  {/* classNames='os' */}
+                  {/* > */}
+                  {/* {state => ( */}
+                  <CountryButton
+                    country={country}
+                    onCLick={(event) => countryButtonHandler(event, {
+                      countryOne,
+                      countryTwo,
+                      setCountryOne,
+                      setCountryTwo
+                    })}
+                    urlFlag={
+                      countriesFlags[country.toLowerCase()]
+                        ? countriesFlags[country.toLowerCase()]
+                        : noImage
+                    }
+                  >
+                  </CountryButton>
+                  {/* )} */}
+                  {/* </CSSTransition> */}
+                </Col>
+              })}
+            </form>
+            <div className="text-center">
+              <Button
+                className='btn btn-sm btn-warning text-white mt-5'
+                onClick={(e) => resetCountries(e, {
+                  countryOne,
+                  countryTwo,
+                  setCountryOne,
+                  setCountryTwo,
+                  setTypeRadio
+                })}
+              >
+                Reset
+              </Button>
+            </div>
+            <form>
               <CSSTransition
-                in={inProp}
                 timeout={500}
                 classNames='os'
               >
                 {state => (
-                  <Button
-                    className={`${state}`}
-                    style={modalButton}
-                    data-country={country}
-                  >
-                    {country}
-                  </Button>
+                  <div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                        checked={typeRadio === CAPITAL}
+                        onChange={() => setTypeRadio(CAPITAL)}
+                      />
+                      <label className="form-check-label float-left" htmlFor="flexRadioDefault1">
+                        Capital
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        disabled
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                        checked={typeRadio === PROVINCE}
+                        onChange={() => setTypeRadio(PROVINCE)}
+                      />
+                      <label className="form-check-label float-left" htmlFor="flexRadioDefault2">
+                        Province
+                      </label>
+                    </div>
+                  </div>
                 )}
               </CSSTransition>
-            </Col>
-          })}
-        </form>
-      }
-
-      <button className='btn btn-secondary' onClick={() => setInProp(!inProp)}>
-        Click to Enter
-      </button>
-      <Link to='/compare'>Compare</Link>
-    </Container>
+            </form>
+            <div className="text-center">
+              <Button
+                className='btn btn-dark btn-lg'
+                disabled={!(countryOne && countryTwo)}
+                onClick={e => beforeCompare(e, countryOne, countryTwo, navigate)}
+              >
+                Start
+              </Button>
+            </div>
+          </div>
+        }
+      </div>
+    </React.Fragment>
   )
 }
-function mapStateToProps(state) {
-  return {
-    test: state.test.test,
-    countries: state.home.countries,
-    loading: state.loading.loading,
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchCountries: () => { dispatch(fetchCountries()) },
-    startLoading: () => { dispatch(startLoading()) },
-    hideLoading: () => { dispatch(hideLoading()) },
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// function mapStateToProps(state) {
+//   return {
+//     countries: state.home.countries,
+//     loading: state.loading.loading,
+//   }
+// }
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     fetchCountries: () => { dispatch(fetchCountries()) },
+//     // setComparedCountries: bindActionCreators(setComparedCountries, dispatch)
+//     // startLoading: () => { dispatch(startLoading()) },
+//     // hideLoading: () => { dispatch(hideLoading()) },
+//   }
+// }
+// function withRouter(Component) {
+//   return (props) => {
+//     const navigate = useNavigate();
+//     return <Component {...props} navigate={navigate} />;
+//   }
+// } // hoc
+// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home2))

@@ -1,0 +1,35 @@
+.Versus {
+  /* position: absolute;
+  top: 50%;
+  right: -7.5%;
+  transform: translate3d(-50%,-50%,0);
+  z-index: 1000; */
+  width: 1%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Versus img {
+  width: 40px;
+  opacity: 0.792;
+}
+
+@media (min-width: 1000px) {
+  .Versus img {
+    width: 55px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .Versus img {
+    width: 75px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .Versus img {
+    width: 85px;
+  }
+}

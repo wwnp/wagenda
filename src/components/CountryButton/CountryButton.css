@@ -1,0 +1,32 @@
+.CountryWrapper {
+  position: relative;
+}
+.CountryButton {
+  background-size: contain;
+  height: 79px;
+  width: 118px;
+  background-repeat: no-repeat;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: border .15s, box-shadow .15s;
+  border: 1px solid rgb(138, 138, 138) ;
+}
+.CountryButton.active {
+  border: 1px solid #00ff00;
+  box-shadow: 1px 2px 3px #00ff00;
+}
+
+
+.CountryWrapper:hover .CountryButton-label {
+  opacity: 1;
+}
+.CountryButton-label {
+  opacity: 0;
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 350ms;
+
+  color: #fff;
+}
