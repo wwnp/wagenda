@@ -4,9 +4,6 @@ import { Outlet } from "react-router-dom";
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header';
 import { Container } from 'react-bootstrap';
-import VideoPlayer from "react-background-video-player";
-import video from '../../3.mp4'
-import { Video } from '../Video/Video';
 export default class Layout extends Component {
   render() {
     return (
@@ -24,10 +21,11 @@ export default class Layout extends Component {
         <div className={classes.Layout}>
           <Header></Header>
           <Container fluid>
-            {this.props.isMobile
+            <Outlet></Outlet>
+            {/* {this.props.isMobile
               ? <div className="text-center display-6"><h6>Unavailable on mobile version</h6></div>
               : <Outlet></Outlet>
-            }
+            } */}
           </Container>
           <Footer></Footer>
         </div>

@@ -6,6 +6,7 @@ import belgium from './images/belgium.png'
 import germany from './images/germany.png'
 import belarus from './images/belarus.png'
 import noImage from './images/noImage.png'
+
 export const countriesFlags = {
   'france' : france,
   'russia' : russia,

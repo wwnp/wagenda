@@ -54,30 +54,24 @@ code {
   transform: translateX(0);
   opacity: 1;
 }
-
 .os-exit-active {
   transform: translateX(100px);
   transition: transform 1s, opacity 500ms;
-
   opacity: 0;
 }
-
 .os-exit-done {
   transform: translateX(0);
   opacity: 1;
 }
-
 .os-enter {
   opacity: 1;
   transform: translateX(0);
 }
-
 .os-enter-active {
   opacity: 0;
   transform: translateX(100px);
   transition: transform 1s, opacity 500ms;
 }
-
 .os-enter-done {
   opacity: 1;
   transform: translateX(0);
@@ -89,34 +83,51 @@ code {
   transform: translateX(0);
   opacity: 1;
 }
-
 .as-exit-active {
   transform: translateX(-100px);
   transition: transform 1s, opacity 500ms;
 
   opacity: 0;
 }
-
 .as-exit-done {
   transform: translateX(0);
   opacity: 1;
 }
-
 .as-enter {
   opacity: 1;
   transform: translateX(0);
 }
-
 .as-enter-active {
   opacity: 0;
   transform: translateX(-100px);
   transition: transform 1s, opacity 500ms;
 }
 
-.os-enter-done {
+
+.es-exit {
+  transform: translateY(0);
   opacity: 1;
-  transform: translateX(0);
 }
+.es-exit-active {
+  transform: translateY(100px);
+  transition: transform 1s, opacity 500ms;
+
+  opacity: 0;
+}
+.es-exit-done {
+  transform: translateY(0);
+  opacity: 1;
+}
+.es-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+.es-enter-active {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 1s, opacity 500ms;
+}
+
 
 
 
@@ -130,23 +141,3 @@ code {
 
 
 
-
-/* @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-
-.App {
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
-}
-.input {
-  border-radius: 15px;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  text-align: center;
-  border: none;
-  height: 6vh;
-  width: 40vw;
-}
-.mainInput {
-  position: relative;
-  margin-top: 50%;
-} */

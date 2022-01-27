@@ -1,4 +1,4 @@
-import video from '../../2.mp4'
+import video from '../../assets/2.mp4'
 export function Video(props) {
   const windowWidth = props.windowWidth
   const { widthVideo, heightVideo } = chooseSizesVideo(windowWidth)
