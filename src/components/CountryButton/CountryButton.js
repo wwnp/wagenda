@@ -4,18 +4,14 @@ const CountryButton = props => {
   const modalButton = {
     backgroundImage: 'url(' + props.urlFlag + ')',
   }
-  console.log(props)
   const cls = ['CountryButton']
   if (props.oneCountry) {
-    console.log(props.country)
-    if (props.country.toLowerCase() === props.oneCountry.country.toLowerCase()) {
-      console.log(123)
+    if (props.country.toLowerCase() === props.oneCountry.toLowerCase()) {
       cls.push('active')
     }
   }
   if (props.twoCountry) {
-    if (props.country.toLowerCase() === props.twoCountry.country.toLowerCase()) {
-      console.log(456)
+    if (props.country.toLowerCase() === props.twoCountry.toLowerCase()) {
       cls.push('active')
     }
   }

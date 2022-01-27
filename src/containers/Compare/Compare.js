@@ -16,8 +16,30 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import Streetview from 'react-google-streetview';
 import draw from '../../images/draw.png'
-import { API_KEY } from '../../config';
-// const API_KEY2 = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
+
+import GoogleStreetview from "react-google-streetview";
+import asyncLoading from "react-async-loader";
+import {
+  GoogleMap,
+  LoadScript,
+  LoadScriptNext,
+  useGoogleMap,
+  StreetViewPanorama
+} from "@react-google-maps/api";
+import Map1 from '../../components/map';
+const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
+const center = {
+  lat: 37.5247596,
+  lng: -122.2583719
+};
+const center2 = {
+  lat: 48.0015179650875,
+  lng: 37.82428179890636
+};
+// import { API_KEY } from '../../config';
+// import Map1 from './../../components/map';
+// const API_KEY = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
+// const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 export default class Compare extends Component {
   state = {
     activeQuestion: 0,
@@ -31,7 +53,36 @@ export default class Compare extends Component {
     countryTwo: null,
     locOne: [],
     locTwo: [],
-    start: true
+    start: true,
+    testArrOne: [
+      {
+        lat: 47.56737703848008,
+        lng: 14.240122170065854
+      },
+      {
+        lat: 37.5247596,
+        lng: -122.2583719
+      },
+      {
+        lat: 47.561199167492155,
+        lng: 14.179007367369614
+      },
+    ],
+    testArrTwo: [
+      {
+        lat: 47.41729809899174,
+        lng: 13.816103956155192
+      },
+      {
+        lat: 47.3891702360734,
+        lng: 13.645285729107657
+      },
+      {
+        lat: 47.394302790229546,
+        lng: 13.591559885085797
+      },
+    ],
+    currTest: 0
   }
   isFinished() {
     return this.state.activeQuestion + 1 === 5 + 3
@@ -75,16 +126,21 @@ export default class Compare extends Component {
       this.setState({
         locOne: temp1,
         locTwo: temp2,
-        loading: false,
-        countryOne,
-        countryTwo,
+        loading: false
       })
+      
+      // this.setState({
+      //   locOne: temp1,
+      //   locTwo: temp2,
+      //   loading: false,
+      //   countryOne,
+      //   countryTwo,
+      // })
     } catch (error) {
       console.log(error)
     }
   }
   render() {
-    console.log(API_KEY)
     if (this.props.isMobile) {
       return <h1>Unavailable on mobile devices</h1>
     }
@@ -97,115 +153,120 @@ export default class Compare extends Component {
       :
       this.state.loading
         ? <Loader></Loader>
-        :
-        this.state.activeQuestion === 0
-          ? <React.Fragment>
-            <h1>Sex</h1>
-            {/* <StreetView
-              address={this.state.locOne[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={{ display: 'none' }}
-            />
-            <StreetView
-              address={this.state.locTwo[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={{ display: 'none' }}
-            />
-            <StreetView
-              address={this.state.locOne[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={{ display: 'none' }}
-            />
-            <StreetView
-              address={this.state.locTwo[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={{ display: 'none' }}
-            /> */}
-            {this.setState({
-              activeQuestion: this.state.activeQuestion + 1
-            })}
-          </React.Fragment>
-          :
+        : (
           <React.Fragment>
-            <h2>2</h2>
-            {/* <StreetView
-              address={this.state.locOne[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={this.mapContainerStyle}
-            />
-            <StreetView
-              address={this.state.locTwo[this.state.activeQuestion]}
-              APIkey={API_KEY}
-              streetView
-              zoomLevel={15}
-              mapStyle={this.mapContainerStyle}
-            /> */}
-            {/* <Versus></Versus> */}
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
-              <CSSTransition
-                in={this.state.toggle1}
-                timeout={500}
-                classNames='os'
-              >
-                <Button
-                  className={classes.modalButton}
-                  onClick={() => { this.incFirst() }}
-                  style={this.state.countryOne
-                    ? {
-                      backgroundImage: 'url(' + countriesFlags[this.state.countryOne.toLowerCase()] + ')'
-                    }
-                    : null
-                  }
-                >
-                </Button>
-              </CSSTransition>
-              <CSSTransition
-                in={this.state.toggleDraw}
-                timeout={500}
-                classNames='es'
-              >
-                <Button
-                  className={classes.modalButton}
-                  variant="light"
-                  onClick={() => { this.drawHandle() }}
-                  style={
-                    {
-                      backgroundImage: 'url(' + draw + ')',
-                      // height: '79px',
-                      // width: '119px'
-                    }
-                  }
-                >
-                </Button>
-              </CSSTransition>
-              <CSSTransition
-                in={this.state.toggle2}
-                timeout={500}
-                classNames='as'
-              >
-                <Button
-                  className={classes.modalButton}
-                  onClick={() => { this.incSecond() }}
-                  style={this.state.countryTwo
-                    ? {
-                      backgroundImage: 'url(' + countriesFlags[this.state.countryTwo.toLowerCase()] + ')'
-                    }
-                    : null
-                  }
-                >
-                </Button>
-              </CSSTransition>
-            </div>
-          </React.Fragment >
+            <Map1 testArrOne={this.state.locOne} testArrTwo={this.state.locTwo} currTest={this.state.currTest}></Map1>
+            <button onClick={() => this.setState({
+              currTest: this.state.currTest + 1
+            })}>Test</button>
+          </React.Fragment>
+        )
+    // this.state.activeQuestion === 0
+    //   ? <React.Fragment>
+    //     <h1>Sex</h1>
+    //     <StreetView
+    //       address={this.state.locOne[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={{ display: 'none' }}
+    //     />
+    //     <StreetView
+    //       address={this.state.locTwo[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={{ display: 'none' }}
+    //     />
+    //     <StreetView
+    //       address={this.state.locOne[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={{ display: 'none' }}
+    //     />
+    //     <StreetView
+    //       address={this.state.locTwo[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={{ display: 'none' }}
+    //     />
+    //     {this.setState({
+    //       activeQuestion: this.state.activeQuestion + 1
+    //     })}
+    //   </React.Fragment>
+    //   :
+    //   <React.Fragment>
+    //     <h2>2</h2>
+    //     <StreetView
+    //       address={this.state.locOne[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={this.mapContainerStyle}
+    //     />
+    //     <StreetView
+    //       address={this.state.locTwo[this.state.activeQuestion]}
+    //       APIkey={API_KEY}
+    //       streetView
+    //       zoomLevel={15}
+    //       mapStyle={this.mapContainerStyle}
+    //     />
+    //     {/* <Versus></Versus> */}
+    //     <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px' }}>
+    //       <CSSTransition
+    //         in={this.state.toggle1}
+    //         timeout={500}
+    //         classNames='os'
+    //       >
+    //         <Button
+    //           className={classes.modalButton}
+    //           onClick={() => { this.incFirst() }}
+    //           style={this.state.countryOne
+    //             ? {
+    //               backgroundImage: 'url(' + countriesFlags[this.state.countryOne.toLowerCase()] + ')'
+    //             }
+    //             : null
+    //           }
+    //         >
+    //         </Button>
+    //       </CSSTransition>
+    //       <CSSTransition
+    //         in={this.state.toggleDraw}
+    //         timeout={500}
+    //         classNames='es'
+    //       >
+    //         <Button
+    //           className={classes.modalButton}
+    //           variant="light"
+    //           onClick={() => { this.drawHandle() }}
+    //           style={
+    //             {
+    //               backgroundImage: 'url(' + draw + ')',
+    //             }
+    //           }
+    //         >
+    //         </Button>
+    //       </CSSTransition>
+    //       <CSSTransition
+    //         in={this.state.toggle2}
+    //         timeout={500}
+    //         classNames='as'
+    //       >
+    //         <Button
+    //           className={classes.modalButton}
+    //           onClick={() => { this.incSecond() }}
+    //           style={this.state.countryTwo
+    //             ? {
+    //               backgroundImage: 'url(' + countriesFlags[this.state.countryTwo.toLowerCase()] + ')'
+    //             }
+    //             : null
+    //           }
+    //         >
+    //         </Button>
+    //       </CSSTransition>
+    //     </div>
+    //   </React.Fragment >
   }
 }

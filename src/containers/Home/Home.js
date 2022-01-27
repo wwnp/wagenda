@@ -1,20 +1,13 @@
 import React, { useContext, useEffect } from 'react'
-import { Component } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
-import classes from './Home.module.css'
+// import classes from './Home.module.css'
 import Loader from '../../components/Loader/Loader'
 import CountryButton from '../../components/CountryButton/CountryButton';
-import { HookCountySetter } from './HomeLogic';
-import { HookFetchCountries } from './HookFetchCountries';
-import { countryButtonHandler } from './HomeLogic';
-import { resetCountries } from './HomeLogic';
 import noImage from '../../images/noImage.png'
 import { Video } from '../../components/Video/Video'
-import { beforeCompare } from './HomeLogic';
 import { useNavigate } from "react-router-dom"
-import { HookLoading } from './HookFetchCountries';
 import { CAPITAL, CountryContex, PROVINCE } from './../../contex/contex';
 import axios from 'axios';
 
@@ -32,8 +25,6 @@ export default function Home(props) {
     radioType,
     changeRadioType,
     addElToDom,
-    resetElDom,
-    countriesDOM
   } = useContext(CountryContex)
   const navigate = useNavigate()
   useEffect(() => {
@@ -42,36 +33,26 @@ export default function Home(props) {
       const { data } = response
       setCountries(data)
       stopLoading()
-      const a = document.getElementById('countryForm').querySelectorAll('[data-take="true"]')
-      console.log(a)
     }
     fetchData()
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const countryBtnHandler = (event) => {
     event.preventDefault()
     const country = event.target.dataset.country
     if (!oneCountry || !twoCountry) {
-      // event.target.classList.add('active')
-
       if (!oneCountry) {
         addElToDom(event.target)
-        setOneCountry({
-          country,
-          el: event.target
-        })
+        setOneCountry(country)
       } else if (!twoCountry && country !== twoCountry?.country) {
         addElToDom(event.target)
-        setTwoCountry({
-          country, el: event.target
-        })
+        setTwoCountry(country)
       }
     }
   }
   const resetBtnHandler = () => {
-    oneCountry.el.classList.remove('active')
-    twoCountry.el.classList.remove('active')
-    resetElDom()
+    // oneCountry.el.classList.remove('active')
+    // twoCountry.el.classList.remove('active')
     resetCountries()
   }
   const beforeCompare = (event) => {
@@ -79,19 +60,19 @@ export default function Home(props) {
     if (!(oneCountry, twoCountry)) {
       alert('Choose countries!')
     } else {
-      localStorage.setItem('countryOne', oneCountry.country)
-      localStorage.setItem('countryTwo', twoCountry.country)
+      localStorage.setItem('countryOne', oneCountry)
+      localStorage.setItem('countryTwo', twoCountry)
       navigate('/compare')
     }
   }
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>
-      <div className={classes.formWrapper}>
+      <div className={'formWrapper'}>
         {loading
           ? <Loader></Loader>
-          : <div style={{ padding: '15px' }}>
-            <form className={classes.formCountries} id='countryForm'>
+          : <div style={{ marginTop: '55px', padding: '5px' }}>
+            <form className={'formCountries'}>
               {countries.map((country, index) => {
                 return <Col
                   key={index}
@@ -119,13 +100,6 @@ export default function Home(props) {
                 onClick={e => {
                   resetBtnHandler()
                 }}
-              // onClick={(e) => resetCountries(e, {
-              //   countryOne,
-              //   countryTwo,
-              //   setCountryOne,
-              //   setCountryTwo,
-              //   setTypeRadio
-              // })}
               >
                 Reset
               </Button>

@@ -141,3 +141,24 @@ code {
 
 
 
+.formWrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+  background: rgba(5, 5, 5, 0.9);
+  box-shadow: 1px 1px 1px 1px #0e0e0e;
+  transition: box-shadow .1s;
+}
+.formWrapper:hover {
+  box-shadow: 1px 1px 3px 2px #0e0e0e;
+}
+.formCountries {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container-custom {
+  max-width: 800px;
+  z-index: 100;
+  position: relative;
+}

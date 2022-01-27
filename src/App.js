@@ -22,10 +22,10 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Layout isMobile={isMobile} />}>
           <Route index element={<Home windowWidth={windowWidth}/>}></Route>
-          <Route path='compare' element={<Compare isMobile={isMobile} />}></Route>
           <Route path='add' element={<Add />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Route>
+        <Route path='compare' element={<Compare isMobile={isMobile} />}></Route>
       </Routes>
     </div>
   )

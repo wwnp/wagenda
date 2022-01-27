@@ -16,6 +16,7 @@ const Add = props => {
   const { location, setLocation } = HandleLocation()
   const { error, setError } = AddError()
   const { items, setItems } = HandleItems()
+  console.log(items)
   return (
     <div className={classes.Add}>
       <h1 className='text-center'>Add</h1>
@@ -93,16 +94,14 @@ const Add = props => {
                 className="btn btn-warning mr-4"
                 onClick={(e) => {
                   e.preventDefault()
-                  AddHook(country, urbanType, location, setError, setItems, items,setLocation)
+                  AddHook(country, urbanType, location, setError, setItems, items, setLocation)
                 }}
-
               >
                 Add
               </button>
               <button
                 className="btn btn-warning"
                 onClick={(e) => setItems([])}
-
               >
                 Reset
               </button>
@@ -112,7 +111,7 @@ const Add = props => {
                 className="btn btn-success"
                 onClick={e => {
                   e.preventDefault()
-                  finishLocations(items,setItems,setLocation)
+                  finishLocations(items, setItems, setLocation)
                 }}
                 disabled={items.length === 0}
               >

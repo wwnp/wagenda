@@ -58,8 +58,15 @@ export function AddHook(country, urbanType, location, setError, setItems, items,
     errorLog['locationError'] = 'Type location'
   }
   if (Object.keys(errorLog).length === 0) {
-    console.log(Object.keys(errorLog).length)
-    const itemsNew = [...items, { country, urbanType, location }]
+    const loc = location.split(',')
+    const itemsNew = [...items, { 
+      country,
+      urbanType,
+       location: {
+         lat: parseFloat(loc[0]),
+         lng: parseFloat(loc[1])
+       } 
+    }]
     setItems(itemsNew)
     setLocation('')
   } else {
