@@ -31,7 +31,7 @@ import { ContexProvider } from "./contex/contex";
 
 const app = (
   <ContexProvider>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-countries">
       <App />
     </BrowserRouter>
   </ContexProvider>

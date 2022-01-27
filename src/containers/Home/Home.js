@@ -31,6 +31,9 @@ export default function Home(props) {
     resetCountries,
     radioType,
     changeRadioType,
+    addElToDom,
+    resetElDom,
+    countriesDOM
   } = useContext(CountryContex)
   const navigate = useNavigate()
   useEffect(() => {
@@ -39,21 +42,26 @@ export default function Home(props) {
       const { data } = response
       setCountries(data)
       stopLoading()
+      const a = document.getElementById('countryForm').querySelectorAll('[data-take="true"]')
+      console.log(a)
     }
     fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
   const countryBtnHandler = (event) => {
     event.preventDefault()
     const country = event.target.dataset.country
     if (!oneCountry || !twoCountry) {
-      event.target.classList.add('active')
+      // event.target.classList.add('active')
+
       if (!oneCountry) {
+        addElToDom(event.target)
         setOneCountry({
           country,
           el: event.target
         })
       } else if (!twoCountry && country !== twoCountry?.country) {
+        addElToDom(event.target)
         setTwoCountry({
           country, el: event.target
         })
@@ -63,6 +71,7 @@ export default function Home(props) {
   const resetBtnHandler = () => {
     oneCountry.el.classList.remove('active')
     twoCountry.el.classList.remove('active')
+    resetElDom()
     resetCountries()
   }
   const beforeCompare = (event) => {
@@ -82,7 +91,7 @@ export default function Home(props) {
         {loading
           ? <Loader></Loader>
           : <div style={{ padding: '15px' }}>
-            <form className={classes.formCountries}>
+            <form className={classes.formCountries} id='countryForm'>
               {countries.map((country, index) => {
                 return <Col
                   key={index}
@@ -90,6 +99,8 @@ export default function Home(props) {
                   className='text-center my-3'
                 >
                   <CountryButton
+                    oneCountry={oneCountry}
+                    twoCountry={twoCountry}
                     country={country}
                     onClick={countryBtnHandler}
                     urlFlag={

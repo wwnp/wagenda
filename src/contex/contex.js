@@ -8,7 +8,8 @@ const initialState = {
   loading: true,
   oneCountry: null,
   twoCountry: null,
-  radioType: CAPITAL
+  radioType: CAPITAL,
+  countriesDOM: []
 }
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
@@ -32,6 +33,12 @@ export const ContexProvider = (props) => {
   }
   value.changeRadioType= (type) => {
     dispatch({ type: 'CHANGE_RADIO_TYPE' , payload: type})
+  }
+  value.addElToDom= (el) => {
+    dispatch({ type: 'ADD_EL' , payload: el})
+  }
+  value.resetElDom= (el) => {
+    dispatch({ type: 'RESET_EL_DOM'})
   }
   return (
     <CountryContex.Provider value={value}>

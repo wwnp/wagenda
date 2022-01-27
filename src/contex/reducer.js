@@ -14,8 +14,10 @@ export const reducer = (state, action) => {
       return { ...state, oneCountry: null, twoCountry: null }
     case 'CHANGE_RADIO_TYPE':
       return { ...state, radioType: action.payload }
-    case 'TEST2':
-      return { ...state, test: action.payload }
+    case 'ADD_EL':
+      return { ...state, countriesDOM: [...state.countriesDOM, action.payload] }
+    case 'RESET_EL_DOM':
+      return { ...state, countriesDOM: [] }
     default:
       return state
   }
