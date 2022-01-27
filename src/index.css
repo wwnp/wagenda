@@ -162,3 +162,14 @@ code {
   z-index: 100;
   position: relative;
 }
+
+.Compare {
+  height: 100vh;
+  background-color: #202020;
+}
+.modalButton {
+  background-size: 'contain';
+  height: 79px;
+  width:119px;
+  background-repeat: 'no-repeat';
+}

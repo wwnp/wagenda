@@ -42,9 +42,8 @@ export function HandleLocation() {
     setLocation
   }
 }
-export function AddHook(country, urbanType, location, setError, setItems, items,setLocation) {
+export function AddHook(country, urbanType, location, setError, setItems, items, setLocation) {
   const errorLog = {}
-  // let isSame = true
   setError({})
   items.forEach(item => {
     if (item.location === location) {
@@ -59,13 +58,13 @@ export function AddHook(country, urbanType, location, setError, setItems, items,
   }
   if (Object.keys(errorLog).length === 0) {
     const loc = location.split(',')
-    const itemsNew = [...items, { 
+    const itemsNew = [...items, {
       country,
       urbanType,
-       location: {
-         lat: parseFloat(loc[0]),
-         lng: parseFloat(loc[1])
-       } 
+      location: {
+        lat: parseFloat(loc[0]),
+        lng: parseFloat(loc[1])
+      }
     }]
     setItems(itemsNew)
     setLocation('')
@@ -88,9 +87,7 @@ export function HandleItems() {
     setItems
   }
 }
-export async function finishLocations(items,setItems,setLocation) {
-  console.log(items)
-
+export async function finishLocations(items, setItems, setLocation) {
   items.forEach(item => {
     async function helpFetch() {
       const url = (`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${item.country}/${item.urbanType}.json`)

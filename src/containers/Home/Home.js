@@ -44,7 +44,7 @@ export default function Home(props) {
       if (!oneCountry) {
         addElToDom(event.target)
         setOneCountry(country)
-      } else if (!twoCountry && country !== twoCountry?.country) {
+      } else if (!twoCountry && country !== oneCountry) {
         addElToDom(event.target)
         setTwoCountry(country)
       }
@@ -65,6 +65,8 @@ export default function Home(props) {
       navigate('/compare')
     }
   }
+  console.log(oneCountry)
+  console.log(twoCountry)
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>
