@@ -1,12 +1,12 @@
 .Versus {
-  /* position: absolute;
-  top: 50%;
-  right: -7.5%;
-  transform: translate3d(-50%,-50%,0);
-  z-index: 1000; */
+  position: absolute;
+  top: 37%;
+  right: 50.5%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 1000;
   width: 1%;
 
-  display: flex;
+  display: inline-block;
   justify-content: center;
   align-items: center;
 }
@@ -28,8 +28,42 @@
   }
 }
 
+@media (min-width: 1400px) {
+  .Versus {
+    right: 50.95%;
+  }
+}
 @media (min-width: 1700px) {
   .Versus img {
     width: 85px;
+  }
+}
+@media (min-width: 1800px) {
+  .Versus  {
+    right: 50.5%;
+    top: 45%;
+  }
+}
+@media (min-width: 2000px) {
+  .Versus  {
+    top: 27.5%;
+  }
+}
+@media (min-width: 2900px) {
+  .Versus  {
+    top: 21.5%;
+    right: 50%;
+  }
+}
+@media (min-width: 4000px) {
+  .Versus  {
+    top: 15.5%;
+    right: 49.5%;
+  }
+}
+@media (min-width: 5500px) {
+  .Versus  {
+    top: 11.5%;
+    right: 49.25%;
   }
 }

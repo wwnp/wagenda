@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
@@ -15,13 +15,66 @@ import { Video } from '../../components/Video/Video'
 import { beforeCompare } from './HomeLogic';
 import { useNavigate } from "react-router-dom"
 import { HookLoading } from './HookFetchCountries';
-const CAPITAL = 'capital'
-const PROVINCE = 'province'
+import { CAPITAL, CountryContex, PROVINCE } from './../../contex/contex';
+import axios from 'axios';
+
 export default function Home(props) {
-  const { countryOne, countryTwo, setCountryOne, setCountryTwo, typeRadio, setTypeRadio } = HookCountySetter()
-  const { loading, setLoading } = HookLoading(true)
-  const { countries } = HookFetchCountries({setLoading})
+  const {
+    setCountries,
+    countries,
+    loading,
+    stopLoading,
+    setOneCountry,
+    setTwoCountry,
+    oneCountry,
+    twoCountry,
+    resetCountries,
+    radioType,
+    changeRadioType,
+  } = useContext(CountryContex)
   const navigate = useNavigate()
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
+      const { data } = response
+      setCountries(data)
+      stopLoading()
+    }
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const countryBtnHandler = (event) => {
+    event.preventDefault()
+    const country = event.target.dataset.country
+    if (!oneCountry || !twoCountry) {
+      event.target.classList.add('active')
+      if (!oneCountry) {
+        setOneCountry({
+          country,
+          el: event.target
+        })
+      } else if (!twoCountry && country !== twoCountry?.country) {
+        setTwoCountry({
+          country, el: event.target
+        })
+      }
+    }
+  }
+  const resetBtnHandler = () => {
+    oneCountry.el.classList.remove('active')
+    twoCountry.el.classList.remove('active')
+    resetCountries()
+  }
+  const beforeCompare = (event) => {
+    event.preventDefault()
+    if (!(oneCountry, twoCountry)) {
+      alert('Choose countries!')
+    } else {
+      localStorage.setItem('countryOne', oneCountry.country)
+      localStorage.setItem('countryTwo', twoCountry.country)
+      navigate('/compare')
+    }
+  }
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>
@@ -36,19 +89,9 @@ export default function Home(props) {
                   xs='4'
                   className='text-center my-3'
                 >
-                  {/* <CSSTransition */}
-                  {/* timeout={500} */}
-                  {/* classNames='os' */}
-                  {/* > */}
-                  {/* {state => ( */}
                   <CountryButton
                     country={country}
-                    onCLick={(event) => countryButtonHandler(event, {
-                      countryOne,
-                      countryTwo,
-                      setCountryOne,
-                      setCountryTwo
-                    })}
+                    onClick={countryBtnHandler}
                     urlFlag={
                       countriesFlags[country.toLowerCase()]
                         ? countriesFlags[country.toLowerCase()]
@@ -56,21 +99,22 @@ export default function Home(props) {
                     }
                   >
                   </CountryButton>
-                  {/* )} */}
-                  {/* </CSSTransition> */}
                 </Col>
               })}
             </form>
             <div className="text-center">
               <Button
                 className='btn btn-sm btn-warning text-white mt-5'
-                onClick={(e) => resetCountries(e, {
-                  countryOne,
-                  countryTwo,
-                  setCountryOne,
-                  setCountryTwo,
-                  setTypeRadio
-                })}
+                onClick={e => {
+                  resetBtnHandler()
+                }}
+              // onClick={(e) => resetCountries(e, {
+              //   countryOne,
+              //   countryTwo,
+              //   setCountryOne,
+              //   setCountryTwo,
+              //   setTypeRadio
+              // })}
               >
                 Reset
               </Button>
@@ -88,8 +132,8 @@ export default function Home(props) {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault1"
-                        checked={typeRadio === CAPITAL}
-                        onChange={() => setTypeRadio(CAPITAL)}
+                        checked={radioType === CAPITAL}
+                        onChange={() => changeRadioType(CAPITAL)}
                       />
                       <label className="form-check-label float-left" htmlFor="flexRadioDefault1">
                         Capital
@@ -102,8 +146,8 @@ export default function Home(props) {
                         type="radio"
                         name="flexRadioDefault"
                         id="flexRadioDefault2"
-                        checked={typeRadio === PROVINCE}
-                        onChange={() => setTypeRadio(PROVINCE)}
+                        checked={radioType === PROVINCE}
+                        onChange={() => changeRadioType(PROVINCE)}
                       />
                       <label className="form-check-label float-left" htmlFor="flexRadioDefault2">
                         Province
@@ -116,8 +160,8 @@ export default function Home(props) {
             <div className="text-center">
               <Button
                 className='btn btn-dark btn-lg'
-                disabled={!(countryOne && countryTwo)}
-                onClick={e => beforeCompare(e, countryOne, countryTwo, navigate)}
+                disabled={!(oneCountry && twoCountry)}
+                onClick={e => beforeCompare(e)}
               >
                 Start
               </Button>
@@ -128,24 +172,3 @@ export default function Home(props) {
     </React.Fragment>
   )
 }
-// function mapStateToProps(state) {
-//   return {
-//     countries: state.home.countries,
-//     loading: state.loading.loading,
-//   }
-// }
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     fetchCountries: () => { dispatch(fetchCountries()) },
-//     // setComparedCountries: bindActionCreators(setComparedCountries, dispatch)
-//     // startLoading: () => { dispatch(startLoading()) },
-//     // hideLoading: () => { dispatch(hideLoading()) },
-//   }
-// }
-// function withRouter(Component) {
-//   return (props) => {
-//     const navigate = useNavigate();
-//     return <Component {...props} navigate={navigate} />;
-//   }
-// } // hoc
-// export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home2))
