@@ -36,7 +36,6 @@ const app = (
     </BrowserRouter>
   </ContexProvider>
 )
-
 ReactDOM.render(
   app,
   document.getElementById('root')

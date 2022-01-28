@@ -51,8 +51,6 @@ export default function Home(props) {
     }
   }
   const resetBtnHandler = () => {
-    // oneCountry.el.classList.remove('active')
-    // twoCountry.el.classList.remove('active')
     resetCountries()
   }
   const beforeCompare = (event) => {
@@ -65,8 +63,6 @@ export default function Home(props) {
       navigate('/compare')
     }
   }
-  console.log(oneCountry)
-  console.log(twoCountry)
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>
@@ -155,6 +151,13 @@ export default function Home(props) {
             </div>
           </div>
         }
+      </div>
+      <div className={'formWrapper'} style={{ marginTop: '20px' }}>
+        <ul>
+          <li><span>1. Belgium</span></li>
+          <li><span>2. USA</span></li>
+          <li><span>3. UK</span></li>
+        </ul>
       </div>
     </React.Fragment>
   )

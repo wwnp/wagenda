@@ -5,8 +5,8 @@ const Header = props => {
   return (
     <div className={classes.Header}>
       <div>
-        <img src={logo} alt="" />
-        <h1>Compareville</h1>
+        
+        <h3>Point Comparer <img src={logo} alt="" /></h3>
       </div>
     </div>
   )

@@ -5,19 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #181818;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
-
-
-
-
-.square {}
 
 .square.entering {
   animation: square 1000ms ease-out forwards;
@@ -54,24 +48,29 @@ code {
   transform: translateX(0);
   opacity: 1;
 }
+
 .os-exit-active {
   transform: translateX(100px);
   transition: transform 1s, opacity 500ms;
   opacity: 0;
 }
+
 .os-exit-done {
   transform: translateX(0);
   opacity: 1;
 }
+
 .os-enter {
   opacity: 1;
   transform: translateX(0);
 }
+
 .os-enter-active {
   opacity: 0;
   transform: translateX(100px);
   transition: transform 1s, opacity 500ms;
 }
+
 .os-enter-done {
   opacity: 1;
   transform: translateX(0);
@@ -83,20 +82,24 @@ code {
   transform: translateX(0);
   opacity: 1;
 }
+
 .as-exit-active {
   transform: translateX(-100px);
   transition: transform 1s, opacity 500ms;
 
   opacity: 0;
 }
+
 .as-exit-done {
   transform: translateX(0);
   opacity: 1;
 }
+
 .as-enter {
   opacity: 1;
   transform: translateX(0);
 }
+
 .as-enter-active {
   opacity: 0;
   transform: translateX(-100px);
@@ -108,20 +111,24 @@ code {
   transform: translateY(0);
   opacity: 1;
 }
+
 .es-exit-active {
   transform: translateY(100px);
   transition: transform 1s, opacity 500ms;
 
   opacity: 0;
 }
+
 .es-exit-done {
   transform: translateY(0);
   opacity: 1;
 }
+
 .es-enter {
   opacity: 1;
   transform: translateY(0);
 }
+
 .es-enter-active {
   opacity: 0;
   transform: translateY(100px);
@@ -132,7 +139,6 @@ code {
 
 
 
-.form-check-input {}
 
 .form-check-input:checked {
   background-color: #a2312816;
@@ -150,26 +156,129 @@ code {
   box-shadow: 1px 1px 1px 1px #0e0e0e;
   transition: box-shadow .1s;
 }
+
 .formWrapper:hover {
   box-shadow: 1px 1px 3px 2px #0e0e0e;
 }
+
 .formCountries {
   display: flex;
   flex-wrap: wrap;
 }
+
 .container-custom {
   max-width: 800px;
   z-index: 100;
   position: relative;
 }
 
-.Compare {
-  height: 100vh;
-  background-color: #202020;
-}
 .modalButton {
   background-size: 'contain';
   height: 79px;
-  width:119px;
+  width: 119px;
   background-repeat: 'no-repeat';
+}
+
+
+.close {
+  left: -280px;
+}
+
+
+
+.Drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 150px;
+  /* padding: 20px 10px; */
+  box-sizing: border-box;
+  background: #fff;
+  transform: translateX(0px);
+  transition: transform .22s ease-in;
+  z-index: 9220;
+}
+
+.Drawer.close {
+  /* transform: translateX(-300px); */
+  transform: translateX(-300px);
+}
+
+.Drawer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* .Drawer ul li a {
+  color: #363d54;
+  font-size: 30px;
+  text-decoration: none;
+  background-color: #fff;
+  position: relative;
+  padding: 0 20px 10px 20px;
+  transition: opacity .3s;
+} */
+.Drawer ul li a:hover, .active {
+  opacity: .7;
+}
+
+
+.MenuToggle {
+  position: fixed;
+  bottom: 10px;
+  /* left: 10px; */
+  left: 3px;
+
+  width: 50px;
+  height: 50px;
+
+  font-size: 25px;
+  cursor: pointer;
+  transition: opacity, all .22s ease-in;
+  z-index: 100;
+  border: 0.5px solid rgb(27, 27, 27);
+  background-color: transparent;
+  background-image: url('../src/images/menu.png');
+  background-size: cover
+}
+
+.MenuToggle:hover {
+  opacity: .7;
+}
+
+.MenuToggle.open {
+  left: 155px;
+}
+
+.side-a {
+  padding: 10px;
+  color: #363d54;
+  font-size: 30px;
+  text-decoration: none;
+  background-color: #fff;
+  border-right: none;
+  width: 100%;
+  display: block;
+}
+
+.side-a:hover {
+  border-right: 5px solid #cf7500;
+}
+
+.active-side {
+  background-color: rgb(231, 228, 228);
+}
+
+.Backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.75);
 }

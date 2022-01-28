@@ -9,7 +9,8 @@ const initialState = {
   oneCountry: null,
   twoCountry: null,
   radioType: CAPITAL,
-  countriesDOM: []
+  countriesDOM: [],
+  menu: false
 }
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
@@ -19,26 +20,29 @@ export const ContexProvider = (props) => {
   value.setCountries = (countries) => {
     dispatch({ type: 'SET_COUNTRIES', payload: countries })
   }
-  value.stopLoading= () => {
-    dispatch({ type: 'STOP_LOADING'})
+  value.stopLoading = () => {
+    dispatch({ type: 'STOP_LOADING' })
   }
-  value.setOneCountry= (country) => {
-    dispatch({ type: 'SET_ONE_COUNTRY', payload: country})
+  value.setOneCountry = (country) => {
+    dispatch({ type: 'SET_ONE_COUNTRY', payload: country })
   }
-  value.setTwoCountry= (country) => {
-    dispatch({ type: 'SET_TWO_COUNTRY', payload: country})
+  value.setTwoCountry = (country) => {
+    dispatch({ type: 'SET_TWO_COUNTRY', payload: country })
   }
-  value.resetCountries= () => {
-    dispatch({ type: 'RESET_COUNTRIES'})
+  value.resetCountries = () => {
+    dispatch({ type: 'RESET_COUNTRIES' })
   }
-  value.changeRadioType= (type) => {
-    dispatch({ type: 'CHANGE_RADIO_TYPE' , payload: type})
+  value.changeRadioType = (type) => {
+    dispatch({ type: 'CHANGE_RADIO_TYPE', payload: type })
   }
-  value.addElToDom= (el) => {
-    dispatch({ type: 'ADD_EL' , payload: el})
+  value.addElToDom = (el) => {
+    dispatch({ type: 'ADD_EL', payload: el })
   }
-  value.resetElDom= (el) => {
-    dispatch({ type: 'RESET_EL_DOM'})
+  value.resetElDom = (el) => {
+    dispatch({ type: 'RESET_EL_DOM' })
+  }
+  value.changeMenu = (menu) => {
+    dispatch({ type: 'CHANGE_MENU', payload: menu })
   }
   return (
     <CountryContex.Provider value={value}>
@@ -59,7 +63,7 @@ export const ContexProvider = (props) => {
 //   }
 //    value.setCountries = (countries) => {
 //      dispatch({ type: 'SET_COUNTRIES', payload: countries })
-//    }  
+//    }
 //   return (
 //     <CountryContex.Provider value={value}>
 //       {props.children}

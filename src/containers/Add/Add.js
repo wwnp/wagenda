@@ -1,30 +1,93 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classes from './Add.module.css'
-import { GetCountries } from './AddLogic'
-import { HandleRadio } from './AddLogic'
-import { HandleLocation } from './AddLogic'
-import { AddHook } from './AddLogic'
-import { AddError } from './AddLogic'
-import { HandleItems } from './AddLogic'
-import { finishLocations } from './AddLogic'
 import Loader from '../../components/Loader/Loader'
+import { CountryContex } from '../../contex/contex'
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useState } from 'react';
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
-  const { countries, loading, country, setCountry } = GetCountries()
-  const { urbanType, setUrbanType } = HandleRadio()
-  const { location, setLocation } = HandleLocation()
-  const { error, setError } = AddError()
-  const { items, setItems } = HandleItems()
-  console.log(items)
+  // const { countries, loading, country, setCountry } = GetCountries()
+  const [urbanType, setUrbanType] = useState(null)
+  const [location, setLocation] = useState('')
+  const [error, setError] = useState({})
+  const [items, setItems] = useState([])
+  // const [countries, setCountries] = useState([])
+  // const { loading, setLoading } = HookLoading(true)
+  const [country, setCountry] = useState('')
+
+  const {
+    setCountries,
+    countries,
+    loading,
+    stopLoading
+  } = useContext(CountryContex);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
+      const { data } = response
+      setCountries(data)
+      setCountry(response.data[0])
+      stopLoading()
+    }
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const addHook = () => {
+    const errorLog = {}
+    setError({})
+    items.forEach(item => {
+      if (item.location === location) {
+        errorLog['locError'] = 'Same locations in items'
+      }
+    })
+    if (!urbanType) {
+      errorLog['radioError'] = 'Select urban type'
+    }
+    if (location.trim().length === 0) {
+      errorLog['locationError'] = 'Type location'
+    }
+    if (Object.keys(errorLog).length === 0) {
+      const loc = location.split(',')
+      const itemsNew = [...items, {
+        country,
+        urbanType,
+        location: {
+          lat: parseFloat(loc[0]),
+          lng: parseFloat(loc[1])
+        }
+      }]
+      setItems(itemsNew)
+      setLocation('')
+    } else {
+      setError(errorLog)
+    }
+
+  }
+
+  const finishLocations = () => {
+    items.forEach(item => {
+      async function helpFetch() {
+        const url = (`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${item.country}/${item.urbanType}.json`)
+        await axios.post(url, JSON.stringify(item.location))
+        setItems([])
+        setLocation('')
+      }
+      helpFetch()
+    })
+  }
+
   return (
     <div className={classes.Add}>
       <h1 className='text-center'>Add</h1>
-      <form>
+      <React.Fragment>
         {loading
           ? <Loader></Loader>
           :
-          <React.Fragment>
+          <form>
             <div className='form-group mb-3'>
               <label htmlFor="">Countries</label>
               <select
@@ -32,7 +95,7 @@ const Add = props => {
                 name="countries"
                 id="countries"
                 onChange={e => {
-                  setCountry(e.target.value)
+                  // setCountry(e.target.value)
                 }}
               >
                 {loading
@@ -94,7 +157,7 @@ const Add = props => {
                 className="btn btn-warning mr-4"
                 onClick={(e) => {
                   e.preventDefault()
-                  AddHook(country, urbanType, location, setError, setItems, items, setLocation)
+                  addHook()
                 }}
               >
                 Add
@@ -111,15 +174,14 @@ const Add = props => {
                 className="btn btn-success"
                 onClick={e => {
                   e.preventDefault()
-                  finishLocations(items, setItems, setLocation)
+                  finishLocations()
                 }}
                 disabled={items.length === 0}
               >
                 Submit
               </button>
             </div>
-
-          </React.Fragment>
+          </form>
         }
         {
           Object.values(error).length !== 0
@@ -128,8 +190,7 @@ const Add = props => {
             })
             : null
         }
-      </form>
-
+      </React.Fragment>
 
     </div>
   )

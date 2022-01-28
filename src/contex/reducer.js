@@ -18,6 +18,8 @@ export const reducer = (state, action) => {
       return { ...state, countriesDOM: [...state.countriesDOM, action.payload] }
     case 'RESET_EL_DOM':
       return { ...state, countriesDOM: [] }
+    case 'CHANGE_MENU':
+      return { ...state, menu: action.payload }
     default:
       return state
   }

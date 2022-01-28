@@ -4,11 +4,11 @@ import { countriesFlags } from '../../countriesFlags';
 import { StreetView } from 'react-google-map-street-view'
 import Versus from '../../components/Versus/Versus';
 import { CSSTransition } from 'react-transition-group';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import { fetchLocations } from '../../redux/actions/compareActions';
+// import { fetchLocations } from '../../redux/actions/compareActions';
 import Loader from '../../components/Loader/Loader';
 import { delay } from '../../dox';
 import axios from 'axios';
@@ -26,13 +26,19 @@ import {
   StreetViewPanorama
 } from "@react-google-maps/api";
 import Map1 from '../../components/map';
+import { Finish } from '../../components/Finish';
+import { CountryContex } from '../../contex/contex';
 // const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
 // import { API_KEY } from '../../config';
 // import Map1 from './../../components/map';
+// import { CountryContex } from './../../contex/contex';
+import { Drawer } from './../../components/Drawer';
+import MenuToggle from './../../components/MenuToggle';
 // const API_KEY = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
-// const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
+const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 const LIMIT = 3
-export default class Compare extends Component {
+
+export class Compare extends Component {
   state = {
     activeQuestion: 0,
     toggle1: true,
@@ -76,7 +82,7 @@ export default class Compare extends Component {
     //     lng: 13.591559885085797
     //   },
     // ],
-    currTest: 0
+    currTest: 0,
   }
   isFinished() {
     return this.state.activeQuestion + 1 === 5 + 3
@@ -91,26 +97,27 @@ export default class Compare extends Component {
   }
   incFirst = () => {
     this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
+      currTest: this.state.currTest + 1,
       counterFirst: this.state.counterFirst + 1,
       toggle1: !this.state.toggle1
     })
   }
   incSecond = () => {
     this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
+      currTest: this.state.currTest + 1,
       counterSecond: this.state.counterSecond + 1,
       toggle2: !this.state.toggle2
     })
   }
   drawHandle = () => {
     this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
+      currTest: this.state.currTest + 1,
       toggleDraw: !this.state.toggleDraw
     })
   }
   async componentDidMount() {
     try {
+      // await delay(2000)
       const countryOne = localStorage.getItem('countryOne')
       const countryTwo = localStorage.getItem('countryTwo')
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
@@ -128,13 +135,12 @@ export default class Compare extends Component {
         countryOne,
         countryTwo
       })
-      const a = document.querySelectorAll('.gm-iv-container')
-      console.log(a)
     } catch (error) {
       console.log(error)
     }
   }
   render() {
+    console.log(this.props)
     if (this.props.isMobile) {
       return <h1>Unavailable on mobile devices</h1>
     }
@@ -142,85 +148,169 @@ export default class Compare extends Component {
     //   this.props.navigate('/')
     //   // return <React.Fragment></React.Fragment>
     // } // __gives an error about somethg: Can't perform a state ... __
-    return this.isFinished()
-      ? <h1>Finish</h1>
-      :
-      this.state.loading
-        ? <Loader></Loader>
-        :
-        this.state.currTest === LIMIT
-          ? <h1>FINISH</h1>
-          :
-          (
-            <div className='Compare'>
-              <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
-              <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '100px' }}>
-                <CSSTransition
-                  in={this.state.toggle1}
-                  timeout={500}
-                  classNames='os'
-                >
-                  <Button
-                    className={'modalButton'}
-                    onClick={() => {
-                      this.setState({
-                        currTest: this.state.currTest + 1
-                      })
-                    }}
-                    style={this.state.countryOne
-                      ? {
-                        backgroundImage: 'url(' + countriesFlags[this.state.countryOne.toLowerCase()] + ')'
-                      }
-                      : null
-                    }
+    return (
+      <React.Fragment>
+        {
+          this.state.loading
+            ? <Loader></Loader>
+            :
+            this.state.currTest === this.state.filteredOne.length
+              ? <Finish></Finish>
+              :
+              <div className='Compare'>
+                <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
+                <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '100px' }}>
+                  <div>
+                    <CSSTransition
+                      in={this.state.toggle1}
+                      timeout={500}
+                      classNames='os'
+                    >
+                      <Button
+                        className={'modalButton'}
+                        onClick={this.incFirst}
+                        style={this.state.countryOne
+                          ? {
+                            backgroundImage: 'url(' + countriesFlags[this.state.countryOne.toLowerCase()] + ')'
+                          }
+                          : null
+                        }
+                      >
+                      </Button>
+                    </CSSTransition>
+                    <span style={{ color: 'white', fontSize: '2.2rem', marginLeft: '1rem', fontWeight: 'bold' }}>
+                      {this.state.counterFirst}
+                    </span>
+                  </div>
+                  <CSSTransition
+                    in={this.state.toggleDraw}
+                    timeout={500}
+                    classNames='es'
                   >
-                  </Button>
-                </CSSTransition>
-                <CSSTransition
-                  in={this.state.toggleDraw}
-                  timeout={500}
-                  classNames='es'
-                >
-                  <Button
-                    className={'modalButton'}
-                    variant="light"
-                    onClick={() => {
-                      this.setState({
-                        currTest: this.state.currTest + 1
-                      })
-                    }}
-                    style={
-                      {
-                        backgroundImage: 'url(' + draw + ')',
+                    <Button
+                      className={'modalButton'}
+                      variant="light"
+                      onClick={this.drawHandle}
+                      style={
+                        {
+                          backgroundImage: 'url(' + draw + ')',
+                        }
                       }
-                    }
-                  >
-                  </Button>
-                </CSSTransition>
-                <CSSTransition
-                  in={this.state.toggle2}
-                  timeout={500}
-                  classNames='as'
-                >
-                  <Button
-                    className={'modalButton'}
-                    onClick={() => {
-                      this.setState({
-                        currTest: this.state.currTest + 1
-                      })
-                    }}
-                    style={this.state.countryTwo
-                      ? {
-                        backgroundImage: 'url(' + countriesFlags[this.state.countryTwo.toLowerCase()] + ')'
-                      }
-                      : null
-                    }
-                  >
-                  </Button>
-                </CSSTransition>
+                    >
+                    </Button>
+                  </CSSTransition>
+                  <div>
+                    <span style={{ color: 'white', fontSize: '2.2rem', marginRight: '1rem', fontWeight: 'bold' }}>
+                      {this.state.counterSecond}
+                    </span>
+                    <CSSTransition
+                      in={this.state.toggle2}
+                      timeout={500}
+                      classNames='as'
+                    >
+                      <Button
+                        className={'modalButton'}
+                        onClick={this.incSecond}
+                        style={this.state.countryTwo
+                          ? {
+                            backgroundImage: 'url(' + countriesFlags[this.state.countryTwo.toLowerCase()] + ')'
+                          }
+                          : null
+                        }
+                      >
+                      </Button>
+                    </CSSTransition>
+                  </div>
+                </div>
+                <div className='d-flex justify-content-center' style={{marginTop:'100px'}}>
+                  <button className="btn btn-warning" onClick={() => this.props.navigate(-1)}>Back</button>
+                </div>
               </div>
-            </div>
-          )
+        }
+        <Drawer
+          menu={this.props.menu}
+          onToggleHandler={this.props.onToggleHandler}
+          changeMenu={this.props.changeMenu}
+        >
+
+        </Drawer>
+        <MenuToggle onToggleHandler={this.props.onToggleHandler} menu={this.props.menu}></MenuToggle>
+      </React.Fragment>
+    )
+    // this.state.loading
+    //   ? <Loader></Loader>
+    //   :
+    //   this.state.currTest === this.state.filteredOne.length
+    //     ? <Finish></Finish>
+    //     :
+    // (
+    //   <div className='Compare'>
+    //     <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
+    //     <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '100px' }}>
+    //       <div>
+    //         <CSSTransition
+    //           in={this.state.toggle1}
+    //           timeout={500}
+    //           classNames='os'
+    //         >
+    //           <Button
+    //             className={'modalButton'}
+    //             onClick={this.incFirst}
+    //             style={this.state.countryOne
+    //               ? {
+    //                 backgroundImage: 'url(' + countriesFlags[this.state.countryOne.toLowerCase()] + ')'
+    //               }
+    //               : null
+    //             }
+    //           >
+    //           </Button>
+    //         </CSSTransition>
+    //         <span style={{ color: 'white', fontSize: '2.2rem', marginLeft: '1rem', fontWeight: 'bold' }}>
+    //           {this.state.counterFirst}
+    //         </span>
+    //       </div>
+    //       <CSSTransition
+    //         in={this.state.toggleDraw}
+    //         timeout={500}
+    //         classNames='es'
+    //       >
+    //         <Button
+    //           className={'modalButton'}
+    //           variant="light"
+    //           onClick={this.drawHandle}
+    //           style={
+    //             {
+    //               backgroundImage: 'url(' + draw + ')',
+    //             }
+    //           }
+    //         >
+    //         </Button>
+    //       </CSSTransition>
+    //       <div>
+    //         <span style={{ color: 'white', fontSize: '2.2rem', marginRight: '1rem', fontWeight: 'bold' }}>
+    //           {this.state.counterSecond}
+    //         </span>
+    //         <CSSTransition
+    //           in={this.state.toggle2}
+    //           timeout={500}
+    //           classNames='as'
+    //         >
+    //           <Button
+    //             className={'modalButton'}
+    //             onClick={this.incSecond}
+    //             style={this.state.countryTwo
+    //               ? {
+    //                 backgroundImage: 'url(' + countriesFlags[this.state.countryTwo.toLowerCase()] + ')'
+    //               }
+    //               : null
+    //             }
+    //           >
+    //           </Button>
+    //         </CSSTransition>
+    //       </div>
+    //     </div>
+    //   </div>
+    // )
     // this.state.activeQuestion === 0
     //   ? <React.Fragment>
     //     <h1>Sex</h1>
@@ -347,3 +437,16 @@ function filterLocations(a) {
   }
   return used
 }
+// export const Compare = (props) => {
+//   const { onToggleHandler,menu,changeMenu } = props
+//   return (
+//     <React.Fragment>
+//       <Drawer
+//         menu={menu}
+//         changeMenu={changeMenu}
+//       >
+//       </Drawer>
+//       <MenuToggle onToggleHandler={onToggleHandler} ></MenuToggle>
+//     </React.Fragment>
+//   )
+// }

@@ -7,4 +7,8 @@
   position: relative;
   z-index: 100;
   background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #ccc;
+  /* margin-bottom: 10px; */
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
