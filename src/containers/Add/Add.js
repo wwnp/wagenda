@@ -13,6 +13,7 @@ const Add = props => {
   const [error, setError] = useState({})
   const [items, setItems] = useState([])
   const [country, setCountry] = useState('')
+  const {changeMenu,menu} = useContext(CountryContex);
 
   const {
     setCountries,
@@ -22,6 +23,7 @@ const Add = props => {
   } = useContext(CountryContex);
 
   useEffect(() => {
+    changeMenu(!menu)
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const { data } = response

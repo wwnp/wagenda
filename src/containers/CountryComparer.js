@@ -28,10 +28,13 @@ export function CountryComparer(props) {
     changeRadioType,
     addElToDom,
     setEstimates,
-    estimates
+    estimates,
+    menu,
+    changeMenu
   } = useContext(CountryContex)
   const navigate = useNavigate()
   useEffect(() => {
+    changeMenu(!menu)
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const response2 = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/estimates.json')

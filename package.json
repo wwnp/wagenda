@@ -1,6 +1,6 @@
 {
   "name": "react_countries",
-  "homepage":"https://wwnp.github.io/react-countries",
+  "homepage": "https://wwnp.github.io/react-countries",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-slick": "^0.28.1",
     "react-streetview": "^1.1.1",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.2",

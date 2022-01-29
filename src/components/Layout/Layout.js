@@ -12,7 +12,7 @@ export const Layout = (props) => {
   return (
     <React.Fragment>
       <div className={classes.Layout}>
-        <Header></Header>
+        {/* <Header></Header> */}
         <Drawer
           menu={menu}
           onToggleHandler={onToggleHandler}
@@ -23,13 +23,13 @@ export const Layout = (props) => {
           onToggleHandler={onToggleHandler}
         >
         </MenuToggle>
-        <Container fluid>
-          <Outlet></Outlet>
-          {/* {this.props.isMobile
+        {/* <Container fluid> */}
+        <Outlet></Outlet>
+        {/* {this.props.isMobile
               ? <div className="text-center display-6"><h6>Unavailable on mobile version</h6></div>
               : <Outlet></Outlet>
             } */}
-        </Container>
+        {/* </Container> */}
         {/* <Footer></Footer> */}
       </div>
     </React.Fragment>
