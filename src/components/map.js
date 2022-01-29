@@ -23,9 +23,9 @@ let Map1 = class Map1 extends React.Component {
             <GoogleMap
               key={APIkey}
               visible={false}
-              style={{ height: "600px", width: "400px" }}
+              style={{ height: "750px", width: "400px" }}
             >
-              <div style={{ height: "600px", width: "400px" }}>
+              <div style={{ height: "750px", width: "400px" }}>
                 <StreetViewPanorama
                   position={this.props.ArrOne[this.props.currTest]}
                   enableCloseButton={false}
@@ -45,9 +45,9 @@ let Map1 = class Map1 extends React.Component {
             <GoogleMap
               key={APIkey}
               visible={false}
-              style={{ height: "600px", width: "400px" }}
+              style={{ height: "750px", width: "400px" }}
             >
-              <div style={{ height: "600px", width: "400px" }}>
+              <div style={{ height: "750px", width: "400px" }}>
                 <StreetViewPanorama
                   position={this.props.ArrTwo[this.props.currTest]}
                   enableCloseButton={false}

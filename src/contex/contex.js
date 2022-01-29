@@ -10,7 +10,8 @@ const initialState = {
   twoCountry: null,
   radioType: CAPITAL,
   countriesDOM: [],
-  menu: false
+  menu: false,
+  estimates: []
 }
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
@@ -43,6 +44,9 @@ export const ContexProvider = (props) => {
   }
   value.changeMenu = (menu) => {
     dispatch({ type: 'CHANGE_MENU', payload: menu })
+  }
+  value.setEstimates = (estimates) => {
+    dispatch({ type: 'SET_ESTIMATES', payload: estimates })
   }
   return (
     <CountryContex.Provider value={value}>

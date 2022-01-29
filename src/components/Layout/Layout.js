@@ -15,6 +15,7 @@ export const Layout = (props) => {
         <Header></Header>
         <Drawer
           menu={menu}
+          onToggleHandler={onToggleHandler}
         >
         </Drawer>
         <MenuToggle

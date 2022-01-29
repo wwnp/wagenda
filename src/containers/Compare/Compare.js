@@ -26,7 +26,7 @@ import {
   StreetViewPanorama
 } from "@react-google-maps/api";
 import Map1 from '../../components/map';
-import { Finish } from '../../components/Finish';
+import { Finish } from '../../components/Finish.jsx';
 import { CountryContex } from '../../contex/contex';
 // const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
 // import { API_KEY } from '../../config';
@@ -37,7 +37,7 @@ import MenuToggle from './../../components/MenuToggle';
 // const API_KEY = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
 const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 const LIMIT = 3
-
+const AMOUNT_TIMER = 60
 export class Compare extends Component {
   state = {
     activeQuestion: 0,
@@ -83,6 +83,7 @@ export class Compare extends Component {
     //   },
     // ],
     currTest: 0,
+    time: AMOUNT_TIMER,
   }
   isFinished() {
     return this.state.activeQuestion + 1 === 5 + 3
@@ -99,25 +100,28 @@ export class Compare extends Component {
     this.setState({
       currTest: this.state.currTest + 1,
       counterFirst: this.state.counterFirst + 1,
-      toggle1: !this.state.toggle1
+      toggle1: !this.state.toggle1,
+      time: 60
     })
   }
   incSecond = () => {
     this.setState({
       currTest: this.state.currTest + 1,
       counterSecond: this.state.counterSecond + 1,
-      toggle2: !this.state.toggle2
+      toggle2: !this.state.toggle2,
+      time: 60
     })
   }
   drawHandle = () => {
     this.setState({
       currTest: this.state.currTest + 1,
-      toggleDraw: !this.state.toggleDraw
+      toggleDraw: !this.state.toggleDraw,
+      time: 60
     })
   }
   async componentDidMount() {
     try {
-      // await delay(2000)
+      await delay(2000)
       const countryOne = localStorage.getItem('countryOne')
       const countryTwo = localStorage.getItem('countryTwo')
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
@@ -135,12 +139,31 @@ export class Compare extends Component {
         countryOne,
         countryTwo
       })
+      this.interval = setInterval(() => {
+        if (this.state.currTest === this.state.filteredOne.length) {
+          clearInterval(this.interval)
+        }
+        if (this.state.time === 1) {
+          this.drawHandle()
+          this.setState({
+            time: AMOUNT_TIMER
+          })
+        } else {
+          this.setState({
+            time: this.state.time - 1
+          })
+        }
+
+      }, 1000);
     } catch (error) {
       console.log(error)
     }
   }
+  componentWillUnmount() {
+    clearInterval(this.interval)
+    this.interval = null
+  }
   render() {
-    console.log(this.props)
     if (this.props.isMobile) {
       return <h1>Unavailable on mobile devices</h1>
     }
@@ -149,17 +172,24 @@ export class Compare extends Component {
     //   // return <React.Fragment></React.Fragment>
     // } // __gives an error about somethg: Can't perform a state ... __
     return (
-      <React.Fragment>
+      <div className='Compare-wrapper'>
         {
           this.state.loading
             ? <Loader></Loader>
             :
             this.state.currTest === this.state.filteredOne.length
-              ? <Finish></Finish>
+              ? <Finish
+                countryOne={this.state.countryOne}
+                countryTwo={this.state.countryTwo}
+                counterFirst={this.state.counterFirst}
+                counterSecond={this.state.counterSecond}
+              >
+
+              </Finish>
               :
               <div className='Compare'>
                 <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
-                <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '100px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', paddingTop: '20px' }}>
                   <div>
                     <CSSTransition
                       in={this.state.toggle1}
@@ -222,9 +252,13 @@ export class Compare extends Component {
                     </CSSTransition>
                   </div>
                 </div>
-                <div className='d-flex justify-content-center' style={{marginTop:'100px'}}>
+                <div className='d-flex justify-content-center' style={{ marginTop: '20px', color: 'white' }}>
+                  <h1>{this.state.time}</h1>
+                </div>
+                <div className='d-flex justify-content-center' style={{ marginTop: 'auto' }}>
                   <button className="btn btn-warning" onClick={() => this.props.navigate(-1)}>Back</button>
                 </div>
+
               </div>
         }
         <Drawer
@@ -232,10 +266,9 @@ export class Compare extends Component {
           onToggleHandler={this.props.onToggleHandler}
           changeMenu={this.props.changeMenu}
         >
-
         </Drawer>
         <MenuToggle onToggleHandler={this.props.onToggleHandler} menu={this.props.menu}></MenuToggle>
-      </React.Fragment>
+      </div>
     )
     // this.state.loading
     //   ? <Loader></Loader>
@@ -420,11 +453,9 @@ export class Compare extends Component {
     //   </React.Fragment >
   }
 }
-
 function generateRandNum(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1))
 }
-
 function filterLocations(a) {
   const used = []
   while (used.length !== (a.length <= LIMIT ? a.length : LIMIT)) {
@@ -437,16 +468,3 @@ function filterLocations(a) {
   }
   return used
 }
-// export const Compare = (props) => {
-//   const { onToggleHandler,menu,changeMenu } = props
-//   return (
-//     <React.Fragment>
-//       <Drawer
-//         menu={menu}
-//         changeMenu={changeMenu}
-//       >
-//       </Drawer>
-//       <MenuToggle onToggleHandler={onToggleHandler} ></MenuToggle>
-//     </React.Fragment>
-//   )
-// }

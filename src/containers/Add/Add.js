@@ -8,13 +8,10 @@ import { useState } from 'react';
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
-  // const { countries, loading, country, setCountry } = GetCountries()
   const [urbanType, setUrbanType] = useState(null)
   const [location, setLocation] = useState('')
   const [error, setError] = useState({})
   const [items, setItems] = useState([])
-  // const [countries, setCountries] = useState([])
-  // const { loading, setLoading } = HookLoading(true)
   const [country, setCountry] = useState('')
 
   const {
@@ -181,19 +178,20 @@ const Add = props => {
                 Submit
               </button>
             </div>
+            <hr />
+            {
+              Object.values(error).length !== 0
+                ? Object.values(error).map((errorItem, index) => {
+                  return <p className={classes.not} key={index}>{errorItem}</p>
+                })
+                : null
+            }
           </form>
         }
-        {
-          Object.values(error).length !== 0
-            ? Object.values(error).map((errorItem, index) => {
-              return <p className={classes.not} key={index}>{errorItem}</p>
-            })
-            : null
-        }
+
       </React.Fragment>
 
     </div>
   )
 }
 export default Add
-// 52.379156, -2.227493

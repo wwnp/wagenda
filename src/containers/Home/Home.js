@@ -65,7 +65,8 @@ export default function Home(props) {
   }
   return (
     <React.Fragment>
-      <Video windowWidth={props.windowWidth}></Video>
+      <h1>Home</h1>
+      {/* <Video windowWidth={props.windowWidth}></Video>
       <div className={'formWrapper'}>
         {loading
           ? <Loader></Loader>
@@ -158,7 +159,7 @@ export default function Home(props) {
           <li><span>2. USA</span></li>
           <li><span>3. UK</span></li>
         </ul>
-      </div>
+      </div> */}
     </React.Fragment>
   )
 }

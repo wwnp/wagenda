@@ -40,7 +40,7 @@ export default function App() {
           }
         >
           <Route index element={<Home windowWidth={windowWidth} />}></Route>
-          <Route path='/placecomparer' element={<CountryComparer />}></Route>
+          <Route path='/countrycomparer' element={<CountryComparer />}></Route>
           <Route path='add' element={<Add />}></Route>
           <Route path='*' element={<NotFound />}></Route>
         </Route>

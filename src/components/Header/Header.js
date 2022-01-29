@@ -4,10 +4,7 @@ import logo from '../../images/logo.png'
 const Header = props => {
   return (
     <div className={classes.Header}>
-      <div>
-        
-        <h3>Point Comparer <img src={logo} alt="" /></h3>
-      </div>
+      <h3>Country Comparer <img src={logo} alt="" /></h3>
     </div>
   )
 }

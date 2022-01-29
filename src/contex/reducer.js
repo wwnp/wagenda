@@ -20,6 +20,8 @@ export const reducer = (state, action) => {
       return { ...state, countriesDOM: [] }
     case 'CHANGE_MENU':
       return { ...state, menu: action.payload }
+    case 'SET_ESTIMATES':
+      return { ...state, estimates: action.payload }
     default:
       return state
   }
