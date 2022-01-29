@@ -9,7 +9,6 @@ import { CountryComparer } from './containers/CountryComparer';
 import { CountryContex } from "./contex/contex.js";
 export default function App() {
   const { changeMenu, menu } = useContext(CountryContex);
-
   const onToggleHandler = () => {
     changeMenu(!menu)
   }
@@ -26,38 +25,38 @@ export default function App() {
   //   setWindowWidth(window.innerWidth);
   // }
   return (
-    <div className="App">
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <Layout
-              onToggleHandler={onToggleHandler}
-              menu={menu}
-              changeMenu={changeMenu}
-              isMobile={isMobile}
-            />
-          }
-        >
-          <Route index element={<Home windowWidth={windowWidth} />}></Route>
-          <Route path='/countrycomparer' element={<CountryComparer />}></Route>
-          <Route path='add' element={<Add />}></Route>
-          <Route path='*' element={<NotFound />}></Route>
-        </Route>
-        <Route
-          path='compare'
-          element={
-            <Compare
-              onToggleHandler={onToggleHandler}
-              menu={menu}
-              changeMenu={changeMenu}
-              navigate={navigate}
-              isMobile={isMobile}
-            />
-          }
-        ></Route>
-      </Routes>
-    </div>
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <Layout
+            onToggleHandler={onToggleHandler}
+            menu={menu}
+            changeMenu={changeMenu}
+            isMobile={isMobile}
+          />
+        }
+      >
+        <Route index element={<Home windowWidth={windowWidth} />}></Route>
+
+        <Route path='countrycomparer' element={<CountryComparer />}></Route>
+        <Route path='add' element={<Add />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
+      </Route>
+
+      <Route
+        path='compare'
+        element={
+          <Compare
+            onToggleHandler={onToggleHandler}
+            menu={menu}
+            changeMenu={changeMenu}
+            navigate={navigate}
+            isMobile={isMobile}
+          />
+        }
+      ></Route>
+    </Routes>
   )
 }
 

@@ -9,19 +9,15 @@
     geogesser
     add
     ...
-6. stats wins on placecomparer page like 
-  1. Belgium
-  2. USA
-  3. England
+  Home page:
+    header
+    carousel
+    cards: countrycomparer , geogesser, empty_game
   
 7. Modal : how to compare:
-  1.roads
-  2. trash
-  3.graphities (not decreased if allowed)
-  4. modern building
+   roads
+   trash
+   graphities (not decreased if allowed)
+   modern building
 
-Home page:
-  header
-  carousel
-  cards: countrycomparer , empty_game, empty_game
-  
+8. Finish component

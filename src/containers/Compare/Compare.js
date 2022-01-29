@@ -256,7 +256,10 @@ export class Compare extends Component {
                   <h1>{this.state.time}</h1>
                 </div>
                 <div className='d-flex justify-content-center' style={{ marginTop: 'auto' }}>
-                  <button className="btn btn-warning" onClick={() => this.props.navigate(-1)}>Back</button>
+                  <button className="btn btn-warning" onClick={() => {
+                    this.props.changeMenu(!this.props.menu)
+                    this.props.navigate(-1)
+                  }}>Back</button>
                 </div>
 
               </div>

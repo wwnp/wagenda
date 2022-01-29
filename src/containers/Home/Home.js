@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Col, Button } from 'react-bootstrap';
+import { Col, Button, Carousel, Container, Row } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
 // import classes from './Home.module.css'
@@ -10,62 +10,113 @@ import { Video } from '../../components/Video/Video'
 import { useNavigate } from "react-router-dom"
 import { CAPITAL, CountryContex, PROVINCE } from './../../contex/contex';
 import axios from 'axios';
+import carItem1 from '../../images/carItem1.jpg'
+import carItem2 from '../../images/carItem2.png'
+import carItem3 from '../../images/carItem3.jpg'
+import SimpleSlider from '../../components/SimpleSlider';
 
 export default function Home(props) {
   const {
-    setCountries,
-    countries,
-    loading,
-    stopLoading,
-    setOneCountry,
-    setTwoCountry,
-    oneCountry,
-    twoCountry,
-    resetCountries,
-    radioType,
-    changeRadioType,
-    addElToDom,
+    // setCountries,
+    // countries,
+    // loading,
+    // stopLoading,
+    // setOneCountry,
+    // setTwoCountry,
+    // oneCountry,
+    // twoCountry,
+    // resetCountries,
+    // radioType,
+    // changeRadioType,
+    // addElToDom,
+    changeMenu,
+    menu
   } = useContext(CountryContex)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
-      const { data } = response
-      setCountries(data)
-      stopLoading()
+    if (menu === true) {
+      changeMenu(!menu)
     }
-    fetchData()
+    // async function fetchData() {
+    //   const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
+    //   const { data } = response
+    //   setCountries(data)
+    //   stopLoading()
+    // }
+    // fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const countryBtnHandler = (event) => {
-    event.preventDefault()
-    const country = event.target.dataset.country
-    if (!oneCountry || !twoCountry) {
-      if (!oneCountry) {
-        addElToDom(event.target)
-        setOneCountry(country)
-      } else if (!twoCountry && country !== oneCountry) {
-        addElToDom(event.target)
-        setTwoCountry(country)
-      }
-    }
-  }
-  const resetBtnHandler = () => {
-    resetCountries()
-  }
-  const beforeCompare = (event) => {
-    event.preventDefault()
-    if (!(oneCountry, twoCountry)) {
-      alert('Choose countries!')
-    } else {
-      localStorage.setItem('countryOne', oneCountry)
-      localStorage.setItem('countryTwo', twoCountry)
-      navigate('/compare')
-    }
-  }
+  // const countryBtnHandler = (event) => {
+  //   event.preventDefault()
+  //   const country = event.target.dataset.country
+  //   if (!oneCountry || !twoCountry) {
+  //     if (!oneCountry) {
+  //       addElToDom(event.target)
+  //       setOneCountry(country)
+  //     } else if (!twoCountry && country !== oneCountry) {
+  //       addElToDom(event.target)
+  //       setTwoCountry(country)
+  //     }
+  //   }
+  // }
+  // const resetBtnHandler = () => {
+  //   resetCountries()
+  // }
+  // const beforeCompare = (event) => {
+  //   event.preventDefault()
+  //   if (!(oneCountry, twoCountry)) {
+  //     alert('Choose countries!')
+  //   } else {
+  //     localStorage.setItem('countryOne', oneCountry)
+  //     localStorage.setItem('countryTwo', twoCountry)
+  //     navigate('/compare')
+  //   }
+  // }
   return (
     <React.Fragment>
-      <h1>Home</h1>
+      <SimpleSlider></SimpleSlider>
+      {/* <Carousel fade interval={3000}>
+        <Carousel.Item>
+          <img
+            className="d-block mx-auto"
+            src={carItem1}
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block mx-auto"
+            src={carItem2}
+            alt="Second slide"
+            width={1920}
+            height={640}
+          />
+
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block mx-auto"
+            src={carItem3}
+            alt="Third slide"
+            width={1920}
+            height={640}
+          />
+
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel> */}
+
       {/* <Video windowWidth={props.windowWidth}></Video>
       <div className={'formWrapper'}>
         {loading

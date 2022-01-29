@@ -14,26 +14,26 @@ export const Drawer = props => {
         <ul>
           <li>
             <NavLink
-              to={'/'}
+              to='/'
               className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-              onClick={e => changeMenu(!menu)}
+              // onClick={e => changeMenu(!menu)}
             >Home
             </NavLink>
           </li>
           <li>
             <NavLink
-              to={'/add'}
+              to='/add'
               className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-              onClick={e => changeMenu(!menu)}
+              // onClick={e => changeMenu(!menu)}
             >
               Add
             </NavLink>
           </li>
           <li>
             <NavLink
-              to={'/countrycomparer'}
+              to='/countrycomparer'
               className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-              onClick={e => changeMenu(!menu)}
+              // onClick={e => changeMenu(!menu)}
             >
               Country Comparer
             </NavLink>
