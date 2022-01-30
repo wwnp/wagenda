@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Col, Button } from 'react-bootstrap';
+import { Col, Button, Container } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 // import classes from './Home.module.css'
 import Loader from '../components/Loader/Loader';
@@ -34,7 +34,10 @@ export function CountryComparer(props) {
   } = useContext(CountryContex)
   const navigate = useNavigate()
   useEffect(() => {
-    changeMenu(!menu)
+    if (menu === true) {
+      changeMenu(!menu)
+    }
+
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const response2 = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/estimates.json')
@@ -82,7 +85,7 @@ export function CountryComparer(props) {
         loading
           ? <Loader></Loader>
           : (
-            <React.Fragment>
+            <Container>
               <div className={'formWrapper'}>
                 <div style={{ marginTop: '55px', padding: '5px' }}>
                   <form className={'formCountries'}>
@@ -186,7 +189,7 @@ export function CountryComparer(props) {
                         <span>{item[0]} :</span><span style={{ float: 'right' }}>{item[1]}</span>
                         {
                           medal
-                            ? <img style={{ position: 'absolute', left: '-20px', top:'5px' }} src={medal} alt="" width={16} />
+                            ? <img style={{ position: 'absolute', left: '-20px', top: '5px' }} src={medal} alt="" width={16} />
                             : null
                         }
                       </li>
@@ -200,8 +203,7 @@ export function CountryComparer(props) {
                   <li>6. Russia</li> */}
                 </ul>
               </div>
-
-            </React.Fragment>
+            </Container>
           )
       }
 

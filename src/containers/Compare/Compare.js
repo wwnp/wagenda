@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
 import { CSSTransition } from 'react-transition-group';
 import Loader from '../../components/Loader/Loader';
@@ -30,34 +30,6 @@ export class Compare extends Component {
     filteredOne: [],
     filteredTwo: [],
     start: true,
-    // testArrOne: [
-    //   {
-    //     lat: 47.56737703848008,
-    //     lng: 14.240122170065854
-    //   },
-    //   {
-    //     lat: 37.5247596,
-    //     lng: -122.2583719
-    //   },
-    //   {
-    //     lat: 47.561199167492155,
-    //     lng: 14.179007367369614
-    //   },
-    // ],
-    // testArrTwo: [
-    //   {
-    //     lat: 47.41729809899174,
-    //     lng: 13.816103956155192
-    //   },
-    //   {
-    //     lat: 47.3891702360734,
-    //     lng: 13.645285729107657
-    //   },
-    //   {
-    //     lat: 47.394302790229546,
-    //     lng: 13.591559885085797
-    //   },
-    // ],
     currTest: 0,
     time: AMOUNT_TIMER,
   }
@@ -97,7 +69,7 @@ export class Compare extends Component {
   }
   async componentDidMount() {
     try {
-      await delay(2000)
+      // await delay(2000)
       const countryOne = localStorage.getItem('countryOne')
       const countryTwo = localStorage.getItem('countryTwo')
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
@@ -165,7 +137,7 @@ export class Compare extends Component {
               :
               <div className='Compare'>
                 <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
-                <div style={{ display: 'flex', justifyContent: 'space-around', paddingTop: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', paddingTop: '10px' }}>
                   <div>
                     <CSSTransition
                       in={this.state.toggle1}
@@ -228,8 +200,8 @@ export class Compare extends Component {
                     </CSSTransition>
                   </div>
                 </div>
-                <div className='d-flex justify-content-center' style={{ marginTop: '20px', color: 'white' }}>
-                  <h1>{this.state.time}</h1>
+                <div className='d-flex justify-content-center' style={{ marginTop: '10px', color: 'white' }}>
+                  <h2>{this.state.time}</h2>
                 </div>
                 <div className='d-flex justify-content-center' style={{ marginTop: 'auto' }}>
                   <button className="btn btn-warning" onClick={() => {

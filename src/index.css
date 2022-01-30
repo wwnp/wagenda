@@ -281,7 +281,7 @@ code {
   background-color: transparent;
   background-image: url('../src/images/menu.png');
   background-size: cover;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .MenuToggle:hover {
@@ -346,4 +346,19 @@ iframe {
 
 main {
   padding-top: 56px;
+}
+.games-h2 {
+  position: relative;
+  font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+  text-transform: uppercase;
+}
+.games-h2::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  height: 2px;
+  width: 170px;
+  transform: translateX(-50%);
+  background-image: radial-gradient( circle farthest-corner at 32.7% 82.7%,  rgb(233, 231, 231) 8.3%, rgb(17, 44, 134) 79.4% );
 }

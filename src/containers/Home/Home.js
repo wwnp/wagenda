@@ -16,6 +16,7 @@ import carItem3 from '../../images/carItem3.jpg'
 import SimpleSlider from '../../components/SimpleSlider';
 import Slider from "react-slick";
 import Header from './../../components/Header/Header';
+const cardHeight = 175
 export default function Home(props) {
   const {
     // setCountries,
@@ -106,24 +107,23 @@ export default function Home(props) {
       <div ref={carouselRef} style={{ paddingBottom: '20px', borderTop: '1px solid #ccc' }}>
         <Slider {...settings} >
           <div>
-
             <div style={{ position: 'relative' }}>
               <img src={carItem1} alt="" />
-              <button className="btn btn-success btn-large" style={{
-                position: 'absolute',
-                bottom: '20%',
-                left: '33.5%',
-                transform: 'translateX(-50%)',
-                textTransform: 'uppercase'
-              }}
-              >
-                В каталог
-              </button>
+
             </div>
           </div>
           <div style={{ position: 'relative' }}>
             <img src={carItem2} alt="" />
-
+            <button className="btn btn-success btn-large" style={{
+              position: 'absolute',
+              bottom: '20%',
+              left: '33.5%',
+              transform: 'translateX(-50%)',
+              textTransform: 'uppercase'
+            }}
+            >
+              В каталог
+            </button>
           </div>
           <div style={{ position: 'relative' }}>
             <img src={carItem3} alt="" />
@@ -131,18 +131,19 @@ export default function Home(props) {
         </Slider>
       </div>
       <Container style={{ paddingTop: '20px', borderTop: '1px solid #ccc' }}>
-        <Row>
+        <h2 className='text-center mb-3 games-h2 text-white'>Our Games</h2>
+        <Row >
           <Col xs={4}>
             <Card >
-              <Card.Img variant="top" height={191} src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5" />
-              <Card.Body style={{ padding: '0' }}>
+              <Card.Img variant="top" height={cardHeight} src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5" />
+              <Card.Body style={{ padding: '0' }} >
                 <Link to='/countrycomparer' className='btn btn-large btn-success text-uppercase' style={{ width: '100%' }}>Country Comparer</Link>
               </Card.Body>
             </Card>
           </Col>
           <Col xs={4}>
             <Card>
-              <Card.Img variant="top" height={191} src="https://cdn.pixabay.com/photo/2012/01/09/09/59/earth-11595__340.jpg" />
+              <Card.Img variant="top" height={cardHeight} src="https://cdn.pixabay.com/photo/2012/01/09/09/59/earth-11595__340.jpg" />
               <Card.Body style={{ padding: '0' }}>
                 <Link to='/geoguesser' className='btn btn-large btn-primary text-uppercase disabled' style={{ width: '100%' }}>Geo Guesser</Link>
               </Card.Body>
@@ -150,7 +151,7 @@ export default function Home(props) {
           </Col>
           <Col xs={4}>
             <Card>
-              <Card.Img variant="top" height={191} src="https://image.freepik.com/free-vector/realistic-construction-sign-background_23-2148165508.jpg" />
+              <Card.Img variant="top" height={cardHeight} src="https://image.freepik.com/free-vector/realistic-construction-sign-background_23-2148165508.jpg" />
               <Card.Body style={{ padding: '0' }}>
                 <Link to='/countrycomparer' className='btn btn-large btn-dark text-uppercase disabled' style={{ width: '100%' }} disabled >Coming Soon</Link>
               </Card.Body>
