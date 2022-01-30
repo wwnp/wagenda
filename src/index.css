@@ -235,7 +235,7 @@ code {
   background: #fff;
   transform: translateX(0px);
   transition: transform .22s ease-in;
-  z-index: 1000;
+  z-index: 999999999999;
 }
 
 .Drawer.close {
@@ -317,6 +317,33 @@ code {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 998;
+  z-index: 9999;
   background: rgba(0, 0, 0, 0.75);
+}
+
+iframe {
+  pointer-events: none;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.sticky+.content {
+  padding-top: 102px;
+}
+
+.navbar-collapse {
+  flex-grow: 0 !important;
+}
+
+.nav-link.active {
+  color: #c51765 !important;
+}
+
+main {
+  padding-top: 56px;
 }

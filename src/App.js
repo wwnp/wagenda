@@ -26,36 +26,14 @@ export default function App() {
   // }
   return (
     <Routes>
-      <Route
-        path='/'
-        element={
-          <Layout
-            onToggleHandler={onToggleHandler}
-            menu={menu}
-            changeMenu={changeMenu}
-            isMobile={isMobile}
-          />
-        }
-      >
-        <Route index element={<Home windowWidth={windowWidth} />}></Route>
-
+      <Route path='/' element={<Layout onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} isMobile={isMobile} />} >
         <Route path='countrycomparer' element={<CountryComparer />}></Route>
         <Route path='add' element={<Add />}></Route>
         <Route path='*' element={<NotFound />}></Route>
+        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} />} ></Route>
       </Route>
-
-      <Route
-        path='compare'
-        element={
-          <Compare
-            onToggleHandler={onToggleHandler}
-            menu={menu}
-            changeMenu={changeMenu}
-            navigate={navigate}
-            isMobile={isMobile}
-          />
-        }
-      ></Route>
+      <Route index element={<Home windowWidth={windowWidth} />}></Route>
+      
     </Routes>
   )
 }

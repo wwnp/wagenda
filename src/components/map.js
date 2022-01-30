@@ -6,8 +6,6 @@ import {
   // useGoogleMap,
   StreetViewPanorama
 } from "@react-google-maps/api";
-// import asyncLoading from "react-async-loader";
-// import GoogleStreetview from "react-google-streetview";
 const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
 let Map1 = class Map1 extends React.Component {
   constructor(props) {

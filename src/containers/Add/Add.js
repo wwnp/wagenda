@@ -5,6 +5,7 @@ import { CountryContex } from '../../contex/contex'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Header from './../../components/Header/Header';
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
@@ -13,7 +14,7 @@ const Add = props => {
   const [error, setError] = useState({})
   const [items, setItems] = useState([])
   const [country, setCountry] = useState('')
-  const {changeMenu,menu} = useContext(CountryContex);
+  const { changeMenu, menu } = useContext(CountryContex);
 
   const {
     setCountries,
@@ -80,120 +81,123 @@ const Add = props => {
   }
 
   return (
-    <div className={classes.Add}>
-      <h1 className='text-center'>Add</h1>
-      <React.Fragment>
-        {loading
-          ? <Loader></Loader>
-          :
-          <form>
-            <div className='form-group mb-3'>
-              <label htmlFor="">Countries</label>
-              <select
-                className='form-select'
-                name="countries"
-                id="countries"
-                onChange={e => {
-                  // setCountry(e.target.value)
-                }}
-              >
-                {loading
-                  ? null
-                  : countries.map((country, index) => {
-                    return (
-                      <option
-                        value={country}
-                        key={index}
-                      >
-                        {country}
-                      </option>
-                    )
+    <main>
+      <div className={classes.Add}>
+        <Header></Header>
+        <h1 className='text-center'>Add</h1>
+        <React.Fragment>
+          {loading
+            ? <Loader></Loader>
+            :
+            <form>
+              <div className='form-group mb-3'>
+                <label htmlFor="">Countries</label>
+                <select
+                  className='form-select'
+                  name="countries"
+                  id="countries"
+                  onChange={e => {
+                    // setCountry(e.target.value)
+                  }}
+                >
+                  {loading
+                    ? null
+                    : countries.map((country, index) => {
+                      return (
+                        <option
+                          value={country}
+                          key={index}
+                        >
+                          {country}
+                        </option>
+                      )
+                    })
+                  }
+                </select>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="capOrPro"
+                  value={CAPITAL}
+                  id="capitalId"
+                  onChange={e => setUrbanType(e.target.value)}
+                />
+                <label className="form-check-label" htmlFor="capitalId">
+                  Capital
+                </label>
+              </div>
+              <div className="form-check mb-3">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="capOrPro"
+                  value={PROVINCE}
+                  id="provinceId"
+                  onChange={e => setUrbanType(e.target.value)}
+                />
+                <label className="form-check-label" htmlFor="provinceId">
+                  Province
+                </label>
+              </div>
+              <div className='form-group'>
+                <label htmlFor="locId">Locations</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name='loc'
+                  value={location}
+                  id='locId'
+                  onChange={(e) => {
+                    setLocation(e.target.value)
+                  }}
+                />
+              </div>
+              <div className="form-group mt-3 pb-3 border-bottom">
+                <button
+                  className="btn btn-warning mr-4"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    addHook()
+                  }}
+                >
+                  Add
+                </button>
+                <button
+                  className="btn btn-warning"
+                  onClick={(e) => setItems([])}
+                >
+                  Reset
+                </button>
+              </div>
+              <div className="form-group mt-3 text-center">
+                <button
+                  className="btn btn-success"
+                  onClick={e => {
+                    e.preventDefault()
+                    finishLocations()
+                  }}
+                  disabled={items.length === 0}
+                >
+                  Submit
+                </button>
+              </div>
+              <hr />
+              {
+                Object.values(error).length !== 0
+                  ? Object.values(error).map((errorItem, index) => {
+                    return <p className={classes.not} key={index}>{errorItem}</p>
                   })
-                }
-              </select>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="capOrPro"
-                value={CAPITAL}
-                id="capitalId"
-                onChange={e => setUrbanType(e.target.value)}
-              />
-              <label className="form-check-label" htmlFor="capitalId">
-                Capital
-              </label>
-            </div>
-            <div className="form-check mb-3">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="capOrPro"
-                value={PROVINCE}
-                id="provinceId"
-                onChange={e => setUrbanType(e.target.value)}
-              />
-              <label className="form-check-label" htmlFor="provinceId">
-                Province
-              </label>
-            </div>
-            <div className='form-group'>
-              <label htmlFor="locId">Locations</label>
-              <input
-                className="form-control"
-                type="text"
-                name='loc'
-                value={location}
-                id='locId'
-                onChange={(e) => {
-                  setLocation(e.target.value)
-                }}
-              />
-            </div>
-            <div className="form-group mt-3 pb-3 border-bottom">
-              <button
-                className="btn btn-warning mr-4"
-                onClick={(e) => {
-                  e.preventDefault()
-                  addHook()
-                }}
-              >
-                Add
-              </button>
-              <button
-                className="btn btn-warning"
-                onClick={(e) => setItems([])}
-              >
-                Reset
-              </button>
-            </div>
-            <div className="form-group mt-3 text-center">
-              <button
-                className="btn btn-success"
-                onClick={e => {
-                  e.preventDefault()
-                  finishLocations()
-                }}
-                disabled={items.length === 0}
-              >
-                Submit
-              </button>
-            </div>
-            <hr />
-            {
-              Object.values(error).length !== 0
-                ? Object.values(error).map((errorItem, index) => {
-                  return <p className={classes.not} key={index}>{errorItem}</p>
-                })
-                : null
-            }
-          </form>
-        }
+                  : null
+              }
+            </form>
+          }
 
-      </React.Fragment>
+        </React.Fragment>
 
-    </div>
+      </div>
+    </main>
   )
 }
 export default Add

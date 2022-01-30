@@ -44,7 +44,6 @@ export function CountryComparer(props) {
       const entries = Object.entries(data2)
       setEstimates(quickSort(entries).reverse())
       stopLoading()
-
     }
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps

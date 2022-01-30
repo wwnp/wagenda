@@ -1,40 +1,16 @@
 import React, { Component } from 'react'
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Button} from 'react-bootstrap';
 import { countriesFlags } from '../../countriesFlags';
-import { StreetView } from 'react-google-map-street-view'
-import Versus from '../../components/Versus/Versus';
 import { CSSTransition } from 'react-transition-group';
-import { useState, useContext } from 'react';
-import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-// import { fetchLocations } from '../../redux/actions/compareActions';
 import Loader from '../../components/Loader/Loader';
 import { delay } from '../../dox';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
-import Streetview from 'react-google-streetview';
 import draw from '../../images/draw.png'
 
-import GoogleStreetview from "react-google-streetview";
-import asyncLoading from "react-async-loader";
-import {
-  GoogleMap,
-  LoadScript,
-  LoadScriptNext,
-  useGoogleMap,
-  StreetViewPanorama
-} from "@react-google-maps/api";
 import Map1 from '../../components/map';
 import { Finish } from '../../components/Finish.jsx';
-import { CountryContex } from '../../contex/contex';
-// const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
-// import { API_KEY } from '../../config';
-// import Map1 from './../../components/map';
-// import { CountryContex } from './../../contex/contex';
 import { Drawer } from './../../components/Drawer';
 import MenuToggle from './../../components/MenuToggle';
-// const API_KEY = 'AIzaSyC8vrSRl5lVB0uR506rjvi5b2DtyrREVP8'
 const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 const LIMIT = 3
 const AMOUNT_TIMER = 60
