@@ -105,7 +105,6 @@ export default function Home(props) {
             </div>
           </Slider>
         </>
-
         <section className='bg-dark-darker py-3' style={{ height: '200px' }}>
           <Container className=''>
             <h2 className='text-center mb-3 title-section text-white'>Contributions</h2>

@@ -30,7 +30,7 @@ export class Compare extends Component {
     filteredOne: [],
     filteredTwo: [],
     start: true,
-    currTest: 3,
+    currTest: 0,
     time: AMOUNT_TIMER,
   }
   isFinished() {
@@ -69,7 +69,7 @@ export class Compare extends Component {
   }
   async componentDidMount() {
     try {
-      // await delay(2000)
+      await delay(2000)
       const countryOne = localStorage.getItem('countryOne')
       const countryTwo = localStorage.getItem('countryTwo')
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
@@ -120,7 +120,7 @@ export class Compare extends Component {
     //   // return <React.Fragment></React.Fragment>
     // } // __gives an error about somethg: Can't perform a state ... __
     return (
-      <div className='Compare-wrapper'>
+      <div className='Compare-wrapper hero-particles'>
         {
           this.state.loading
             ? <Loader></Loader>
@@ -135,11 +135,10 @@ export class Compare extends Component {
 
               </Finish>
               :
-              <div className='Compare'>
+              <div className='Compare hero-particles'>
                 <div style={{ borderBottom: '2px solid #ccc' }}>
                   <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
                 </div>
-
                 <div style={{ display: 'flex', justifyContent: 'space-around', paddingTop: '10px' }}>
                   <div>
                     <CSSTransition

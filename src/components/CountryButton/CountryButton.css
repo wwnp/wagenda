@@ -10,6 +10,7 @@
   margin-right: 10px;
   transition: border .15s, box-shadow .15s;
   border: 1px solid rgb(138, 138, 138) ;
+  opacity: 0.8;
 }
 .CountryButton.active {
   border: 1px solid #00ff00;

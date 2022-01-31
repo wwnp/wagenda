@@ -206,16 +206,17 @@ code {
   height: 79px;
   width: 119px;
   background-repeat: 'no-repeat';
+  opacity: 0.9;
 }
-
 
 .close {
   left: -280px;
 }
 
 .Compare-wrapper {
-  background-image: url('./images/bgCompare.jpg');
-  background-size: contain;
+  
+  // background-image: url('./images/bgCompare.jpg');
+  // background-size: contain;
   height: 100vh;
 }
 
@@ -278,7 +279,7 @@ code {
   cursor: pointer;
   transition: opacity, all .22s ease-in;
   z-index: 100;
-  border: 0.5px solid rgb(27, 27, 27);
+  border: none;
   background-color: transparent;
   background-image: url('../src/images/menu.png');
   background-size: cover;
@@ -509,121 +510,13 @@ section {
 section:last-child {
   border-bottom: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.col-2 img {
-  width: 100%;
+.hero-particles {
+  background: linear-gradient(
+    0deg, rgb(32, 32, 32) 0%, rgba(32, 32, 32, 0.9
+  ) 10%, transparent 40%, transparent 100%), url("../src/images/ball-wed.svg") center center, #242423;
+  background-size: cover;
+  margin-bottom: -25px;
 }
-.col-2  {
-  padding: 0;
-}
-.bg-got {
-  // background-color: #002431;
-  // background-image: url("https://www.transparenttextures.com/patterns/fabric-1-light.png");
-  background-image: url("../src/images/bg-got.jpg");
-}
-.card-custom {
-  height: 100%;
-  width: 100%;
-  // border-radius: 10px;
-  -moz-transition: -moz-background .1s ease-in-out;
-  transition: background .9s ease-in-out;
-  overflow: hidden;
-  // box-shadow: 0 70px 63px -60px #000000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  h2 {
-    text-align: center;
-    transition: opacity .9s ease-in-out;
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: auto;
-    opacity: 0;
-    font-size: 1.1rem;
-    font-family: 'MedievalSharp', cursive;
-  }
-  &:hover {
-    h2 {
-      opacity: 1;
-    }
-  }
-}
-.card-custom0 {
-  background: url('https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg') center center no-repeat;
-  background-size: 300px;
-  &:hover {
-    background: url('https://i.pinimg.com/736x/8f/a0/51/8fa051251f5ac2d0b756027089fbffde--terry-o-neill-al-pacino.jpg') left center no-repeat;
-    background-size: 600px
-  }
-}
-.card-wrapper {  
-  height: 397px;
-  width: 100%;
-  background: url('../src/images/got.jpg') center center no-repeat;
-  background-size: 300px;
-}
-
-@keyframes mymove {
-  from {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-  to {
-    -webkit-transform: rotate(0);
-    -o-transform: rotate(0);
-    transform: rotate(0);
-  }
-}
-
-/* The element to apply the animation to */
-.tar-logo {
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100px;
-  height: 100px;
-  -webkit-animation: rotating 2s linear infinite;
-  -moz-animation: rotating 2s linear infinite;
-  -ms-animation: rotating 2s linear infinite;
-  -o-animation: rotating 2s linear infinite;
-  animation: mymove 60s linear infinite;
-  opacity: 0.8;
-  transition: opacity .5s;
-}
-@media (min-width: 768px){
-  .tar-logo{
-    width: 200px;
-    height: 200px;
-  }
-}
-.tar-logo:hover {
-  opacity: 1;
-}
-
-.smooth-border {
-  box-shadow: 0 100px 8px 82px rgb(255, 255, 255) inset;
+.youtubeVid {
+  pointer-events: initial;
 }

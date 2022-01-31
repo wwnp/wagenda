@@ -13,6 +13,7 @@ import { countriesFlags } from './../countriesFlags';
 import medalGold from '../images/medalGold.png'
 import medalSilver from '../images/medalSilver.png'
 import medalBronze from '../images/medalBronze.png'
+import { delay } from '../dox';
 export function CountryComparer(props) {
   const {
     setCountries,
@@ -39,6 +40,7 @@ export function CountryComparer(props) {
     }
 
     async function fetchData() {
+      // await delay(200000)
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const response2 = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/estimates.json')
       const { data } = response
@@ -49,6 +51,23 @@ export function CountryComparer(props) {
       stopLoading()
     }
     fetchData()
+
+    document.addEventListener('keydown', turnOffKey)
+    window.addEventListener('wheel', turnOffWheel, { passive: false })
+    function turnOffKey(event) {
+      if (event.ctrlKey === true && (event.key === '+' || event.key === '-')) {
+        event.preventDefault()
+      }
+    }
+    function turnOffWheel(event) {
+      if (event.ctrlKey === true) {
+        event.preventDefault()
+      }
+    }
+    return () => {
+      document.removeEventListener('keydown', turnOffKey)
+      window.removeEventListener('wheel',turnOffWheel)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const countryBtnHandler = (event) => {

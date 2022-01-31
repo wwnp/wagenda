@@ -9,6 +9,14 @@
   left: 50%;
   transform: translateX(-50%);
 }
+.lgbt {
+	background: linear-gradient(180deg, #FE0000 16.66%,
+		#FD8C00 16.66%, 33.32%,
+		#FFE500 33.32%, 49.98%,
+		#119F0B 49.98%, 66.64%,
+		#0644B3 66.64%, 83.3%,
+		#C22EDC 83.3%);
+}
 
 .lds-default {
   display: inline-block;
@@ -19,9 +27,14 @@
 
 .lds-default div {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background: rgb(255, 255, 255);
+  width: 15px;
+  height: 15px;
+  /* background: rgb(255, 255, 255); */
+	background: linear-gradient(180deg, #181818 12.5%,
+		#784F17 12.5%, 25%, #FE0000 25%, 37.5%,
+		#FD8C00 37.5%, 50%, #FFE500 50%, 62.5%,
+		#119F0B 62.5%, 75%, #0644B3 75%, 87.5%,
+		#C22EDC 87.5%);
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
