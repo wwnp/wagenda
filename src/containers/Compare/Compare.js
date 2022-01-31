@@ -13,7 +13,7 @@ import { Drawer } from './../../components/Drawer';
 import MenuToggle from './../../components/MenuToggle';
 const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 const LIMIT = 3
-const AMOUNT_TIMER = 60
+const AMOUNT_TIMER = 300
 export class Compare extends Component {
   state = {
     activeQuestion: 0,
@@ -30,7 +30,7 @@ export class Compare extends Component {
     filteredOne: [],
     filteredTwo: [],
     start: true,
-    currTest: 0,
+    currTest: 3,
     time: AMOUNT_TIMER,
   }
   isFinished() {
@@ -49,7 +49,7 @@ export class Compare extends Component {
       currTest: this.state.currTest + 1,
       counterFirst: this.state.counterFirst + 1,
       toggle1: !this.state.toggle1,
-      time: 60
+      time: AMOUNT_TIMER
     })
   }
   incSecond = () => {
@@ -57,14 +57,14 @@ export class Compare extends Component {
       currTest: this.state.currTest + 1,
       counterSecond: this.state.counterSecond + 1,
       toggle2: !this.state.toggle2,
-      time: 60
+      time: AMOUNT_TIMER
     })
   }
   drawHandle = () => {
     this.setState({
       currTest: this.state.currTest + 1,
       toggleDraw: !this.state.toggleDraw,
-      time: 60
+      time: AMOUNT_TIMER
     })
   }
   async componentDidMount() {
@@ -136,7 +136,10 @@ export class Compare extends Component {
               </Finish>
               :
               <div className='Compare'>
-                <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
+                <div style={{ borderBottom: '2px solid #ccc' }}>
+                  <Map1 ArrOne={this.state.filteredOne} ArrTwo={this.state.filteredTwo} currTest={this.state.currTest}></Map1>
+                </div>
+
                 <div style={{ display: 'flex', justifyContent: 'space-around', paddingTop: '10px' }}>
                   <div>
                     <CSSTransition
@@ -201,7 +204,19 @@ export class Compare extends Component {
                   </div>
                 </div>
                 <div className='d-flex justify-content-center' style={{ marginTop: '10px', color: 'white' }}>
-                  <h2>{this.state.time}</h2>
+                  <h2>{
+                    this.state.time > 60
+                      ? Math.floor(this.state.time / 60) + ':' + (
+                        (this.state.time % 60).toLocaleString().length === 1
+                          ? '0' + this.state.time % 60
+                          : this.state.time % 60
+                      )
+                      : this.state.time
+                  }
+                  </h2>
+                  {/* this.state.time % 60).length === 1
+                        ? '0' + this.state.time % 60
+                        : this.state.time % 60 */}
                 </div>
                 <div className='d-flex justify-content-center' style={{ marginTop: 'auto' }}>
                   <button className="btn btn-warning" onClick={() => {

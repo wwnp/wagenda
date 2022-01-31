@@ -77,7 +77,6 @@ export function CountryComparer(props) {
       navigate('/compare')
     }
   }
-  console.log(estimates)
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>

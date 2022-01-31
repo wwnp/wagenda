@@ -1,7 +1,6 @@
 import React from 'react'
 import burger from '../images/menu.png'
 const MenuToggle = props => {
-  console.log(props.menu)
   const cls = [
     'MenuToggle',
     props.menu ? 'open' : ''
