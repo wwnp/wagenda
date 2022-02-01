@@ -1,19 +1,10 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { Col, Button, Carousel, Container, Row, Card, NavLink, Accordion } from 'react-bootstrap';
-import { countriesFlags } from '../../countriesFlags';
-import { CSSTransition } from 'react-transition-group';
+import { Col, Container, Row, Card, Accordion } from 'react-bootstrap';
 // import classes from './Home.module.css'
-import Loader from '../../components/Loader/Loader'
-import CountryButton from '../../components/CountryButton/CountryButton';
-import noImage from '../../images/noImage.png'
-import { Video } from '../../components/Video/Video'
-import { Link, useNavigate } from "react-router-dom"
-import { CAPITAL, CountryContex, PROVINCE } from './../../contex/contex';
-import axios from 'axios';
-import carItem1 from '../../images/carItem1.jpg'
+import { Link, } from "react-router-dom"
+import { CountryContex, } from './../../contex/contex';
 import carItem2 from '../../images/carItem2.png'
 import carItem3 from '../../images/carItem3.jpg'
-import SimpleSlider from '../../components/SimpleSlider';
 import Slider from "react-slick";
 import Header from './../../components/Header/Header';
 const cardHeight = 175

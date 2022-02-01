@@ -8,7 +8,7 @@ import Add from "./containers/Add/Add.js";
 import { CountryComparer } from './containers/CountryComparer';
 import { CountryContex } from "./contex/contex.js";
 export default function App() {
-  const { changeMenu, menu } = useContext(CountryContex);
+  const { changeMenu, menu, modal, changeModal } = useContext(CountryContex);
   const onToggleHandler = () => {
     changeMenu(!menu)
   }
@@ -30,10 +30,10 @@ export default function App() {
         <Route path='countrycomparer' element={<CountryComparer />}></Route>
         <Route path='add' element={<Add />}></Route>
         <Route path='*' element={<NotFound />}></Route>
-        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} />} ></Route>
+        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} modal={modal} changeModal={changeModal}/>} ></Route>
       </Route>
       <Route index element={<Home windowWidth={windowWidth} />}></Route>
-      
+
     </Routes>
   )
 }

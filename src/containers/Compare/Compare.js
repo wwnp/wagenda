@@ -11,6 +11,7 @@ import Map1 from '../../components/map';
 import { Finish } from '../../components/Finish.jsx';
 import { Drawer } from './../../components/Drawer';
 import MenuToggle from './../../components/MenuToggle';
+import { Modal } from './../../components/Modal';
 const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
 const LIMIT = 3
 const AMOUNT_TIMER = 300
@@ -69,7 +70,7 @@ export class Compare extends Component {
   }
   async componentDidMount() {
     try {
-      await delay(2000)
+      // await delay(2000)
       const countryOne = localStorage.getItem('countryOne')
       const countryTwo = localStorage.getItem('countryTwo')
       const response = await axios.get(`https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/locations/${countryOne}/Capital.json`)
@@ -115,10 +116,7 @@ export class Compare extends Component {
     if (this.props.isMobile) {
       return <h1>Unavailable on mobile devices</h1>
     }
-    // if (this.props.comparedCountries === null) {
-    //   this.props.navigate('/')
-    //   // return <React.Fragment></React.Fragment>
-    // } // __gives an error about somethg: Can't perform a state ... __
+    const { changeModal, modal } = this.props
     return (
       <div className='Compare-wrapper hero-particles'>
         {
@@ -132,7 +130,6 @@ export class Compare extends Component {
                 counterFirst={this.state.counterFirst}
                 counterSecond={this.state.counterSecond}
               >
-
               </Finish>
               :
               <div className='Compare hero-particles'>
@@ -223,7 +220,6 @@ export class Compare extends Component {
                     this.props.navigate(-1)
                   }}>Back</button>
                 </div>
-
               </div>
         }
         <Drawer
@@ -233,6 +229,30 @@ export class Compare extends Component {
         >
         </Drawer>
         <MenuToggle onToggleHandler={this.props.onToggleHandler} menu={this.props.menu}></MenuToggle>
+        {modal
+          ? <Modal>
+            <h1>Pay attention to</h1>
+            <ol>
+              <li>Roads state</li>
+              <li>Graphities. Don't downgrade if allowed.</li>
+              <li>Garbage on the street</li>
+              <li>Building modernity</li>
+              <li>Monetary condition of surrounding things</li>
+            </ol>
+          </Modal>
+          : null
+        }
+        <Button
+          className='btn btn-success btn-sm'
+          onClick={() => changeModal(!modal)}
+          style={{
+            position: 'fixed',
+            bottom: '12px',
+            left: '4rem',
+          }}
+        >
+          Hints: how to compare
+        </Button>
       </div>
     )
     // this.state.loading

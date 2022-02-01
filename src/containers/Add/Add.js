@@ -24,7 +24,7 @@ const Add = props => {
   } = useContext(CountryContex);
 
   useEffect(() => {
-    changeMenu(!menu)
+    // changeMenu(!menu)
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const { data } = response
@@ -79,7 +79,7 @@ const Add = props => {
       helpFetch()
     })
   }
-
+  console.log(country)
   return (
     <main>
       <div className={classes.Add}>
@@ -97,7 +97,7 @@ const Add = props => {
                   name="countries"
                   id="countries"
                   onChange={e => {
-                    // setCountry(e.target.value)
+                    setCountry(e.target.value)
                   }}
                 >
                   {loading

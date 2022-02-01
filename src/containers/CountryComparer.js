@@ -14,6 +14,7 @@ import medalGold from '../images/medalGold.png'
 import medalSilver from '../images/medalSilver.png'
 import medalBronze from '../images/medalBronze.png'
 import { delay } from '../dox';
+import { Modal } from './../components/Modal';
 export function CountryComparer(props) {
   const {
     setCountries,
@@ -31,7 +32,9 @@ export function CountryComparer(props) {
     setEstimates,
     estimates,
     menu,
-    changeMenu
+    changeMenu,
+    modal,
+    changeModal
   } = useContext(CountryContex)
   const navigate = useNavigate()
   useEffect(() => {
@@ -66,7 +69,7 @@ export function CountryComparer(props) {
     }
     return () => {
       document.removeEventListener('keydown', turnOffKey)
-      window.removeEventListener('wheel',turnOffWheel)
+      window.removeEventListener('wheel', turnOffWheel)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -96,6 +99,7 @@ export function CountryComparer(props) {
       navigate('/compare')
     }
   }
+  console.log(modal)
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>
@@ -178,6 +182,14 @@ export function CountryComparer(props) {
                   </form>
                   <div className="text-center">
                     <Button
+                      className='btn btn-success btn-sm'
+                      onClick={() => changeModal(!modal)}
+                    >
+                      Hints: how to compare
+                    </Button>
+                  </div>
+                  <div className="text-center mt-4">
+                    <Button
                       className='btn btn-dark btn-lg'
                       disabled={!(oneCountry && twoCountry)}
                       onClick={e => beforeCompare(e)}
@@ -203,7 +215,6 @@ export function CountryComparer(props) {
                     }
                     return (
                       <li key={index + item[0] + item[1]} style={{ position: 'relative' }}>
-
                         <span>{item[0]} :</span><span style={{ float: 'right' }}>{item[1]}</span>
                         {
                           medal
@@ -213,18 +224,25 @@ export function CountryComparer(props) {
                       </li>
                     )
                   })}
-                  {/* <li>1. Belgium</li>
-                  <li>2. USA</li>
-                  <li>3. UK</li>
-                  <li>4. France</li>
-                  <li>5. Germany</li>
-                  <li>6. Russia</li> */}
                 </ul>
               </div>
             </Container>
           )
       }
-
+      {
+        modal
+          ? <Modal>
+            <h1>Pay attention to</h1>
+            <ol>
+              <li>Roads state</li>
+              <li>Graphities. Don't downgrade if allowed.</li>
+              <li>Garbage on the street</li>
+              <li>Building modernity</li>
+              <li>Monetary condition of surrounding things</li>
+            </ol>
+          </Modal>
+          : null
+      }
 
     </React.Fragment>
   )
