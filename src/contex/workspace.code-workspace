@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "domainsSync",
+			"path": "..\\..\\.."
+		}
+	],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "liveServer.settings.port": 5501
+  }
+}

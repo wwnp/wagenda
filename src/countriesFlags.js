@@ -27,5 +27,5 @@ export const urlYoutube = {
   'belgium' : 'https://www.youtube.com/embed/d9u_Ituu2Q8',
   'ukraine' : 'https://www.youtube.com/embed/nybtOIxlku8',
   'norway' : 'https://www.youtube.com/embed/VRS6cbLOrPQ',
-  'draw' : 'https://www.youtube.com/embed/W5PqXn-KXak',
+  'draw' : 'https://www.youtube.com/embed/tH2w6Oxx0kQ',
 }

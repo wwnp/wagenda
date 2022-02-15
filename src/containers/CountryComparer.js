@@ -41,7 +41,6 @@ export function CountryComparer(props) {
     if (menu === true) {
       changeMenu(!menu)
     }
-
     async function fetchData() {
       // await delay(200000)
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
@@ -54,7 +53,6 @@ export function CountryComparer(props) {
       stopLoading()
     }
     fetchData()
-
     document.addEventListener('keydown', turnOffKey)
     window.addEventListener('wheel', turnOffWheel, { passive: false })
     function turnOffKey(event) {
@@ -99,7 +97,6 @@ export function CountryComparer(props) {
       navigate('/compare')
     }
   }
-  console.log(modal)
   return (
     <React.Fragment>
       <Video windowWidth={props.windowWidth}></Video>

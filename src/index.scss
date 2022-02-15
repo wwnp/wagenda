@@ -10,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #181818;
   font-family: 'Roboto', sans-serif;
+  scroll-behavior: smooth;
 }
 .got-img{
   width: 100%;
@@ -550,4 +551,31 @@ section:last-child {
 }
 .modal-inside button {
   float: right;
+}
+
+.ToTop {
+  background-color: #fff;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100000;
+  // font-size: 20px;
+  color: #fff;
+  transition: all ease .35s;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+.ToTop:hover {
+  background-color: rgb(218, 216, 216);
+}
+.ToTop img {
+  padding: 10px;
+  width: 100%;
+  height: auto;
+}
+.hide {
+  opacity: 0;
+  transition: opacity all .35s;
 }
