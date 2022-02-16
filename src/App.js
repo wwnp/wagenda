@@ -30,7 +30,7 @@ export default function App() {
         <Route path='countrycomparer' element={<CountryComparer />}></Route>
         <Route path='add' element={<Add />}></Route>
         <Route path='*' element={<NotFound />}></Route>
-        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} modal={modal} changeModal={changeModal}/>} ></Route>
+        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} modal={modal} changeModal={changeModal} />} ></Route>
       </Route>
       <Route index element={<Home windowWidth={windowWidth} />}></Route>
 

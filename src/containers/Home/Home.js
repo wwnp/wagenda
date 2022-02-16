@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import { Col, Container, Row, Card, Accordion } from 'react-bootstrap';
-// import classes from './Home.module.css'
 import { Link, } from "react-router-dom"
 import { CountryContex, } from './../../contex/contex';
 import carItem2 from '../../images/carItem2.png'
@@ -10,22 +9,10 @@ import Header from './../../components/Header/Header';
 import { ToTop } from './../../components/ToTop';
 import { animateScroll, Link as ScrollLink } from "react-scroll";
 import react from '../../images/react.png'
+
 const cardHeight = 175
-// eslint-disable-next-line react-hooks/exhaustive-deps
 export default function Home(props) {
   const {
-    // setCountries,
-    // countries,
-    // loading,
-    // stopLoading,
-    // setOneCountry,
-    // setTwoCountry,
-    // oneCountry,
-    // twoCountry,
-    // resetCountries,
-    // radioType,
-    // changeRadioType,
-    // addElToDom,
     changeMenu,
     menu
   } = useContext(CountryContex)
@@ -42,9 +29,8 @@ export default function Home(props) {
     arrows: false
   };
   const toTOpRef = useRef(null)
+  const carouselRef = useRef(null)
   useEffect(() => {
-    // console.log(carouselRef.current.offsetTop )
-    // console.log(carouselRef.current.offsetHeight )
     document.addEventListener('scroll', btnToTopHandler)
 
     // carouselRef.current.style.marginTop = headerRef.current.clientHeight + 'px'
@@ -71,38 +57,13 @@ export default function Home(props) {
     return () => {
       document.removeEventListener('scroll', btnToTopHandler)
     }
-    // console.log(carouselRef.current.innerSlider.list.offsetHeight)
-    // async function fetchData() {
-    //   const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
-    //   const { data } = response
-    //   setCountries(data)
-    //   stopLoading()
-    // }
-    // fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const gamesRef = useRef(null)
-  const carouselRef = useRef(null)
-  const aboutRef = useRef(null)
-
-  const scrollTo = (ref) => {
-    // const element =
-    // ref.current.getBoundingClientRect().top + window.scrollY
-    if (ref && ref.current) {
-      // window.scroll({
-      //   top: element,
-      //   behavior: "smooth"
-      // })
-      ref.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <>
       <Container>
         <main >
-          <Header scrollTo={scrollTo} aboutRef={aboutRef} gamesRef={gamesRef}></Header>
+          <Header ></Header>
           <div ref={carouselRef}>
             <Slider {...settings} >
               <div className='slide slide-bg' >
@@ -122,7 +83,6 @@ export default function Home(props) {
                     >
                       Below
                     </ScrollLink>
-                    {/* <button className='btn btn-dark btn-sm' onClick={() => scrollTo(gamesRef)}>Below</button> */}
                   </p>
                 </div>
                 <img src={carItem3} alt="carItem1" />
@@ -144,7 +104,7 @@ export default function Home(props) {
               </Row>
             </Container>
           </section>
-          <section name='games' className='bg-dark-lighten py-3' ref={gamesRef}>
+          <section name='games' className='bg-dark-lighten py-3' >
             <Container className=''>
               <h2 className='text-center mb-4 title-section text-white'>Our Games</h2>
               <Row >
@@ -176,8 +136,7 @@ export default function Home(props) {
             </Container>
           </section>
           <section style={{ height: '30333px' }}></section>
-          {/* <section className='bg-dark-darker py-3' > */}
-          <section name='about' className='bg-dark-darker py-3' ref={aboutRef}>
+          <section name='about' className='bg-dark-darker py-3' >
             <h2 className='text-center mb-4 title-section text-white'>About Project</h2>
             <Container className=''>
               <Accordion defaultActiveKey="0">
@@ -208,11 +167,9 @@ export default function Home(props) {
               </Accordion>
             </Container>
           </section>
-
         </main>
       </Container>
       <ToTop ref={toTOpRef} toTopHandler={() => animateScroll.scrollToTop({ duration: 200 })}></ToTop>
     </>
   )
 }
-console.log('test')
