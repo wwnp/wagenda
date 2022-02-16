@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../images/logo.png'
+import logo from '../../images/wagenda.png'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from "react-scroll";
@@ -8,7 +8,7 @@ const Header = props => {
   return (
     <Navbar fixed='top' bg="dark" expand="lg" variant="dark" style={{ flexGrow: '0!important' }}>
       <Container>
-        <Navbar.Brand ><Link to={'/'}><img className="d-inline-block align-top" src={logo} width={24} alt="" /></Link> </Navbar.Brand>
+        <Navbar.Brand ><Link to={'/'}><img className="d-inline-block align-top" src={logo} width={120} alt="" /></Link> </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">

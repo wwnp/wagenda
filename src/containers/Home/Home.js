@@ -4,11 +4,17 @@ import { Link, } from "react-router-dom"
 import { CountryContex, } from './../../contex/contex';
 import carItem2 from '../../images/carItem2.png'
 import carItem3 from '../../images/carItem3.jpg'
+import carItem4 from '../../images/bgWorld.png'
 import Slider from "react-slick";
 import Header from './../../components/Header/Header';
 import { ToTop } from './../../components/ToTop';
 import { animateScroll, Link as ScrollLink } from "react-scroll";
 import react from '../../images/react.png'
+import axios from '../../images/axios.png'
+import rboot from '../../images/rboot.png'
+import stackOverflow from '../../images/stack-overflow.png'
+import Footer from './../../components/Footer/Footer';
+
 
 const cardHeight = 175
 export default function Home(props) {
@@ -22,7 +28,7 @@ export default function Home(props) {
     speed: 750,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
     cssEase: "linear",
@@ -69,7 +75,7 @@ export default function Home(props) {
               <div className='slide slide-bg' >
                 <div className="slide-caption">
                   <h3>Welcome to</h3>
-                  <h1>Country Gesser</h1>
+                  <h1><span className='lgbt'>W</span>agenda</h1>
                   <p>To begin select the guessing game
                     <ScrollLink
                       className='btn btn-dark btn-sm'
@@ -78,7 +84,8 @@ export default function Home(props) {
                       smooth={true}
                       duration={200}
                       style={{
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        marginLeft: '5px'
                       }}
                     >
                       Below
@@ -91,16 +98,28 @@ export default function Home(props) {
                 <div className="slide-caption">Text for slide 2</div>
                 <img src={carItem2} alt="carItem2" />
               </div>
+              <div className='slide' >
+                <div className="slide-caption">Text for slide 2</div>
+                <img src={carItem4} alt="carItem2" />
+              </div>
             </Slider>
           </div>
-          <section className='bg-dark-darker py-3'>
+          <section className='bg-dark-darker py-5 '>
             <Container>
               <h2 className='text-center mb-3 title-section text-white'>Contributions</h2>
               <Row>
-                <Col xs={3} className={'text-center'}><img width={100} src={react} alt="" /></Col>
-                <Col xs={3} className={'text-center'}><img width={100} src={react} alt="" /></Col>
-                <Col xs={3} className={'text-center'}><img width={100} src={react} alt="" /></Col>
-                <Col xs={3} className={'text-center'}><img width={100} src={react} alt="" /></Col>
+                <Col xs={3} className={'text-center hoverable'}>
+                  <a href="https://reactjs.org/" target={'_blank'} rel="noreferrer"><img width={100} src={react} alt="react" /></a>
+                </Col>
+                <Col xs={3} className={'text-center d-flex hoverable'}>
+                  <a className='m-auto' href="https://github.com/axios/axios" target={'_blank'} rel="noreferrer"><img width={200} src={axios} alt="axios" /></a>
+                </Col>
+                <Col xs={3} className={'text-center hoverable'}>
+                  <a href="https://react-bootstrap.netlify.app/getting-started/introduction/" target={'_blank'} rel="noreferrer"><img width={100} src={rboot} alt="rboot" /></a>
+                </Col>
+                <Col xs={3} className={'text-center hoverable'}>
+                  <a href="https://stackoverflow.com/" target={'_blank'} rel="noreferrer"><img width={100} src={stackOverflow} alt="stackOverflow" /></a>
+                </Col>
               </Row>
             </Container>
           </section>
@@ -167,6 +186,7 @@ export default function Home(props) {
               </Accordion>
             </Container>
           </section>
+          <Footer></Footer>
         </main>
       </Container>
       <ToTop ref={toTOpRef} toTopHandler={() => animateScroll.scrollToTop({ duration: 200 })}></ToTop>

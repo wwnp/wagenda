@@ -407,12 +407,16 @@ main {
   border-radius: .5rem;
 }
 .lgbt {
-	background: linear-gradient(180deg, #FE0000 16.66%,
+  
+  -webkit-text-fill-color: transparent;
+	background: linear-gradient(90deg, #FE0000 16.66%,
 		#FD8C00 16.66%, 33.32%,
 		#FFE500 33.32%, 49.98%,
-		#119F0B 49.98%, 66.64%,
-		#0644B3 66.64%, 83.3%,
+		#119F0B 49.98%, 70.64%,
+		#0644B3 70.64%, 83.3%,
 		#C22EDC 83.3%);
+  background-clip:'text';
+  -webkit-background-clip: text;
 }
 .slide-caption h3 {
   font-size: 1rem;
@@ -554,21 +558,23 @@ section:last-child {
 }
 
 .ToTop {
-  background-color: #fff;
-  border-radius: 50%;
+  // background-color: #fff;
+  // border-radius: 50%;
   position: fixed;
-  bottom: 10px;
+  bottom: 25px;
   right: 10px;
   z-index: 100000;
   // font-size: 20px;
-  color: #fff;
+  // color: #fff;
   transition: all ease .35s;
-  width: 60px;
-  height: 60px;
+  // width: 60px;
+  // height: 60px;
   cursor: pointer;
+
+  transform: rotate(-90deg);
 }
 .ToTop:hover {
-  background-color: rgb(218, 216, 216);
+  // background-color: rgb(218, 216, 216);
 }
 .ToTop img {
   padding: 10px;
@@ -578,4 +584,14 @@ section:last-child {
 .hide {
   opacity: 0;
   transition: opacity all .35s;
+}
+
+.hoverable {
+  transition: opacity .25s linear;
+}
+.hoverable:hover a img {
+  opacity: 0.8;
+}
+.Footer {
+  color: rgb(163 163 163/var(--tw-text-opacity));
 }
