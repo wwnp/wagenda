@@ -24,6 +24,8 @@ export const reducer = (state, action) => {
       return { ...state, estimates: action.payload }
     case 'CHANGE_MODAL':
       return { ...state, modal: action.payload }
+    case 'CHANGE_THEME':
+      return { ...state, theme: action.payload }
     default:
       return state
   }

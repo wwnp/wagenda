@@ -12,7 +12,8 @@ const initialState = {
   countriesDOM: [],
   menu: false,
   estimates: [],
-  modal:false
+  modal:false,
+  theme: 'dark'
 }
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
@@ -51,6 +52,9 @@ export const ContexProvider = (props) => {
   }
   value.changeModal = (modal) => {
     dispatch({ type: 'CHANGE_MODAL', payload: modal })
+  }
+  value.changeTheme = (theme) => {
+    dispatch({ type: 'CHANGE_THEME', payload: theme })
   }
   return (
     <CountryContex.Provider value={value}>

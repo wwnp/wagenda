@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from 'react-router-dom'
 import App from "./App";
 import { ContexProvider } from "./contex/contex";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
 import './index.scss'
+import './css/style.loader.scss'
 
 const app = (
   <ContexProvider>
