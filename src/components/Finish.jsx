@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { urlYoutube } from '../config';
+import { motion } from 'framer-motion';
 export const Finish = props => {
   const {
     countryOne,
@@ -24,7 +25,17 @@ export const Finish = props => {
       <div className='container'>
         <div className="d-flex justify-center pt-3">
           <div className='col-8'>
-            <div className="my-5 text-center finish-block">
+            <motion.div
+              className="my-5 text-center finish-block"
+              initial={{
+                opacity:0,
+                x:'-100vw'
+              }}
+              animate={{
+                opacity:1,
+                x:0
+              }}
+            >
               {/* <img className="d-block mx-auto mb-1" src="https://i.kym-cdn.com/photos/images/original/001/598/863/4cc.jpg" alt="" width="100%" height="400px" /> */}
               <h1 className="display-5 fw-bold py-5 border-bottom">{
                 result === 'Draw'
@@ -37,7 +48,7 @@ export const Finish = props => {
                   <Link to={'/countrycomparer'} className={'btn btn-success btn-lg my-2'}>Back</Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export const ToTop = React.forwardRef((props, ref) => {
   } = useContext(CountryContex)
   return (
     <div className="ToTop hide" ref={ref} onClick={toTopHandler}>
-      <AiOutlineArrowUp size={36} color={theme === 'dark' ? 'white' : 'black'}></AiOutlineArrowUp>
+      <AiOutlineArrowUp size={36} color='black'></AiOutlineArrowUp>
     </div>
   )
 })

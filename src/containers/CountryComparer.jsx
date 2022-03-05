@@ -17,6 +17,21 @@ import { Modal } from '../components/Modal';
 import { Preloader } from '../components/Preloader';
 import { AnimatePresence, motion } from 'framer-motion'
 
+const cbAnimation = {
+  hidden: {
+    x: '-100vw',
+    opacity: 0
+  },
+  visible: (custom) => ({
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: .3,
+      delay: custom * .15
+    }
+  }),
+}
+
 export function CountryComparer(props) {
   const {
     setCountries,
@@ -83,6 +98,7 @@ export function CountryComparer(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const countryBtnHandler = (event) => {
     event.preventDefault()
     const country = event.target.dataset.country
@@ -109,9 +125,10 @@ export function CountryComparer(props) {
       navigate('/compare')
     }
   }
+
   return (
     <React.Fragment>
-      {/* <Video windowWidth={props.windowWidth}></Video> */}
+      <Video windowWidth={props.windowWidth}></Video>
       {
         loading
           ? <Preloader color='linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 54%, rgba(255,0,0,1) 100%)'></Preloader>
@@ -119,13 +136,24 @@ export function CountryComparer(props) {
             <div className='container'>
               <div className={'formWrapper'}>
                 <div style={{ marginTop: '55px', padding: '5px' }}>
-                  <form className={'formCountries'}>
+                  <motion.form
+                    className={'formCountries'}
+                    initial='hidden'
+                    animate='visible'
+                  >
                     {countries.map((country, index) => {
-                      return <div
+                      return <motion.div
+
                         key={index}
-                        className='text-center my-3 col-4'
+                        className='text-center my-1 col-4'
                       >
                         <MCountryButton
+                          variants={cbAnimation}
+                          custom={index}
+                          whileHover={{
+                            scale: 1.1,
+                            transition: { duration: .3 },
+                          }}
                           oneCountry={oneCountry}
                           twoCountry={twoCountry}
                           country={country}
@@ -137,9 +165,9 @@ export function CountryComparer(props) {
                           }
                         >
                         </MCountryButton>
-                      </div>
+                      </motion.div>
                     })}
-                  </form>
+                  </motion.form>
                   <div className="text-center mt-2">
                     <Button
                       className='btn btn-sm btn-warning text-white mt-5'
@@ -190,7 +218,7 @@ export function CountryComparer(props) {
                   </form>
                   <div className="text-center">
                     <Button
-                      className='btn btn-success btn-sm'
+                      className='btn btn-purple btn-sm'
                       onClick={() => changeModal(!modal)}
                     >
                       Hints: how to compare
@@ -198,7 +226,7 @@ export function CountryComparer(props) {
                   </div>
                   <div className="text-center mt-2">
                     <Button
-                      className='btn btn-dark btn-lg'
+                      className='btn btn-success btn-lg'
                       disabled={!(oneCountry && twoCountry)}
                       onClick={e => beforeCompare(e)}
                     >
@@ -234,7 +262,7 @@ export function CountryComparer(props) {
                   })}
                 </ul>
               </div>
-            </div>
+            </div >
           )
       }
       <AnimatePresence>
@@ -254,7 +282,7 @@ export function CountryComparer(props) {
         }
       </AnimatePresence>
 
-    </React.Fragment>
+    </React.Fragment >
   )
 }
 function quickSort(arr) {

@@ -13,7 +13,7 @@ import MenuToggle from './../components/MenuToggle';
 import { Modal } from './../components/Modal';
 import { Preloader } from '../components/Preloader';
 import { motion } from 'framer-motion';
-// const API_KEY = 'AIzaSyA8zlguZvshGclLLgePtXJrO7z3LDq8xl8'
+
 const LIMIT = 3
 const AMOUNT_TIMER = 300
 export class Compare extends Component {

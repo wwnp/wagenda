@@ -145,8 +145,27 @@ export default function Home(props) {
           {/* CAROUSEL */}
           <section className='section-odd' ref={carouselRef}>
             <Slider {...settings} >
-              <div className='slide slide-bg' >
-                <div className="slide-caption">
+              <motion.div
+                className='slide slide-bg'
+              >
+                <motion.div
+                  initial={{
+                    opacity: 0
+                  }}
+                  animate={{
+                    opacity: 1
+                  }}
+                  transition={{
+                    delay: 0,
+                    duration: 1,
+                    // repeat: Infinity,
+                    // repeatDelay: 0,
+                    // repeatType: 'reverse',
+                    type: 'tween',
+                    ease: 'easeInOut'
+                  }}
+                  className="slide-caption"
+                >
                   <h3>Welcome to</h3>
                   <h1><span className='lgbt'>W</span>agenda</h1>
                   <p>To begin select the guessing game
@@ -164,9 +183,9 @@ export default function Home(props) {
                       Below
                     </ScrollLink>
                   </p>
-                </div>
+                </motion.div>
                 <img src={carItem3} alt="carItem1" />
-              </div>
+              </motion.div>
               <div className='slide' >
                 <div className="slide-caption">Text for slide 2</div>
                 <img src={carItem2} alt="carItem2" />
@@ -181,6 +200,8 @@ export default function Home(props) {
           {/* TRAVEL */}
           <motion.section
             className='section-odd d-flex'
+            initial='hidden'
+            whileInView='visible'
             // className='d-flex travel-section'
 
             // style={{
@@ -193,7 +214,7 @@ export default function Home(props) {
           >
             <div className="col-travel">
               <motion.img
-                variants={opacityVariants}
+                variants={scrollLeftXVarians}
                 animate={{
                   rotate: 360
                 }}
@@ -362,34 +383,37 @@ export default function Home(props) {
             whileInView='visible'
             viewport={{ amount: .5, once: true }}
           >
-            <motion.h2
-              className='text-center mb-4 title-section text-white'
-              variants={titlesVariants}
-            >
-              About Project
-            </motion.h2>
-            <div className='container'>
-              <AccordionItem title='What about our service'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-              </AccordionItem>
-              <AccordionItem title='What about our service'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                est laborum.
-              </AccordionItem>
+            <div className="col-8 m-auto">
+              <motion.h2
+                className='text-center mb-4 title-section text-white'
+                variants={titlesVariants}
+              >
+                About Project
+              </motion.h2>
+              <div className='container'>
+                <AccordionItem title='What about our service'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                  est laborum.
+                </AccordionItem>
+                <AccordionItem title='What about our service'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                  est laborum.
+                </AccordionItem>
+              </div>
             </div>
+
           </motion.section>
-          
+
           <Footer></Footer>
         </main>
       </div>
