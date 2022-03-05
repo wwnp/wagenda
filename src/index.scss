@@ -528,11 +528,6 @@ code {
   height: 100%;
   width: 100%;
 }
-.btn {
-  border-radius: 0!important;
-  border: none;
-
-}
 .btn-guesser-activated {
   opacity: 0.9;
   color: white;
@@ -700,9 +695,12 @@ code {
 .card-home {
   width: 33.3333%;
   // padding: 1rem;
+  background-color: --var(--colors-section-even);
+  color: --var(--colors-text);
   text-align: center;
   box-shadow: var(--shadow);
   transition: .15s ;
+  z-index: 100;
 }
 .card-home:hover {
   box-shadow: var(--shadow-hover);
@@ -867,7 +865,7 @@ section {
 
 .btn {
   border: none;
-  color: white;
+  color: var(--colors-text);
   padding: 10px 10px;
   text-align: center;
   text-decoration: none;
@@ -877,6 +875,7 @@ section {
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+  border-radius: 5px;
 }
 .btn:disabled {
   background-color: rgb(233, 232, 232);
@@ -900,6 +899,10 @@ section {
 .btn-purple {
   background-color: #8f0177;
   color: #ffffff;
+}
+.btn-secondary {
+  background-color: #747474;
+  color: #000000;
 }
 .btn-dark {
   background-color: #1b1b1b;

@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 
 const cardHeight = 175
 const ccImg = 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5'
+const cc2Img = 'https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__480.jpg'
 
 export default function Home(props) {
   const {
@@ -340,6 +341,10 @@ export default function Home(props) {
               className='cards'
             >
               <MCard
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: .3 },
+                }}
                 variants={gamesAnimation}
                 custom={1}
                 cardHeight={cardHeight}
@@ -356,7 +361,7 @@ export default function Home(props) {
                 cardHeight={cardHeight}
                 linkName={'geogesser'}
                 title={'Geo Gesser'}
-                srcImage={ccImg}
+                srcImage={cc2Img}
                 isDisabled={true}
                 btnColor={'secondary'}
               >

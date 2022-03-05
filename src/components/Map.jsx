@@ -1,9 +1,8 @@
 import React from "react";
+import { motion } from 'framer-motion';
 import {
   GoogleMap,
-  // LoadScript,
   LoadScriptNext,
-  // useGoogleMap,
   StreetViewPanorama
 } from "@react-google-maps/api";
 const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
@@ -15,8 +14,21 @@ let Map1 = class Map1 extends React.Component {
 
   render() {
     return (
-      <div id="total" className="d-flex" >
-        <div className="col-6">
+      <div id="total" className="d-flex" style={{
+        minHeight:750
+      }}>
+        <motion.div
+          initial={{
+            opacity: 0
+          }}
+          transition={{
+            duration: 2
+          }}
+          animate={{
+            opacity: 1
+          }}
+          className="col-6"
+        >
           <LoadScriptNext key={APIkey}>
             <GoogleMap
               key={APIkey}
@@ -37,8 +49,19 @@ let Map1 = class Map1 extends React.Component {
               </div>
             </GoogleMap>
           </LoadScriptNext>
-        </div>
-        <div className="col-6">
+        </motion.div>
+        <motion.div
+          initial={{
+            opacity: 0
+          }}
+          transition={{
+            duration: 2
+          }}
+          animate={{
+            opacity: 1
+          }} ы
+          className="col-6"
+        >
           <LoadScriptNext key={APIkey}>
             <GoogleMap
               key={APIkey}
@@ -59,8 +82,7 @@ let Map1 = class Map1 extends React.Component {
               </div>
             </GoogleMap>
           </LoadScriptNext>
-        </div>
-
+        </motion.div>
       </div>
     );
   }

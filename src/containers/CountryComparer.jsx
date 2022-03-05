@@ -150,10 +150,6 @@ export function CountryComparer(props) {
                         <MCountryButton
                           variants={cbAnimation}
                           custom={index}
-                          whileHover={{
-                            scale: 1.1,
-                            transition: { duration: .3 },
-                          }}
                           oneCountry={oneCountry}
                           twoCountry={twoCountry}
                           country={country}
