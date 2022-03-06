@@ -15,7 +15,7 @@ const collapseVariants = {
   },
   visible: {
     opacity: 1,
-    height: 'auto'
+    height: 'auto' 
   },
   exit: {
     opacity: 0,
@@ -115,17 +115,17 @@ const Header = () => {
               </li>
               <li>
                 <ScrollLink
-                  // onClick={() => {
-                  //   if (isMobile) {
-                  //     setChangeMenu(false)
-                  //   }
-                  // }}
+                  onClick={() => {
+                    if (isMobile) {
+                      setChangeMenu(false)
+                    }
+                  }}
                   to="about"
-                  // smooth={true}
-                  // duration={200}
-                  // style={{
-                  //   cursor: 'pointer'
-                  // }}
+                  smooth={true}
+                  duration={200}
+                  style={{
+                    cursor: 'pointer'
+                  }}
                 >
                   About
                 </ScrollLink>

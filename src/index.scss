@@ -961,8 +961,26 @@ section {
   color: #fff;
 }
 
+.finish-block h1{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: white;
+  color: black;
+  position: relative;
+}
 
-.finish-block {
-  background-color: var(--colors-text);
-  color: var(--colors-bg);
+.finish-block h1::after {
+  display: block;
+  content: "";
+  height: 3px;
+  width: 100%;
+  background-color: rgb(37, 37, 37);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.finish-block div {
+  background: white;
+  color: black;
 }

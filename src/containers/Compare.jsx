@@ -33,7 +33,6 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-
 const LIMIT = 3
 const AMOUNT_TIMER = 300
 export function Compare(props) {
@@ -70,8 +69,6 @@ export function Compare(props) {
     overflow: 'hidden',
   }
   const incFirst = () => {
-    console.log('================')
-    console.log('incFirst')
     setState({
       ...state,
       currTest: state.currTest + 1,
@@ -81,8 +78,6 @@ export function Compare(props) {
     })
   }
   const incSecond = () => {
-    console.log('================')
-    console.log('incSecond')
     setState({
       ...state,
       currTest: state.currTest + 1,
@@ -92,8 +87,6 @@ export function Compare(props) {
     })
   }
   const drawHandle = () => {
-    console.log('================')
-    console.log('drawHandle')
     setState({
       ...state,
       currTest: state.currTest + 1,
@@ -155,10 +148,6 @@ export function Compare(props) {
   if (props.isMobile) {
     return <h1>Unavailable on mobile devices</h1>
   }
-
-  // console.log('============')
-  // console.log(state)
-  // console.log(state.loading)
 
   return (
     <div className='Compare-wrapper hero-particles'>
@@ -260,7 +249,6 @@ export function Compare(props) {
                 </div>
               </div>
             )
-
       }
       <Drawer
         menu={props.menu}
@@ -296,8 +284,6 @@ export function Compare(props) {
     </div>
   )
 }
-
-
 
 function generateRandNum(min, max) {
   return Math.floor(min + Math.random() * (max - min + 1))
