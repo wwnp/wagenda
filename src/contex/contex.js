@@ -12,8 +12,13 @@ const initialState = {
   countriesDOM: [],
   menu: false,
   estimates: [],
-  modal:false,
-  theme: 'dark'
+  modal: false,
+  theme: 'dark',
+  user: {
+    email: null,
+    token: null,
+    id: null,
+  }
 }
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
@@ -55,6 +60,9 @@ export const ContexProvider = (props) => {
   }
   value.changeTheme = (theme) => {
     dispatch({ type: 'CHANGE_THEME', payload: theme })
+  }
+  value.setUser = (user) => {
+    dispatch({ type: 'SET_USER', payload: user })
   }
   return (
     <CountryContex.Provider value={value}>

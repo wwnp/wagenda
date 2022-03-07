@@ -7,14 +7,17 @@ import { Compare } from "./containers/Compare";
 import Add from "./containers/Add";
 import { CountryComparer } from './containers/CountryComparer';
 import { CountryContex } from "./contex/contex.js";
+import { LoginPage } from "./containers/LoginPage";
+// import { getItem } from "./hooks/useCookie";
+
 export default function App() {
+  const navigate = useNavigate()
   const { changeMenu, menu, modal, changeModal } = useContext(CountryContex);
   const onToggleHandler = () => {
     changeMenu(!menu)
   }
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const isMobile = windowWidth <= 700;
-  const navigate = useNavigate()
   // useEffect(() => {
   //   window.addEventListener('resize', handleWindowSizeChange);
   //   return () => {
@@ -28,9 +31,10 @@ export default function App() {
     <Routes>
       <Route path='/' element={<Layout onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} isMobile={isMobile} />} >
         <Route path='countrycomparer' element={<CountryComparer />}></Route>
-        <Route path='add' element={<Add />}></Route>
         <Route path='*' element={<NotFound />}></Route>
         <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} isMobile={isMobile} modal={modal} changeModal={changeModal} />} ></Route>
+        <Route path='add' element={<Add />}></Route>
+        <Route path='login' element={<LoginPage />}></Route>
       </Route>
       <Route index element={<Home windowWidth={windowWidth} />}></Route>
 

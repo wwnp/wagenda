@@ -15,7 +15,9 @@ export function Video(props) {
         width: '100%',
         height: '100%',
         visibility: 'visible',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        zIndex: -5,
+
       }}
     >
       <video

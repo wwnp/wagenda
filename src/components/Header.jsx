@@ -34,9 +34,6 @@ const Header = () => {
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)
-
-    console.log(window.innerWidth)
-
   }, [theme])
 
   useEffect(() => {

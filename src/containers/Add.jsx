@@ -4,11 +4,14 @@ import { CountryContex } from '../contex/contex'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import Header from './../components/Header';
+import { getItem } from './../hooks/useCookie';
+import { useNavigate } from 'react-router';
+
 
 const CAPITAL = 'Capital'
 const PROVINCE = 'Province'
 const Add = props => {
+  const navigate = useNavigate()
   const [urbanType, setUrbanType] = useState(null)
   const [location, setLocation] = useState('')
   const [error, setError] = useState({})
@@ -34,6 +37,13 @@ const Add = props => {
     }
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const token = getItem('userToken')
+    if (!token) {
+      navigate('/login')
+    }
   }, [])
 
   const addHook = () => {
@@ -79,17 +89,18 @@ const Add = props => {
       helpFetch()
     })
   }
-  console.log(country)
+
+
+
   return (
     <main>
       <div className={'Add'}>
-        <Header></Header>
         <h1 className='text-center'>Add</h1>
         <React.Fragment>
           {loading
             ? <Loader></Loader>
             :
-            <form>
+            <form className='form-add'>
               <div className='form-group mb-3'>
                 <label htmlFor="">Countries</label>
                 <select
@@ -171,6 +182,7 @@ const Add = props => {
                   Reset
                 </button>
               </div>
+              <hr />
               <div className="form-group mt-3 text-center">
                 <button
                   className="btn btn-success"

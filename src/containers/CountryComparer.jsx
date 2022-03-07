@@ -68,12 +68,10 @@ export function CountryComparer(props) {
       changeMenu(!menu)
     }
     async function fetchData() {
-      // await delay(200000)
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const response2 = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/estimates.json')
       const { data } = response
       const { data: data2 } = response2
-      // await delay(200000000000000)
       setCountries(data)
       const entries = Object.entries(data2)
       setEstimates(quickSort(entries).reverse())
@@ -127,7 +125,7 @@ export function CountryComparer(props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <Video windowWidth={props.windowWidth}></Video>
       {
         loading
@@ -145,7 +143,7 @@ export function CountryComparer(props) {
                       return <motion.div
 
                         key={index}
-                        className='text-center my-1 col-4'
+                        className='text-center my-1 col-countrybutton'
                       >
                         <MCountryButton
                           variants={cbAnimation}
@@ -278,7 +276,7 @@ export function CountryComparer(props) {
         }
       </AnimatePresence>
 
-    </React.Fragment >
+    </ >
   )
 }
 function quickSort(arr) {

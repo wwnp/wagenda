@@ -26,6 +26,8 @@ export const reducer = (state, action) => {
       return { ...state, modal: action.payload }
     case 'CHANGE_THEME':
       return { ...state, theme: action.payload }
+    case 'SET_USER':
+      return { ...state, user: action.payload }
     default:
       return state
   }

@@ -18,6 +18,7 @@ body[data-theme='dark'] {
   --colors-section-even: #110f13;
   
   --colors-bg2: #1a1a1d;
+  --colors-bg3: rgba(0,0,0,0.87);
   --colors-bg-grad: linear-gradient(90deg, #080911 0%, #05050e 54%, rgb(5, 0, 14) 100%);
 
   --shadow: #2c2c2c 0 3px 7px;
@@ -34,6 +35,7 @@ body[data-theme='light'] {
   --colors-section-even: rgb(236, 236, 236);
 
   --colors-bg2: #dddbdf;
+  --colors-bg3: rgba(255, 255, 255, 0.87);
   --colors-bg-grad: linear-gradient(90deg, #cdcecf 0%, #cbcbe6 54%, rgb(255, 255, 255) 100%);
 
   --shadow: #686868 0 5px 7px;
@@ -43,7 +45,6 @@ body[data-theme='light'] {
 
   --text-under: #ff8a05;
 }
-
 
 body {
   overflow: auto;
@@ -62,9 +63,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
-
 
 .square.entering {
   animation: square 1000ms ease-out forwards;
@@ -204,39 +202,28 @@ code {
   margin: 0 auto;
   position: relative;
   z-index: 100;
-  background: rgba(5, 5, 5, 0.9);
-  box-shadow: 1px 1px 1px 1px #0e0e0e;
+  background: var(--colors-bg);
+  color: var(--colors-text);
   transition: box-shadow .1s;
+  border-radius: 5px;
 }
 
-.formWrapper:hover {
-  box-shadow: 1px 1px 3px 2px #0e0e0e;
-}
 
 .Winner-wrapper {
   max-width: 200px;
   margin: 0 auto;
   margin-top: 30px;
-  padding: 1rem;
-  position: fixed;
+  padding: 2rem;
+  // position: fixed;
 
-  top: 55%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  background: rgba(5, 5, 5, 0.9);
-  box-shadow: 1px 1px 1px 1px #0e0e0e;
-  transition: box-shadow .1s;
+  // top: 65%;
+  // left: 50%;
+  // transform: translateX(-50%);
+  background: var(--colors-bg3);
+  color: var(--colors-text);
+  border-radius: 5px;
 }
 
-@media (min-width: 1200px) {
-  .Winner-wrapper {
-    top: 5rem;
-    left: 1rem;
-    transform: translateX(0);
-
-  }
-}
 
 .formCountries {
   display: flex;
@@ -284,7 +271,8 @@ code {
   max-width: 150px;
   /* padding: 20px 10px; */
   box-sizing: border-box;
-  background: #fff;
+  background: var(--colors-bg2);
+  color: var(--colors-text);
   transform: translateX(0px);
   transition: transform .22s ease-in;
   z-index: 999999999999;
@@ -299,6 +287,7 @@ code {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 
@@ -347,9 +336,10 @@ code {
 .side-a {
   padding: 10px;
   color: #363d54;
-  font-size: 30px;
+  font-size: 1rem;
   text-decoration: none;
-  background-color: #fff;
+  background-color: var(--colors-bg2);
+  color: var(--colors-text);
   border-right: none;
   width: 100%;
   display: block;
@@ -360,7 +350,8 @@ code {
 }
 
 .active-side {
-  background-color: rgb(231, 228, 228);
+  background: var(--colors-bg3);
+  color: var(--colors-text);
 }
 
 .Backdrop {
@@ -557,6 +548,7 @@ code {
   ) 10%, transparent 40%, transparent 100%), url("../src/assets/images/ball-wed.svg") center center, #242423;
   background-size: cover;
   margin-bottom: -25px;
+  overflow: hidden;
 }
 .youtubeVid {
   pointer-events: initial;
@@ -862,6 +854,15 @@ section {
   box-shadow: var(--shadow);
 }
 
+.col-countrybutton {
+  width: 33.333333333%;
+}
+@media screen and (max-width: 576px) {
+  .col-countrybutton {
+    width: 100%;
+  }
+}
+
 
 .btn {
   border: none;
@@ -942,13 +943,14 @@ section {
   
 }
 .CountryButton.active {
-  border: 1px solid #00ff00;
-  box-shadow: 1px 2px 3px #00ff00;
+  border: 1px solid #00ad00;
+  box-shadow: 1px 3px 15px 3px #00ad00;
 }
 
 
 .CountryWrapper:hover .CountryButton-label {
   opacity: 1;
+  
 }
 .CountryButton-label {
   opacity: 0;
@@ -957,8 +959,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   transition: opacity 350ms;
-
-  color: #fff;
+  color: var(--colors-text);
 }
 
 .finish-block h1{
@@ -983,4 +984,16 @@ section {
 .finish-block div {
   background: white;
   color: black;
+}
+
+
+.form-add {
+  padding: 1rem;
+  background-color: var(--colors-bg2);
+  color: var(--colors-text);
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  box-shadow: var(--shadow);
+  border-radius: 5px;
 }

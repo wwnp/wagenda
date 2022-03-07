@@ -7,6 +7,7 @@ import { ContexProvider } from "./contex/contex";
 import "slick-carousel/slick/slick.css";
 import './index.scss'
 import './css/style.loader.scss'
+import './firebase'
 
 const app = (
   <ContexProvider>
