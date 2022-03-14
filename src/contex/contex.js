@@ -1,4 +1,6 @@
-import { createContext, useReducer } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { createContext, useEffect, useReducer, useState } from "react";
+import { auth } from "../firebase";
 import { reducer } from "./reducer";
 export const CountryContex = createContext()
 export const CAPITAL = 'capital'
@@ -14,12 +16,11 @@ const initialState = {
   estimates: [],
   modal: false,
   theme: 'dark',
-  user: {
-    email: null,
-    token: null,
-    id: null,
-  }
+  token: null,
+  user: {}
 }
+const user = auth.currentUser;
+console.log(user)
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
   value.fetchTest = () => {
@@ -64,8 +65,22 @@ export const ContexProvider = (props) => {
   value.setUser = (user) => {
     dispatch({ type: 'SET_USER', payload: user })
   }
+  value.setToken = (token) => {
+    dispatch({ type: 'SET_TOKEN', payload: token })
+  }
+
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, [])
+
   return (
-    <CountryContex.Provider value={value}>
+    <CountryContex.Provider value={{
+      ...value,
+      user
+    }}>
       {props.children}
     </CountryContex.Provider>
   )

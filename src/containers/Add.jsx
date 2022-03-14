@@ -4,8 +4,8 @@ import { CountryContex } from '../contex/contex'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { getItem } from './../hooks/useCookie';
 import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
 
 
 const CAPITAL = 'Capital'
@@ -23,11 +23,16 @@ const Add = props => {
     setCountries,
     countries,
     loading,
-    stopLoading
+    stopLoading,
+    theme
   } = useContext(CountryContex);
 
   useEffect(() => {
-    // changeMenu(!menu)
+    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+  }, [theme])
+
+  useEffect(() => {
+    changeMenu(!menu)
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const { data } = response
@@ -39,12 +44,7 @@ const Add = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    const token = getItem('userToken')
-    if (!token) {
-      navigate('/login')
-    }
-  }, [])
+
 
   const addHook = () => {
     const errorLog = {}

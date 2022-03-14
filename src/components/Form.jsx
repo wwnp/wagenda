@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const Form = ({ title, handleClick }) => {
-  const [email, setEmail] = useState('test@gmail.com')
+  const [email, setEmail] = useState('test@example.com')
   const [password, setPassword] = useState('123456')
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')

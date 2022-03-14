@@ -1,27 +1,37 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { CountryContex } from '../contex/contex';
-import { getItem } from '../hooks/useCookie';
 import { Backdrop } from './Backdrop';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import Cookies from 'js-cookie';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
+import { adminUid, geIfAdminUid } from '../config';
 
 export const Drawer = props => {
   const {
     theme,
-    changeTheme
+    changeTheme,
+    user
   } = useContext(CountryContex)
 
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme)
-  }, [theme])
+
+  // console.log(user)
 
   const navigate = useNavigate()
   const { menu, changeMenu, onToggleHandler } = props
+
+  // useEffect(() => {
+  //   changeMenu(!menu)
+  // }, [])
+
+  // const logout = async () => {
+  //   await signOut(auth);
+  // }
   const cls = [
     'Drawer',
     menu ? null : 'close'
   ]
-  const token = getItem('userToken')
   return (
     <>
       <nav className={cls.join(' ')}>
@@ -44,30 +54,37 @@ export const Drawer = props => {
             </NavLink>
           </li>
           {
-            token
+            !!user
               ? (
                 <li>
                   <NavLink
-                    to='/add'
+                    to='/profile'
                     className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
                   >
-                    Add
+                    Profile
                   </NavLink>
                 </li>
               )
-              : <li>
-                <NavLink
-                  to='/login'
-                  className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-                >
-                  Login
-                </NavLink>
-              </li>
+              : (
+                <li>
+                  <NavLink
+                    to='/login'
+                    className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )
           }
+
+
           <li>
             <span
               className='side-a'
-              onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => {
+                Cookies.set('theme', Cookies.get('theme') === 'dark' ? 'light' : 'dark')
+                changeTheme(theme === 'light' ? 'dark' : 'light')
+              }}
               style={{
                 cursor: 'pointer'
               }}
@@ -75,13 +92,40 @@ export const Drawer = props => {
               {theme} mode
               <span style={{ marginLeft: '1rem' }}>
                 {
-                  theme === 'dark'
+                  Cookies.get('theme') === 'dark'
                     ? <IoMoon size={12}></IoMoon>
                     : <IoMoonOutline size={12}></IoMoonOutline>
                 }
               </span>
             </span>
           </li>
+          
+          {/* <li>
+            <span
+              className='side-a'
+              onClick={logout}
+            >
+              <span style={{ marginLeft: '1rem' }}>
+                logout
+              </span>
+            </span>
+          </li> */}
+          {
+            !!user
+              ? geIfAdminUid(adminUid, user)
+                ? (
+                  <li>
+                    <NavLink
+                      to='/add'
+                      className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
+                    >
+                      Add
+                    </NavLink>
+                  </li>
+                )
+                : null
+              : null
+          }
         </ul>
       </nav>
       {menu

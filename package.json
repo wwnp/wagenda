@@ -13,6 +13,7 @@
     "firebase": "^9.6.8",
     "framer-motion": "^6.2.8",
     "glamor": "^2.20.40",
+    "js-cookie": "^3.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",

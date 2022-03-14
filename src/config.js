@@ -17,33 +17,40 @@ import norway from './assets/images/norway.png'
 
 export const API_KEY = process.env.REACT_APP_API_KEY // NOT MY API
 export const homeImages = {
-  react: [react,'https://reactjs.org/'],
-  rboot: [rboot,'https://react-bootstrap.netlify.app/'],
-  stack: [stack,'https://stackoverflow.com/'],
-  axios: [axios,'https://github.com/axios/axios'],
-  framer: [framer,'https://www.framer.com/'],
-  gmaps: [gmaps,'https://maps.google.com/'],
-  ricons: [ricons,'https://react-icons.github.io/react-icons/'],
-  github: [github,'https://github.com/'],
+  react: [react, 'https://reactjs.org/'],
+  rboot: [rboot, 'https://react-bootstrap.netlify.app/'],
+  stack: [stack, 'https://stackoverflow.com/'],
+  axios: [axios, 'https://github.com/axios/axios'],
+  framer: [framer, 'https://www.framer.com/'],
+  gmaps: [gmaps, 'https://maps.google.com/'],
+  ricons: [ricons, 'https://react-icons.github.io/react-icons/'],
+  github: [github, 'https://github.com/'],
 }
 
 export const countriesFlags = {
-  'france' : france,
-  'russia' : russia,
-  'usa' : usa,
-  'uk' : uk,
-  'belgium' : belgium,
-  'ukraine' : ukraine,
-  'norway' : norway,
+  'france': france,
+  'russia': russia,
+  'usa': usa,
+  'uk': uk,
+  'belgium': belgium,
+  'ukraine': ukraine,
+  'norway': norway,
 }
 
 export const urlYoutube = {
-  'france' : 'https://www.youtube.com/embed/4K1q9Ntcr5g',
-  'russia' : 'https://www.youtube.com/embed/AOAtz8xWM0w',
-  'usa' : 'https://www.youtube.com/embed/eqgQ3rKX6QY',
-  'uk' : 'https://www.youtube.com/embed/I8KSAtos-dk',
-  'belgium' : 'https://www.youtube.com/embed/d9u_Ituu2Q8',
-  'ukraine' : 'https://www.youtube.com/embed/nybtOIxlku8',
-  'norway' : 'https://www.youtube.com/embed/VRS6cbLOrPQ',
-  'draw' : 'https://www.youtube.com/embed/tH2w6Oxx0kQ',
+  'france': 'https://www.youtube.com/embed/4K1q9Ntcr5g',
+  'russia': 'https://www.youtube.com/embed/AOAtz8xWM0w',
+  'usa': 'https://www.youtube.com/embed/eqgQ3rKX6QY',
+  'uk': 'https://www.youtube.com/embed/I8KSAtos-dk',
+  'belgium': 'https://www.youtube.com/embed/d9u_Ituu2Q8',
+  'ukraine': 'https://www.youtube.com/embed/nybtOIxlku8',
+  'norway': 'https://www.youtube.com/embed/VRS6cbLOrPQ',
+  'draw': 'https://www.youtube.com/embed/tH2w6Oxx0kQ',
+}
+
+export const adminUid = ['udGx7hhhLOMlpiwUOYZwNd4WquI3']
+
+
+export function geIfAdminUid(adminUid, user){
+  return adminUid.find(i => i === user.uid)
 }

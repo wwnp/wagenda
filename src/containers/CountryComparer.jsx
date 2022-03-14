@@ -16,6 +16,7 @@ import { delay } from '../auxillary';
 import { Modal } from '../components/Modal';
 import { Preloader } from '../components/Preloader';
 import { AnimatePresence, motion } from 'framer-motion'
+import Cookies from 'js-cookie';
 
 const cbAnimation = {
   hidden: {
@@ -56,11 +57,12 @@ export function CountryComparer(props) {
 
   const {
     theme,
+    changeTheme,
   } = useContext(CountryContex)
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme)
-  }, [theme])
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+  }, [theme])
 
   const navigate = useNavigate()
   useEffect(() => {

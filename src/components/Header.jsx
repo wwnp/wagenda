@@ -7,6 +7,7 @@ import { CountryContex } from '../contex/contex';
 import { useContext } from 'react';
 import { Burger } from './Burger';
 import { motion, AnimatePresence } from 'framer-motion';
+import Cookies from 'js-cookie'
 
 const collapseVariants = {
   hidden: {
@@ -15,7 +16,7 @@ const collapseVariants = {
   },
   visible: {
     opacity: 1,
-    height: 'auto' 
+    height: 'auto'
   },
   exit: {
     opacity: 0,
@@ -33,7 +34,7 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme)
+    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
   }, [theme])
 
   useEffect(() => {
@@ -56,22 +57,25 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const modeSwitch = () => changeTheme(theme === 'light' ? 'dark' : 'light')
+  const modeSwitch = () => {
+    Cookies.set('theme', Cookies.get('theme') === 'dark' ? 'light' : 'dark')
+    changeTheme(theme === 'light' ? 'dark' : 'light')
+  }
 
   return (
     <header className='header'>
       <Link className='brand' to={'/'}><img className="d-inline-block align-top" src={logo} width={120} alt="" /></Link>
-      {
-        menu &&
-        (
-          <AnimatePresence>
-            <ul
+      <AnimatePresence>
+        {
+          menu &&
+          (
+            <motion.ul
               variants={collapseVariants}
               initial='hidden'
               animate='visible'
               exit='exit'
               transition={{
-                duration: .2,
+                duration: .25,
               }}
 
               className={`nav ${isMobile ? 'nav-mobile' : ''}`}
@@ -127,10 +131,11 @@ const Header = () => {
                   About
                 </ScrollLink>
               </li>
-            </ul>
-          </AnimatePresence>
-        )
-      }
+            </motion.ul>
+
+          )
+        }
+      </AnimatePresence>
 
       {isMobile && <Burger handleBurgerClick={() => setChangeMenu(!menu)}></Burger>}
     </header >

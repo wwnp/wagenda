@@ -19,11 +19,92 @@ import { Link } from 'react-router-dom';
 const cardHeight = 175
 const ccImg = 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5'
 const cc2Img = 'https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__480.jpg'
+const contrVarians = {
+  hidden: {
+    x: '-100vw',
+    opacity: 0
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: {
+      duration: 0.7,
+      delay: custom * 0.2
+    },
+    x: 0
+  })
+}
+const scrollLeftXVarians = {
+  hidden: {
+    x: '-100vw',
+    opacity: 0
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: {
+      duration: 0.7,
+      delay: custom * 0.2
+    },
+    x: 0
+  })
+}
+const scrollRightXVarians = {
+  hidden: {
+    x: '100vw',
+    opacity: 0
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: {
+      duration: 0.7,
+      delay: custom * 0.2
+    },
+    x: 0
+  })
+}
+const gamesAnimation = {
+  hidden: {
+    x: '100vw',
+    opacity: 0
+  },
+  visible: (custom) => ({
+    x: 0,
+    opacity: 1,
+    transition: {
+      delay: custom * .25
+    }
+  }),
+}
+const titlesVariants = {
+  hidden: {
+    y: '-100vw',
+    opacity: 0
+  },
+  visible: (index) => ({
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      delay: 0.6
+    },
+    y: 0
+  })
+}
+const opacityVariants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: (index) => ({
+    opacity: 1,
+    transition: {
+      duration: .5,
+    },
+  })
+}
+
 
 export default function Home(props) {
   const {
     changeMenu,
-    menu
+    menu,
   } = useContext(CountryContex)
   const settings = {
     // dots: true,
@@ -39,6 +120,7 @@ export default function Home(props) {
   };
   const toTOpRef = useRef(null)
   const carouselRef = useRef(null)
+
   useEffect(() => {
     document.addEventListener('scroll', btnToTopHandler)
 
@@ -57,86 +139,7 @@ export default function Home(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const contrVarians = {
-    hidden: {
-      x: '-100vw',
-      opacity: 0
-    },
-    visible: (custom) => ({
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        delay: custom * 0.2
-      },
-      x: 0
-    })
-  }
-  const scrollLeftXVarians = {
-    hidden: {
-      x: '-100vw',
-      opacity: 0
-    },
-    visible: (custom) => ({
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        delay: custom * 0.2
-      },
-      x: 0
-    })
-  }
-  const scrollRightXVarians = {
-    hidden: {
-      x: '100vw',
-      opacity: 0
-    },
-    visible: (custom) => ({
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        delay: custom * 0.2
-      },
-      x: 0
-    })
-  }
-  const gamesAnimation = {
-    hidden: {
-      x: '100vw',
-      opacity: 0
-    },
-    visible: (custom) => ({
-      x: 0,
-      opacity: 1,
-      transition: {
-        delay: custom * .25
-      }
-    }),
-  }
-  const titlesVariants = {
-    hidden: {
-      y: '-100vw',
-      opacity: 0
-    },
-    visible: (index) => ({
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        delay: 0.6
-      },
-      y: 0
-    })
-  }
-  const opacityVariants = {
-    hidden: {
-      opacity: 0
-    },
-    visible: (index) => ({
-      opacity: 1,
-      transition: {
-        duration: .5,
-      },
-    })
-  }
+
   return (
     <div style={{ overflow: 'hidden' }}>
       <div className='container'>
