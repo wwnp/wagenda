@@ -15,6 +15,7 @@ import { auth } from "./firebase";
 import  AdminRoute  from './routes/AdminRoute';
 import PrivateRoute from "./routes/PrivateRoute";
 import { ProfilePage } from "./containers/ProfilePage";
+import { SignupPage } from "./containers/RegistrationPage/SignupPage";
 
 export default function App() {
   const navigate = useNavigate()
@@ -52,23 +53,25 @@ export default function App() {
         <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} modal={modal} changeModal={changeModal} />} ></Route>
 
         <Route path='add' element={
-          <AdminRoute user={user}>
-            <Add user={user}/>
+          <AdminRoute >
+            <Add />
           </AdminRoute>
         }></Route>
         <Route path='login' element={
-          <GuestRoute user={user}>
-            <LoginPage user={user} />
+          <GuestRoute >
+            <LoginPage />
+          </GuestRoute>
+        }></Route>
+        <Route path='signup' element={
+          <GuestRoute>
+            <SignupPage />
           </GuestRoute>
         }></Route>
         <Route path='profile' element={
-          <PrivateRoute user={user}>
-            <ProfilePage user={user} />
+          <PrivateRoute >
+            <ProfilePage />
           </PrivateRoute>
         }></Route>
-
-
-
 
         {/* <PrivateRoute></PrivateRoute> */}
 

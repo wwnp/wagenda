@@ -27,9 +27,9 @@ const Add = props => {
     theme
   } = useContext(CountryContex);
 
-  useEffect(() => {
-    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
-  }, [theme])
+  // useEffect(() => {
+  //   document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+  // }, [theme])
 
   useEffect(() => {
     changeMenu(!menu)

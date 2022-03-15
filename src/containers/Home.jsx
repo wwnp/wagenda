@@ -15,6 +15,7 @@ import { motion } from 'framer-motion';
 import { MCard } from '../components/Card';
 import travel from '../assets/images/travel.png'
 import { Link } from 'react-router-dom';
+import { Cookies } from 'js-cookie';
 
 const cardHeight = 175
 const ccImg = 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5'
@@ -99,7 +100,6 @@ const opacityVariants = {
     },
   })
 }
-
 
 export default function Home(props) {
   const {
@@ -323,10 +323,49 @@ export default function Home(props) {
             </motion.div>
           </motion.section>
 
+          {/* ABOUT */}
+          <motion.section
+            className='section-odd py-1'
+            name='about'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ amount: .5, once: true }}
+          >
+            <div className="col-8 m-auto">
+              <motion.h2
+                className='text-center mb-4 title-section text-white'
+                variants={titlesVariants}
+              >
+                About Project
+              </motion.h2>
+              <div className='container'>
+                <AccordionItem title='What about our service'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                  est laborum.
+                </AccordionItem>
+                <AccordionItem title='What about our service'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                  est laborum.
+                </AccordionItem>
+              </div>
+            </div>
+
+          </motion.section>
+
           {/* GAMES */}
           <motion.section
             name='games'
-            className='container section-odd py-1'
+            className='container section-even py-1'
             initial='hidden'
             whileInView='visible'
             viewport={{ amount: .5, once: true }}
@@ -381,45 +420,6 @@ export default function Home(props) {
               >
               </MCard>
             </motion.div>
-          </motion.section>
-
-          {/* ABOUT */}
-          <motion.section
-            className='section-even py-1'
-            name='about'
-            initial='hidden'
-            whileInView='visible'
-            viewport={{ amount: .5, once: true }}
-          >
-            <div className="col-8 m-auto">
-              <motion.h2
-                className='text-center mb-4 title-section text-white'
-                variants={titlesVariants}
-              >
-                About Project
-              </motion.h2>
-              <div className='container'>
-                <AccordionItem title='What about our service'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                  est laborum.
-                </AccordionItem>
-                <AccordionItem title='What about our service'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                  est laborum.
-                </AccordionItem>
-              </div>
-            </div>
-
           </motion.section>
 
           <Footer></Footer>

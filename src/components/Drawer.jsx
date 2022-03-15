@@ -15,16 +15,19 @@ export const Drawer = props => {
     user
   } = useContext(CountryContex)
 
-
   // console.log(user)
 
   const navigate = useNavigate()
   const { menu, changeMenu, onToggleHandler } = props
 
-  // useEffect(() => {
-  //   changeMenu(!menu)
-  // }, [])
+  useEffect(() => {
+    document.body.setAttribute('data-theme', Cookies.get('theme'))
+  }, [theme])
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+  }, [])
+  console.log(user)
   // const logout = async () => {
   //   await signOut(auth);
   // }
@@ -61,29 +64,41 @@ export const Drawer = props => {
                     to='/profile'
                     className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
                   >
-                    Profile
+                    {user?.displayName} Profile
                   </NavLink>
                 </li>
               )
               : (
-                <li>
-                  <NavLink
-                    to='/login'
-                    className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-                  >
-                    Login
-                  </NavLink>
-                </li>
+                <>
+                  <li>
+                    <NavLink
+                      to='/login'
+                      className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to='/signup'
+                      className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
+                    >
+                      Sign Up
+                    </NavLink>
+                  </li>
+                </>
               )
           }
 
 
+          {/* THEME */}
           <li>
             <span
               className='side-a'
               onClick={() => {
+                console.log(123)
                 Cookies.set('theme', Cookies.get('theme') === 'dark' ? 'light' : 'dark')
-                changeTheme(theme === 'light' ? 'dark' : 'light')
+                changeTheme(Cookies.get('theme'))
               }}
               style={{
                 cursor: 'pointer'
@@ -99,7 +114,7 @@ export const Drawer = props => {
               </span>
             </span>
           </li>
-          
+
           {/* <li>
             <span
               className='side-a'

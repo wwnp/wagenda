@@ -2,10 +2,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useContext } from 'react';
 import { CountryContex } from "../contex/contex";
 
-function GuestRoute({children, user}){
-  // return children
+function GuestRoute({children}){
+  const { user } = useContext(CountryContex)
   return (
-    user?.email
+    !!user
       ? <Navigate to='/countrycomparer'></Navigate>
       : children
   )

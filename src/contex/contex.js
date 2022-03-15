@@ -2,6 +2,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useReducer, useState } from "react";
 import { auth } from "../firebase";
 import { reducer } from "./reducer";
+import  Cookies  from 'js-cookie';
+
 export const CountryContex = createContext()
 export const CAPITAL = 'capital'
 export const PROVINCE = 'province'
@@ -15,12 +17,10 @@ const initialState = {
   menu: false,
   estimates: [],
   modal: false,
-  theme: 'dark',
+  theme: Cookies.get('theme') || 'dark',
   token: null,
   user: {}
 }
-const user = auth.currentUser;
-console.log(user)
 export const ContexProvider = (props) => {
   const [value, dispatch] = useReducer(reducer, initialState);
   value.fetchTest = () => {
@@ -72,6 +72,7 @@ export const ContexProvider = (props) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
+      console.log(123)
       setUser(currentUser);
     });
   }, [])

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion';
 
 const Form = ({ title, handleClick }) => {
   const [email, setEmail] = useState('test@example.com')
@@ -6,7 +7,50 @@ const Form = ({ title, handleClick }) => {
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
   return (
-    <div style={{
+    <form className='form-login'>
+      <h3>Login</h3>
+
+      <label className='login-label' for="username">Username</label>
+      <input
+        className='login-input'
+        id="username"
+        type="email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='Email'
+      />
+
+      <label className='login-label' for="password">Password</label>
+      <input
+        className='login-input'
+        type="password"
+        placeholder="Password"
+        id="password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <motion.button
+        whileHover={{
+          scale: 1.05
+        }}
+        className='login-button'
+        onClick={event => handleClick(event, email, password)}
+      >
+        Log In
+      </motion.button>
+    </form>
+
+  )
+}
+
+export { Form }
+
+
+
+/* <div style={{
       width: 400,
       margin: '0 auto'
     }}>
@@ -31,8 +75,4 @@ const Form = ({ title, handleClick }) => {
       >
         {title}
       </button>
-    </div>
-  )
-}
-
-export { Form }
+    </div> */

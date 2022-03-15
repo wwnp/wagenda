@@ -136,12 +136,6 @@ export function Compare(props) {
       })
     }
     fetchLocations()
-    return () => {
-      // interval = null
-      // clearInterval(interval)
-
-      document.body.removeAttribute('data-theme')
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

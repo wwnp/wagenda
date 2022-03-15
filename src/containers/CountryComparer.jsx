@@ -60,9 +60,9 @@ export function CountryComparer(props) {
     changeTheme,
   } = useContext(CountryContex)
 
-  useEffect(() => {
-    document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
-  }, [theme])
+  // useEffect(() => {
+  //   document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+  // }, [theme])
 
   const navigate = useNavigate()
   useEffect(() => {

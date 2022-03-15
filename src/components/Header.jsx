@@ -35,6 +35,7 @@ const Header = () => {
 
   useEffect(() => {
     document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
+    Cookies.set('theme', Cookies.get('theme') || 'dark')
   }, [theme])
 
   useEffect(() => {
