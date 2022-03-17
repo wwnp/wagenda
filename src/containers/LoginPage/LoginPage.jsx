@@ -18,11 +18,41 @@ export const LoginPage = ({ user, }) => {
   } = useContext(CountryContex)
 
   useEffect(() => {
-    changeMenu(!menu)
+    console.log(456)
+    if (menu === true) {
+      console.log(123)
+      changeMenu(false)
+    }
   }, [])
 
-  const handleLogin = async (event, email, password) => {
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(null)
+
+  const handleLogin = async (event, data) => {
     event.preventDefault()
+    const { email, password, capcha } = data
+    console.log(capcha)
+
+    if(email.length === 0){
+      setError('Email required')
+      return
+    }
+
+    if(password.length === 0){
+      setError('Password required')
+      return
+    }
+    console.log(capcha)
+    if(!capcha){
+      setError('Wrong reCapcha')
+      return
+    }
+    console.log(123)
+
+
+    setError(null)
+    setSuccess(null)
+    
     try {
       await signInWithEmailAndPassword(
         auth,
@@ -32,8 +62,9 @@ export const LoginPage = ({ user, }) => {
       // updateProfile(auth.currentUser, {
       //   displayName: "Megan Rain", photoURL: "https://i.pinimg.com/originals/13/0f/cf/130fcf591707629116cf320e040d45d2.jpg"
       // })
+      setSuccess('Successfully login ')
     } catch (error) {
-      console.log(error.message);
+      setError(error.message)
     }
   }
 
@@ -43,7 +74,7 @@ export const LoginPage = ({ user, }) => {
 
   return (
     <>
-      <div class="background">
+      <div className="background">
         <motion.div
           initial={{
             rotate: 0,
@@ -89,7 +120,7 @@ export const LoginPage = ({ user, }) => {
           className="shape">
         </motion.div>
       </div>
-      <Form title={'Log In'} handleClick={handleLogin}></Form>
+      <Form title={'Log In'} handleClick={handleLogin} error={error} success={success}></Form>
     </>
   )
 }

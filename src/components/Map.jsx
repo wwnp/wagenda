@@ -5,7 +5,8 @@ import {
   LoadScriptNext,
   StreetViewPanorama
 } from "@react-google-maps/api";
-const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
+const APIkey = process.env.REACT_APP_API_KEY2;
+// const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
 let Map1 = class Map1 extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +60,7 @@ let Map1 = class Map1 extends React.Component {
           }}
           animate={{
             opacity: 1
-          }} ы
+          }} 
           className="col-6"
         >
           <LoadScriptNext key={APIkey}>

@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion';
-
-const Form = ({ title, handleClick }) => {
+// import ReCAPTCHA from 'react-google-recaptcha';
+import { API_RECAPCHA } from './../config';
+const Form = ({ title, handleClick, error, success }) => {
   const [email, setEmail] = useState('test@example.com')
   const [password, setPassword] = useState('123456')
+  const [capcha, setCapcha] = useState(null)
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')
   return (
     <form className='form-login'>
       <h3>Login</h3>
 
-      <label className='login-label' for="username">Username</label>
+      <label className='login-label' htmlFor="username">Username</label>
       <input
         className='login-input'
         id="username"
@@ -21,7 +23,7 @@ const Form = ({ title, handleClick }) => {
         placeholder='Email'
       />
 
-      <label className='login-label' for="password">Password</label>
+      <label className='login-label' htmlFor="password">Password</label>
       <input
         className='login-input'
         type="password"
@@ -32,20 +34,32 @@ const Form = ({ title, handleClick }) => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
+      {/* <ReCAPTCHA
+        className='mt-1'
+        sitekey={API_RECAPCHA}
+        onChange={(value) => {
+          setCapcha(!!value)
+        }}
+      /> */}
+
       <motion.button
         whileHover={{
           scale: 1.05
         }}
-        className='login-button'
-        onClick={event => handleClick(event, email, password)}
+        className='login-button mb-1'
+        onClick={event => handleClick(event, { email, password, capcha })}
       >
         Log In
       </motion.button>
+      {error && <p className='country-invalid mt-1'>{error}</p>}
+      {success && <p className='country-valid'>{success}</p>}
     </form>
 
   )
 }
-
+function onChange(value) {
+  console.log("Captcha value:", value);
+}
 export { Form }
 
 

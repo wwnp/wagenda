@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useRef, useState } from 'react'
-import { Button } from 'react-bootstrap';
 import { countriesFlags } from '../config';
 import { CSSTransition } from 'react-transition-group';
 import Loader from '../components/Loader';
@@ -219,7 +218,7 @@ export function Compare(props) {
                   </div>
                 </div>
                 <div className='d-flex justify-center' style={{ marginTop: '10px', color: 'white' }}>
-                  <h2>{
+                  <h4>{
                     state.time > 60
                       ? Math.floor(state.time / 60) + ':' + (
                         (state.time % 60).toLocaleString().length === 1
@@ -228,7 +227,7 @@ export function Compare(props) {
                       )
                       : state.time
                   }
-                  </h2>
+                  </h4>
                 </div>
                 <div className='d-flex justify-center' style={{ marginTop: '10px', color: 'white' }}>
                   <h5>
@@ -264,7 +263,7 @@ export function Compare(props) {
         </Modal>
         : null
       }
-      <Button
+      <button
         className='btn btn-success btn-sm'
         onClick={() => changeModal(!modal)}
         style={{
@@ -274,7 +273,7 @@ export function Compare(props) {
         }}
       >
         Hints: how to compare
-      </Button>
+      </button>
     </div>
   )
 }

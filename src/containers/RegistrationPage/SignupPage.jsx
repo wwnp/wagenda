@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import { Form } from '../../components/Form'
 import {
-  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
+  createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, updateProfile,
 } from "firebase/auth";
 import { useContext } from 'react';
 import { CountryContex } from '../../contex/contex';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie'
-import { auth } from '../../firebase';
+import { actionCodeSettings, auth } from '../../firebase';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { emailPattern, passwordPattern } from '../../config';
+import { API_RECAPCHA } from './../../config';
+import Recaptcha from "react-recaptcha";
 
-
+let recaptchaInstance;
 
 export const SignupPage = ({ user, }) => {
   const navigate = useNavigate()
@@ -21,9 +23,10 @@ export const SignupPage = ({ user, }) => {
     changeMenu,
     menu,
   } = useContext(CountryContex)
-
   useEffect(() => {
-    changeMenu(!menu)
+    if (menu === true) {
+      changeMenu(false)
+    }
   }, [])
 
   const [error, setError] = useState(null)
@@ -32,9 +35,7 @@ export const SignupPage = ({ user, }) => {
   const handleSignup = async (data) => {
     setError(null)
     setSuccess(null)
-    console.log(213)
     const { email, password, name } = data
-    console.log(data)
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
@@ -42,8 +43,20 @@ export const SignupPage = ({ user, }) => {
         password
       );
       updateProfile(auth.currentUser, {
-        displayName: name, photoURL: "https://world-xxx.com/upload/iblock/b71/b71c262d51d2e79822f9a92d2c0f1cd8.jpg"
+        displayName: name, photoURL: "https://www.pngitem.com/pimgs/m/661-6619328_default-avatar-png-blank-person-transparent-png.png"
       })
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+        .then(() => {
+          // The link was successfully sent. Inform the user.
+          // Save the email locally so you don't need to ask the user for it again
+          // if they open the link on the same device.
+          window.localStorage.setItem('emailForSignIn', email);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
       await signInWithEmailAndPassword(
         auth,
         email,
@@ -55,10 +68,6 @@ export const SignupPage = ({ user, }) => {
     }
   }
 
-  useEffect(() => {
-    changeMenu(!menu)
-  }, [])
-
   const {
     register,
     handleSubmit,
@@ -66,6 +75,17 @@ export const SignupPage = ({ user, }) => {
   } = useForm({
     mode: 'all'
   });
+
+  const [recaptcha, setRecaptcha] = useState(null)
+  const verifyCallback = (token) => {
+    setRecaptcha(token)
+  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  const callback = () => {
+    recaptchaInstance.reset();
+  }
 
 
   return (
@@ -116,9 +136,9 @@ export const SignupPage = ({ user, }) => {
           className="shape">
         </motion.div>
       </div>
-      <form className='form-login' onSubmit={handleSubmit(handleSignup)}>
+      <form className='form-login' onSubmit={handleSubmit(onSubmit)}>
         <h3>Sign Up</h3>
-        <label className='login-label' for="username">Username</label>
+        <label className='login-label' htmlFor="username">Username</label>
         <input
 
           {...register('email', { required: true, pattern: emailPattern })}
@@ -130,7 +150,7 @@ export const SignupPage = ({ user, }) => {
         {errors.email?.type === 'required' && <p className='country-invalid'>Email is required</p>}
         {errors.email?.type === 'pattern' && <p className='country-invalid'>Email pattern be like: example@test.com</p>}
 
-        <label className='login-label' for="password">Password</label>
+        <label className='login-label' htmlFor="password">Password</label>
         <input
           {...register('password', { required: true, pattern: passwordPattern })}
           className='login-input'
@@ -141,24 +161,36 @@ export const SignupPage = ({ user, }) => {
         {errors.password?.type === 'required' && <p className='country-invalid'>Password is required</p>}
         {errors.password?.type === 'pattern' && <p className='country-invalid'>Minimum six in length</p>}
 
-        <label className='login-label' for="name">Name</label>
+        <label className='login-label' htmlFor="name">Name</label>
         <input
-          {...register('name', { required: true ,min:2})}
+          {...register('name', { required: true, min: 2 })}
           className='login-input'
           type="text"
           placeholder="Name"
           id="name"
         />
+
+
         {errors.name?.type === 'required' && <p className='country-invalid'>Name is required</p>}
         {errors.name?.type === 'min' && <p className='country-invalid'>Minimum two letters</p>}
 
+        <Recaptcha
+          className="g-recaptcha mt-1"
+          ref={(e) => (recaptchaInstance = e)}
+          sitekey={API_RECAPCHA}
+          verifyCallback={verifyCallback}
+          // onloadCallback={callback}
+          size="recaptcha"
+        // size="invisible"
+        />
+
         <motion.button
-          whileHover={{
+          whileHover={isValid && {
             scale: 1.05
           }}
           className='login-button'
           type='submit'
-          disabled={!isValid}
+          disabled={!isValid || recaptcha === null}
         // onClick={event => handleSignup(event, email, password)}
         >
           Sign Up

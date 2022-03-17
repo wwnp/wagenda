@@ -20,7 +20,7 @@ body[data-theme='dark'] {
   --colors-bg2: #1a1a1d;
   --colors-bg3: rgba(0,0,0,0.87);
   --colors-bg-grad: linear-gradient(90deg, #080911 0%, #05050e 54%, rgb(5, 0, 14) 100%);
-  --colors-bg-half-transp: rgba(0, 0, 0, 0.65);
+  --colors-bg-half-transp: rgba(0, 0, 0, 0.85);
   --colors-bg-transp-input: rgba(255, 255, 255, 0.1);
   
 
@@ -40,7 +40,7 @@ body[data-theme='light'] {
   --colors-bg2: #dddbdf;
   --colors-bg3: rgba(255, 255, 255, 0.87);
   --colors-bg-grad: linear-gradient(90deg, #cdcecf 0%, #cbcbe6 54%, rgb(255, 255, 255) 100%);
-  --colors-bg-half-transp: rgba(255, 255, 255, 0.65);
+  --colors-bg-half-transp: rgba(255, 255, 255, 0.85);
   --colors-bg-transp-input: rgba(0, 0, 0, 0.1);
 
   --shadow: #686868 0 5px 7px;
@@ -207,7 +207,7 @@ code {
   margin: 0 auto;
   position: relative;
   z-index: 100;
-  background: var(--colors-bg);
+  background: var(--colors-bg-half-transp);
   color: var(--colors-text);
   transition: box-shadow .1s;
   border-radius: 5px;
@@ -295,7 +295,10 @@ code {
   width: 100%;
 }
 
-
+.Layout {
+  // height: 100vh;
+  // overflow: hidden;
+}
 /* .Drawer ul li a {
   color: #363d54;
   font-size: 30px;
@@ -760,6 +763,19 @@ code {
   margin-top: 4rem;
 }
 
+.mb-1 {
+  margin-top: 1rem;
+}
+.mb-2 {
+  margin-top: 2rem;
+}
+.mb-3{
+  margin-top: 3rem;
+}
+.mb-4 {
+  margin-top: 4rem;
+}
+
 .pt-1 {
   padding-top: 1rem;
 }
@@ -1094,13 +1110,16 @@ section {
 .login-button{
   margin-top: 50px;
   width: 100%;
-  background-color: var(--colors-bg2);
+  background-color: green;
   padding: 15px 0;
   font-size: 18px;
   font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
   color: var(--colors-text);
+}
+.login-button:disabled {
+  background-color: var(--colors-bg-grad);
 }
 
 .country-invalid {

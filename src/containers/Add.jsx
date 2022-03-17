@@ -32,7 +32,9 @@ const Add = props => {
   // }, [theme])
 
   useEffect(() => {
-    changeMenu(!menu)
+    if (menu === true) {
+      changeMenu(false)
+    }
     async function fetchData() {
       const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
       const { data } = response

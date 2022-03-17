@@ -10,6 +10,7 @@ export const PROVINCE = 'province'
 const initialState = {
   countries: [],
   loading: true,
+  error: null,
   oneCountry: null,
   twoCountry: null,
   radioType: CAPITAL,
@@ -67,6 +68,9 @@ export const ContexProvider = (props) => {
   }
   value.setToken = (token) => {
     dispatch({ type: 'SET_TOKEN', payload: token })
+  }
+  value.setError = (error) => {
+    dispatch({ type: 'SET_ERROR', payload: error })
   }
 
   const [user, setUser] = useState(null);

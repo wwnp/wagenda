@@ -12,23 +12,19 @@ import { LoginPage } from "./containers/LoginPage/LoginPage";
 import GuestRoute from './routes/GuestRoute';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import  AdminRoute  from './routes/AdminRoute';
+import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from "./routes/PrivateRoute";
 import { ProfilePage } from "./containers/ProfilePage";
 import { SignupPage } from "./containers/RegistrationPage/SignupPage";
+import TestPage from "./containers/TestPage";
 
 export default function App() {
   const navigate = useNavigate()
-  const { changeMenu, menu, modal, changeModal, user } = useContext(CountryContex);
+  const { changeMenu, menu, modal, changeModal } = useContext(CountryContex);
   const onToggleHandler = () => {
     changeMenu(!menu)
   }
-  // console.log(user)
 
-  // const [user, setUser] = useState({});
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  // });
 
   // console.log(currentUser)
   // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -48,6 +44,7 @@ export default function App() {
   return (
     <Routes>
       <Route path='/' element={<Layout onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} />} >
+        <Route index element={<Home />}></Route>
         <Route path='countrycomparer' element={<CountryComparer />}></Route>
         <Route path='*' element={<NotFound />}></Route>
         <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} modal={modal} changeModal={changeModal} />} ></Route>
@@ -63,9 +60,9 @@ export default function App() {
           </GuestRoute>
         }></Route>
         <Route path='signup' element={
-          <GuestRoute>
-            <SignupPage />
-          </GuestRoute>
+          // <GuestRoute>
+          <SignupPage />
+          // </GuestRoute>
         }></Route>
         <Route path='profile' element={
           <PrivateRoute >
@@ -81,7 +78,7 @@ export default function App() {
           </GuestRoute>
         }></Route> */}
       </Route>
-      <Route index element={<Home />}></Route>
+      <Route path='test' element={ <TestPage /> }></Route>
 
     </Routes>
   )

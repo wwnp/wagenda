@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
 import { CountryContex } from '../contex/contex';
 import carItem2 from '../assets/images/carItem2.png'
 import carItem3 from '../assets/images/carItem3.jpg'

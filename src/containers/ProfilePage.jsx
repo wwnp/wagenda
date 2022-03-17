@@ -1,13 +1,22 @@
 import { signOut } from 'firebase/auth';
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { auth } from '../firebase';
 import { CountryContex } from './../contex/contex';
 
 export const ProfilePage = () => {
   const { user } = useContext(CountryContex)
+  const {
+    changeMenu,
+    menu,
+  } = useContext(CountryContex)
   const logout = async () => {
     await signOut(auth);
   }
+  useEffect(()=> {
+    if (menu === true) {
+      changeMenu(!menu)
+    }
+  },[])
   return (
     <div>
       <h1>ProfilePage</h1>

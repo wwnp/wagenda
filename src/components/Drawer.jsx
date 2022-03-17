@@ -27,7 +27,6 @@ export const Drawer = props => {
   useEffect(() => {
     document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
   }, [])
-  console.log(user)
   // const logout = async () => {
   //   await signOut(auth);
   // }
