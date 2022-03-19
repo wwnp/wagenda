@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Home from "./containers/Home";
@@ -26,29 +26,27 @@ export default function App() {
   }
 
 
-  // console.log(currentUser)
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const isMobile = windowWidth <= 700;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isMobile = windowWidth <= 700;
+  console.log(isMobile)
 
-
-  // useEffect(() => {
-  //   window.addEventListener('resize', handleWindowSizeChange);
-  //   return () => {
-  //     window.removeEventListener('resize', handleWindowSizeChange);
-  //   }
-  // })
-  // function handleWindowSizeChange() {
-  //   setWindowWidth(window.innerWidth);
-  // }
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  })
+  function handleWindowSizeChange() {
+    
+    setWindowWidth(window.innerWidth);
+  }
 
   return (
     <Routes>
       <Route path='/' element={<Layout onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} />} >
-        <Route index element={<Home />}></Route>
-        <Route path='countrycomparer' element={<CountryComparer />}></Route>
+        <Route path='countrycomparer' element={<CountryComparer isMobile={isMobile} />}></Route>
         <Route path='*' element={<NotFound />}></Route>
-        <Route path='compare' element={<Compare onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} modal={modal} changeModal={changeModal} />} ></Route>
-
+        <Route path='compare' element={<Compare isMobile={isMobile} onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} modal={modal} changeModal={changeModal} />} ></Route>
         <Route path='add' element={
           <AdminRoute >
             <Add />
@@ -78,8 +76,8 @@ export default function App() {
           </GuestRoute>
         }></Route> */}
       </Route>
-      <Route path='test' element={ <TestPage /> }></Route>
-
+      <Route path='test' element={<TestPage />}></Route>
+      <Route index element={<Home />}></Route>
     </Routes>
   )
 }

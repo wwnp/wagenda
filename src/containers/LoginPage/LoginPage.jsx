@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form } from '../../components/Form'
-import { signInWithEmailAndPassword , updateProfile} from "firebase/auth";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useContext } from 'react';
 import { CountryContex } from '../../contex/contex';
 import { useNavigate } from 'react-router';
@@ -8,51 +8,44 @@ import { useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { auth } from '../../firebase';
 import { motion } from 'framer-motion';
+import Recaptcha from "react-recaptcha";
+import { useForm } from 'react-hook-form';
+import { API_RECAPCHA, emailPattern, passwordPattern } from '../../config';
+import { Link } from 'react-router-dom';
+
+let recaptchaInstance;
 
 export const LoginPage = ({ user, }) => {
-
   const navigate = useNavigate()
+
   const {
     changeMenu,
     menu,
   } = useContext(CountryContex)
 
   useEffect(() => {
-    console.log(456)
     if (menu === true) {
-      console.log(123)
       changeMenu(false)
     }
   }, [])
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'all'
+  });
+
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
 
-  const handleLogin = async (event, data) => {
-    event.preventDefault()
+  const handleLogin = async (data) => {
     const { email, password, capcha } = data
-    console.log(capcha)
-
-    if(email.length === 0){
-      setError('Email required')
-      return
-    }
-
-    if(password.length === 0){
-      setError('Password required')
-      return
-    }
-    console.log(capcha)
-    if(!capcha){
-      setError('Wrong reCapcha')
-      return
-    }
-    console.log(123)
-
 
     setError(null)
     setSuccess(null)
-    
+
     try {
       await signInWithEmailAndPassword(
         auth,
@@ -68,23 +61,30 @@ export const LoginPage = ({ user, }) => {
     }
   }
 
-  // useEffect(() => {
-  //   document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
-  // }, [theme])
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
 
+  const [recaptcha, setRecaptcha] = useState(null)
+  const verifyCallback = (token) => {
+    setRecaptcha(token)
+  }
+  const callback = () => {
+    recaptchaInstance.reset();
+  }
   return (
     <>
       <div className="background">
         <motion.div
           initial={{
             rotate: 0,
-            x: 0,
+            x: 30,
             y: 0
           }}
           animate={{
             rotate: 360,
-            x: 400,
-            y: 500
+            x: 200,
+            y: 300
           }}
           transition={{
             delay: 0,
@@ -100,13 +100,13 @@ export const LoginPage = ({ user, }) => {
         <motion.div
           initial={{
             rotate: 0,
-            x: 0,
-            y: 0
+            x: 200,
+            y: 300
           }}
           animate={{
             rotate: 360,
-            x: -400,
-            y: -500
+            x: 30,
+            y: 0
           }}
           transition={{
             delay: 0,
@@ -120,7 +120,63 @@ export const LoginPage = ({ user, }) => {
           className="shape">
         </motion.div>
       </div>
-      <Form title={'Log In'} handleClick={handleLogin} error={error} success={success}></Form>
+      <form className='form-login' onSubmit={handleSubmit(handleLogin)}>
+        <h3>Sign In</h3>
+        <label className='login-label' htmlFor="username">Email</label>
+        <input
+          {...register(
+            'email', {
+            required: true,
+            pattern: {
+              value: emailPattern,
+              message: 'sex'
+            }
+          })}
+          className='login-input'
+          type="email"
+          placeholder='Email'
+        />
+        {errors.email?.type === 'required' && <p className='country-invalid'>Email is required</p>}
+        {errors.email?.type === 'pattern' && <p className='country-invalid'>Email pattern be like: example@test.com</p>}
+
+        <label className='login-label' htmlFor="password">Password</label>
+        <input
+          {...register('password', { required: true, pattern: passwordPattern })}
+          className='login-input'
+          type="password"
+          placeholder="Password"
+          id="password"
+        />
+        {errors.password?.type === 'required' && <p className='country-invalid'>Password is required</p>}
+        {errors.password?.type === 'pattern' && <p className='country-invalid'>Minimum six in length</p>}
+
+        <Recaptcha
+          className="g-recaptcha mt-1"
+          ref={(e) => (recaptchaInstance = e)}
+          sitekey={API_RECAPCHA}
+          verifyCallback={verifyCallback}
+          size="recaptcha"
+        />
+
+        <motion.button
+          whileHover={isValid && {
+            scale: 1.05
+          }}
+          className='login-button mt-2'
+          type='submit'
+          disabled={!isValid || recaptcha === null}
+        // onClick={event => handleSignup(event, email, password)}
+        >
+          Sign In
+        </motion.button>
+
+        <p className='mt-2'>Don't have an account? <Link to='/signup'>Sign up</Link></p>
+        
+
+        {error && <p className='country-invalid mt-1'>{error}</p>}
+        {success && <p className='country-valid mt-1'>{success}</p>}
+      </form>
+      {/* <Form title={'Log In'} handleClick={handleLogin} error={error} success={success}></Form> */}
     </>
   )
 }

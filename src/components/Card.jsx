@@ -14,7 +14,7 @@ export const Card = forwardRef((props, ref) => {
 
   return (
     <div
-      className='card-home'
+      className='col-12 col-sm-4'
       ref={ref}
     >
       <img height={cardHeight} src={srcImage} alt={title} width='100%' />

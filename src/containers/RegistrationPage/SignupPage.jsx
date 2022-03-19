@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { emailPattern, passwordPattern } from '../../config';
 import { API_RECAPCHA } from './../../config';
 import Recaptcha from "react-recaptcha";
+import { Link } from 'react-router-dom';
 
 let recaptchaInstance;
 
@@ -76,17 +77,17 @@ export const SignupPage = ({ user, }) => {
     mode: 'all'
   });
 
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
+
   const [recaptcha, setRecaptcha] = useState(null)
   const verifyCallback = (token) => {
     setRecaptcha(token)
   }
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   const callback = () => {
     recaptchaInstance.reset();
   }
-
 
   return (
     <>
@@ -136,14 +137,19 @@ export const SignupPage = ({ user, }) => {
           className="shape">
         </motion.div>
       </div>
-      <form className='form-login' onSubmit={handleSubmit(onSubmit)}>
+      <form className='form-login' onSubmit={handleSubmit(handleSignup)}>
         <h3>Sign Up</h3>
-        <label className='login-label' htmlFor="username">Username</label>
+        <label className='login-label' htmlFor="username">Email</label>
         <input
-
-          {...register('email', { required: true, pattern: emailPattern })}
+          {...register(
+            'email', {
+            required: true,
+            pattern: {
+              value: emailPattern,
+              message: 'sex'
+            }
+          })}
           className='login-input'
-          id="username"
           type="email"
           placeholder='Email'
         />
@@ -195,6 +201,9 @@ export const SignupPage = ({ user, }) => {
         >
           Sign Up
         </motion.button>
+        
+        <p className='mt-2'>Already have an account? <Link to='/login'>Sign up</Link></p>
+          
         {error && <p className='country-invalid'>{error}</p>}
         {success && <p className='country-valid'>{success}</p>}
       </form>

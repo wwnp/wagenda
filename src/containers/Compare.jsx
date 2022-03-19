@@ -12,7 +12,7 @@ import MenuToggle from './../components/MenuToggle';
 import { Modal } from './../components/Modal';
 import { Preloader } from '../components/Preloader';
 import { motion } from 'framer-motion';
-
+import { Unavailable } from '../components/Unavailable';
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -35,7 +35,7 @@ function useInterval(callback, delay) {
 const LIMIT = 3
 const AMOUNT_TIMER = 300
 export function Compare(props) {
-  const { changeModal, modal } = props
+  const { changeModal, modal, isMobile } = props
 
   const [isRunning, setIsRunning] = useState(true);
   const [delay, setDelay] = useState(1000);
@@ -138,8 +138,8 @@ export function Compare(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (props.isMobile) {
-    return <h1>Unavailable on mobile devices</h1>
+  if (isMobile) {
+    return <Unavailable></Unavailable>
   }
 
   return (

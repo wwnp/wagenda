@@ -7,6 +7,8 @@ import {
 } from "@react-google-maps/api";
 const APIkey = process.env.REACT_APP_API_KEY2;
 // const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
+const heightMap = '750px'
+const widthMap = '100%'
 let Map1 = class Map1 extends React.Component {
   constructor(props) {
     super(props);
@@ -16,27 +18,30 @@ let Map1 = class Map1 extends React.Component {
   render() {
     return (
       <div id="total" className="d-flex" style={{
-        minHeight:750
+        minHeight:heightMap
       }}>
         <motion.div
           initial={{
             opacity: 0
           }}
           transition={{
-            duration: 2
+            duration: 5,
+            ease: 'easeInOut'
           }}
           animate={{
             opacity: 1
           }}
-          className="col-6"
+          style={{
+            width:'50%'
+          }}
         >
           <LoadScriptNext key={APIkey}>
             <GoogleMap
               key={APIkey}
               visible={false}
-              style={{ height: "750px", width: "400px" }}
+              style={{ height: heightMap, width: widthMap }}
             >
-              <div style={{ height: "750px", width: "400px" }}>
+              <div style={{ height: heightMap, width: widthMap }}>
                 <StreetViewPanorama
                   position={this.props.ArrOne[this.props.currTest]}
                   enableCloseButton={false}
@@ -56,20 +61,23 @@ let Map1 = class Map1 extends React.Component {
             opacity: 0
           }}
           transition={{
-            duration: 2
+            duration: 5,
+            ease: 'easeInOut'
           }}
           animate={{
             opacity: 1
           }} 
-          className="col-6"
+          style={{
+            width:'50%'
+          }}
         >
           <LoadScriptNext key={APIkey}>
             <GoogleMap
               key={APIkey}
               visible={false}
-              style={{ height: "750px", width: "400px" }}
+              style={{ height: heightMap, width: widthMap }}
             >
-              <div style={{ height: "750px", width: "400px" }}>
+              <div style={{ height: heightMap, width: widthMap }}>
                 <StreetViewPanorama
                   position={this.props.ArrTwo[this.props.currTest]}
                   enableCloseButton={false}

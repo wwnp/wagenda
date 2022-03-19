@@ -8,7 +8,7 @@ export const Modal = props => {
   useEffect(() => {
     function modalRemover(e) {
       if (e.target.id === 'modalId') {
-        changeModal(!modal)
+        changeModal(false)
       }
     }
     if (modal) {
@@ -28,7 +28,7 @@ export const Modal = props => {
       exit={{ opacity: 0 }}
     >
       <div className="modal-inside">
-        <button className='btn btn-danger' onClick={e => changeModal(!modal)}>X</button>
+        <button className='btn btn-danger' onClick={e => changeModal(false)}>X</button>
         {children}
       </div>
     </motion.div>

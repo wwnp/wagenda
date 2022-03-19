@@ -3,6 +3,9 @@ import { CountryContex } from '../contex/contex';
 import carItem2 from '../assets/images/carItem2.png'
 import carItem3 from '../assets/images/carItem3.jpg'
 import carItem4 from '../assets/images/bgWorld.png'
+import game1 from '../assets/images/game1.jpg'
+// import game2 from '../assets/images/game2.jpg'
+import game3 from '../assets/images/game3.jpg'
 import Slider from "react-slick";
 import Header from '../components/Header';
 import { ToTop } from '../components/ToTop';
@@ -15,6 +18,8 @@ import { MCard } from '../components/Card';
 import travel from '../assets/images/travel.png'
 import { Link } from 'react-router-dom';
 import { Cookies } from 'js-cookie';
+
+
 
 const cardHeight = 175
 const ccImg = 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5'
@@ -202,70 +207,67 @@ export default function Home(props) {
 
           {/* TRAVEL */}
           <motion.section
-            className='section-odd d-flex'
+            className='container section-odd'
             initial='hidden'
             whileInView='visible'
-            // className='d-flex travel-section'
+          // className='d-flex travel-section'
 
-            // style={{
-            //   background:'var(--colors-bg-grad)',
-            //   // background:'linear-gradient(90deg, #080911 0%, #0d0d16 54%, rgba(5,0,15,1) 100%)'
-            // }}
-            style={{
-              minHeight: 500
-            }}
+          // style={{
+          //   background:'var(--colors-bg-grad)',
+          //   // background:'linear-gradient(90deg, #080911 0%, #0d0d16 54%, rgba(5,0,15,1) 100%)'
+          // }}
           >
-            <div className="col-travel">
-              <motion.img
-                variants={scrollLeftXVarians}
-                animate={{
-                  rotate: 360
-                }}
-                transition={{
-                  delay: 0,
-                  duration: 30,
-                  repeat: Infinity,
-                  repeatDelay: 0,
-                  repeatType: 'reverse',
-                  type: 'tween',
-                  ease: 'easeInOut'
-                }}
+            <div className="row flex-wrap">
+              <div className="col-12 col-md-6 d-flex justify-center">
+                <motion.img
+                  variants={scrollLeftXVarians}
+                  animate={{
+                    rotate: 360
+                  }}
+                  transition={{
+                    delay: 0,
+                    duration: 30,
+                    repeat: Infinity,
+                    repeatDelay: 0,
+                    repeatType: 'reverse',
+                    type: 'tween',
+                    ease: 'easeInOut'
+                  }}
+                  className='travel-img'
+                  src={travel}
+                  alt="travel"
+                />
+              </div>
 
-                width={'100%'}
-                src={travel}
-                alt="travel"
-              />
+              <motion.div
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ amount: .5, once: true }}
+                className="col-12 col-md-6 d-flex flex-column align-center justify-center border-left travel-section"
+              >
+                <motion.h2
+                  className='display-6 display-md-4 display-lg-2 text-center'
+                  variants={scrollRightXVarians}
+                  custom={1}
+                >
+                  Compare places around the world
+                </motion.h2>
+                <motion.div
+                  variants={scrollLeftXVarians}
+                  custom={2}
+
+                >
+                  <Link
+                    to={'/countrycomparer'}
+                    className={`btn btn-large btn-success`}
+                  >
+                    Start compare
+                  </Link>
+                </motion.div>
+
+              </motion.div>
             </div>
 
-            <motion.div
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ amount: .5, once: true }}
-              className="col-travel d-flex flex-column align-center justify-center border-left travel-section"
-            >
-              <motion.h2
-                variants={scrollRightXVarians}
-                custom={1}
-                style={{
-                  fontSize: '2rem'
-                }}
-              >
-                Compare places around the world
-              </motion.h2>
-              <motion.div
-                variants={scrollLeftXVarians}
-                custom={2}
-
-              >
-                <Link
-                  to={'/countrycomparer'}
-                  className={`btn btn-large btn-success`}
-                >
-                  Start compare
-                </Link>
-              </motion.div>
-
-            </motion.div>
           </motion.section>
 
           {/* CONTR */}
@@ -273,16 +275,17 @@ export default function Home(props) {
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true }}
-            className='contrs container section-even'
+            className='container section-even'
           >
             <motion.h2
-              className='text-center mb-3 title-section text-white'
+              className='text-center title-section text-white display-6 display-sm-4 display-lg-2'
               variants={titlesVariants}
             >
               Contributions
             </motion.h2>
+
             <motion.div
-              className='d-flex flex-wrap justify-center'
+              className='row flex-wrap justify-center '
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true }}
@@ -294,7 +297,7 @@ export default function Home(props) {
                       variants={contrVarians}
                       custom={index}
                       key={item}
-                      className={'col-contr text-center'}
+                      className={'col-12 col-sm-6 col-md-3'}
                       style={{
                         paddingBottom: '3rem',
                       }}
@@ -305,7 +308,7 @@ export default function Home(props) {
                           justifyContent: 'center',
                           alignItems: 'center',
                           height: '100%',
-                          opacity: 0.4
+                          opacity: 0.7,
                         }}
 
                         whileHover={{
@@ -313,7 +316,8 @@ export default function Home(props) {
                           opacity: 1
                         }}
                       >
-                        <a href={homeImages[item][1]} target={'_blank'} rel="noreferrer"><img width={100} src={homeImages[item][0]} alt={item[0]} /></a>
+                        <a className='contr-link' href={homeImages[item][1]} target={'_blank'} rel="noreferrer"><img style={{ objectFit: 'contain',width:'150px',height:'100px'}} src={homeImages[item][0]} alt={item[0]} /></a>
+
                       </motion.div>
                     </motion.div>
                   )
@@ -332,7 +336,7 @@ export default function Home(props) {
           >
             <div className="col-8 m-auto">
               <motion.h2
-                className='text-center mb-4 title-section text-white'
+                className='text-center title-section text-white display-3'
                 variants={titlesVariants}
               >
                 About Project
@@ -370,7 +374,7 @@ export default function Home(props) {
             viewport={{ amount: .5, once: true }}
           >
             <motion.h2
-              className='text-center title-section text-white'
+              className='text-center title-section text-white display-3'
               variants={titlesVariants}
             >
               Our Games
@@ -379,7 +383,7 @@ export default function Home(props) {
               initial='hidden'
               whileInView='visible'
               viewport={{ amount: .5, once: true }}
-              className='cards'
+              className='row justify-center row-gap-2'
             >
               <MCard
                 whileHover={{
@@ -391,7 +395,8 @@ export default function Home(props) {
                 cardHeight={cardHeight}
                 linkName={'countrycomparer'}
                 title={'Country Comparer'}
-                srcImage={ccImg}
+                // srcImage={ccImg}
+                srcImage={game1}
                 isDisabled={false}
                 btnColor={'success'}
               >
@@ -413,7 +418,7 @@ export default function Home(props) {
                 cardHeight={cardHeight}
                 linkName={'/'}
                 title={'Under Development'}
-                srcImage={ccImg}
+                srcImage={game3}
                 isDisabled={true}
                 btnColor={'secondary'}
               >
@@ -425,6 +430,6 @@ export default function Home(props) {
         </main>
       </div>
       <ToTop ref={toTOpRef} toTopHandler={() => animateScroll.scrollToTop({ duration: 200 })}></ToTop>
-    </div>
+    </div >
   )
 }

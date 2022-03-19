@@ -16,6 +16,7 @@ import { Modal } from '../components/Modal';
 import { Preloader } from '../components/Preloader';
 import { AnimatePresence, motion } from 'framer-motion'
 import Cookies from 'js-cookie';
+import { Unavailable } from '../components/Unavailable';
 
 const cbAnimation = {
   hidden: {
@@ -57,7 +58,9 @@ export function CountryComparer(props) {
     setError,
     error
   } = useContext(CountryContex)
-  // const [error, setError] = useState(null)
+
+  const {isMobile} = props 
+
   const navigate = useNavigate()
   useEffect(() => {
     setError(null)
@@ -108,7 +111,6 @@ export function CountryComparer(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(error)
 
   const countryBtnHandler = (event) => {
     event.preventDefault()
@@ -136,9 +138,10 @@ export function CountryComparer(props) {
       navigate('/compare')
     }
   }
-  // if (error) {
-  //   return <h1>{error}</h1>
-  // }
+
+  if(isMobile) {
+    return <Unavailable></Unavailable>
+  }
   return (
     <>
       <Video windowWidth={props.windowWidth}></Video>

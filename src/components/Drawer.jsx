@@ -7,18 +7,22 @@ import Cookies from 'js-cookie';
 import { auth } from '../firebase';
 import { signOut } from 'firebase/auth';
 import { adminUid, geIfAdminUid } from '../config';
+import { Modal } from './Modal';
+import { AnimatePresence } from 'framer-motion';
 
 export const Drawer = props => {
   const {
     theme,
     changeTheme,
-    user
+    user,
+    modal,
+    changeModal
   } = useContext(CountryContex)
 
   // console.log(user)
 
   const navigate = useNavigate()
-  const { menu, changeMenu, onToggleHandler } = props
+  const { menu, changeMenu, onToggleHandler, } = props
 
   useEffect(() => {
     document.body.setAttribute('data-theme', Cookies.get('theme'))
@@ -34,6 +38,14 @@ export const Drawer = props => {
     'Drawer',
     menu ? null : 'close'
   ]
+
+  const isWannaLoginShowed = Cookies.get('wanna-login')
+  // console.log(isWannaLoginShowed)
+  // if(!isWannaLoginShowed){
+  //   changeModal(true)
+  // }
+
+  
   return (
     <>
       <nav className={cls.join(' ')}>
@@ -146,6 +158,19 @@ export const Drawer = props => {
         ? <Backdrop onToggleHandler={onToggleHandler}></Backdrop>
         : null
       }
+      {/* {!isWannaLoginShowed && <Modal>
+        Wanna Sing Up. We have a cookie :D
+      </Modal>} */}
+
+      {/* <AnimatePresence>
+        {
+          modal && !isWannaLoginShowed && (
+            <Modal>
+              <p>Wanna Sing Up. We have a cookie :D</p>
+            </Modal>
+          )
+        }
+      </AnimatePresence> */}
     </>
   )
 }
