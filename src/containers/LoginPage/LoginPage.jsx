@@ -7,15 +7,19 @@ import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { auth } from '../../firebase';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Recaptcha from "react-recaptcha";
 import { useForm } from 'react-hook-form';
 import { API_RECAPCHA, emailPattern, passwordPattern } from '../../config';
 import { Link } from 'react-router-dom';
+import { delay } from '../../auxillary';
 
 let recaptchaInstance;
 
-export const LoginPage = ({ user, }) => {
+export const LoginPage = () => {
+  const { user } = useContext(CountryContex)
+
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const {
@@ -41,6 +45,8 @@ export const LoginPage = ({ user, }) => {
   const [success, setSuccess] = useState(null)
 
   const handleLogin = async (data) => {
+    console.log(recaptchaInstance)
+    setLoading(true)
     const { email, password, capcha } = data
 
     setError(null)
@@ -56,8 +62,13 @@ export const LoginPage = ({ user, }) => {
       //   displayName: "Megan Rain", photoURL: "https://i.pinimg.com/originals/13/0f/cf/130fcf591707629116cf320e040d45d2.jpg"
       // })
       setSuccess('Successfully login ')
+      // await delay(700)
+      // navigate('/countrycomparer')
     } catch (error) {
       setError(error.message)
+    }
+    finally {
+      setLoading(false)
     }
   }
 
@@ -72,6 +83,7 @@ export const LoginPage = ({ user, }) => {
   const callback = () => {
     recaptchaInstance.reset();
   }
+  console.log(errors)
   return (
     <>
       <div className="background">
@@ -155,23 +167,33 @@ export const LoginPage = ({ user, }) => {
           ref={(e) => (recaptchaInstance = e)}
           sitekey={API_RECAPCHA}
           verifyCallback={verifyCallback}
+          // onloadCallback={callback}
           size="recaptcha"
         />
 
-        <motion.button
-          whileHover={isValid && {
-            scale: 1.05
-          }}
-          className='login-button mt-2'
-          type='submit'
-          disabled={!isValid || recaptcha === null}
-        // onClick={event => handleSignup(event, email, password)}
-        >
-          Sign In
-        </motion.button>
-
+        {/* <AnimatePresence> */}
+          <motion.button
+            // initial={{
+            //   opacity: 0,
+            //   x: -100
+            // }}
+            // animate={{
+            //   opacity: 1,
+            //   x: 0
+            // }}
+            whileHover={isValid && {
+              scale: 1.05
+            }}
+            className='login-button mt-2'
+            type='submit'
+            disabled={!isValid || recaptcha === null || loading === true}
+          // onClick={event => handleSignup(event, email, password)}
+          >
+            Sign In
+          </motion.button>
+        {/* </AnimatePresence> */}
         <p className='mt-2'>Don't have an account? <Link to='/signup'>Sign up</Link></p>
-        
+
 
         {error && <p className='country-invalid mt-1'>{error}</p>}
         {success && <p className='country-valid mt-1'>{success}</p>}

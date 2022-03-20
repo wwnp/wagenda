@@ -25,10 +25,8 @@ export default function App() {
     changeMenu(!menu)
   }
 
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const isMobile = windowWidth <= 700;
-  console.log(isMobile)
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);
@@ -37,7 +35,6 @@ export default function App() {
     }
   })
   function handleWindowSizeChange() {
-    
     setWindowWidth(window.innerWidth);
   }
 
@@ -48,24 +45,24 @@ export default function App() {
         <Route path='*' element={<NotFound />}></Route>
         <Route path='compare' element={<Compare isMobile={isMobile} onToggleHandler={onToggleHandler} menu={menu} changeMenu={changeMenu} navigate={navigate} modal={modal} changeModal={changeModal} />} ></Route>
         <Route path='add' element={
-          <AdminRoute >
+          // <AdminRoute >
             <Add />
-          </AdminRoute>
+          // </AdminRoute>
         }></Route>
         <Route path='login' element={
           <GuestRoute >
             <LoginPage />
-          </GuestRoute>
+           </GuestRoute>
         }></Route>
         <Route path='signup' element={
-          // <GuestRoute>
-          <SignupPage />
-          // </GuestRoute>
+          <GuestRoute>
+            <SignupPage />
+          </GuestRoute>
         }></Route>
         <Route path='profile' element={
-          <PrivateRoute >
+          // <PrivateRoute >
             <ProfilePage />
-          </PrivateRoute>
+          // </PrivateRoute>
         }></Route>
 
         {/* <PrivateRoute></PrivateRoute> */}

@@ -9,7 +9,9 @@ function AdminRoute({ children }) {
   const { user } = useContext(CountryContex)
   return (
     !!user
-      ? children
+      ? user.adminUid === adminUid
+        ? children
+        : <Navigate to='/countrycomparer'></Navigate>
       : <Navigate to='/countrycomparer'></Navigate>
   )
   // return children

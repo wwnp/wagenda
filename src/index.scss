@@ -298,8 +298,8 @@ code {
 }
 
 .Layout {
-  height: 100vh;
-  overflow: hidden;
+  // height: 100vh;
+  // overflow: hidden;
 }
 /* .Drawer ul li a {
   color: #363d54;
@@ -902,7 +902,8 @@ section {
   padding: 1rem;
   background-color: var(--colors-bg2);
   color: var(--colors-text);
-  width: 500px;
+  max-width: 500px;
+  min-width: 197px;
   margin: 0 auto;
   margin-top: 2rem;
   box-shadow: var(--shadow);

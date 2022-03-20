@@ -62,6 +62,8 @@ const Add = props => {
     if (location.trim().length === 0) {
       errorLog['locationError'] = 'Type location'
     }
+
+
     if (Object.keys(errorLog).length === 0) {
       const loc = location.split(',')
       const itemsNew = [...items, {
@@ -92,21 +94,18 @@ const Add = props => {
     })
   }
 
-
-
   return (
-    <main>
-      <div className={'Add'}>
-        <h1 className='text-center'>Add</h1>
-        <React.Fragment>
-          {loading
-            ? <Loader></Loader>
-            :
+    <main className='container'>
+      <h1 className='text-center'>Add</h1>
+      <>
+        {loading
+          ? <Loader></Loader>
+          : <>
             <form className='form-add'>
-              <div className='form-group mb-3'>
+              <div className='input-group mb-1'>
                 <label htmlFor="">Countries</label>
                 <select
-                  className='form-select'
+                  className='custom-select'
                   name="countries"
                   id="countries"
                   onChange={e => {
@@ -128,7 +127,8 @@ const Add = props => {
                   }
                 </select>
               </div>
-              <div className="form-check">
+
+              <div className="form-check mb-1">
                 <input
                   className="form-check-input"
                   type="radio"
@@ -141,7 +141,8 @@ const Add = props => {
                   Capital
                 </label>
               </div>
-              <div className="form-check mb-3">
+
+              <div className="form-check mb-1">
                 <input
                   className="form-check-input"
                   type="radio"
@@ -154,7 +155,8 @@ const Add = props => {
                   Province
                 </label>
               </div>
-              <div className='form-group'>
+
+              <div className='input-group mb-1'>
                 <label htmlFor="locId">Locations</label>
                 <input
                   className="form-control"
@@ -167,7 +169,8 @@ const Add = props => {
                   }}
                 />
               </div>
-              <div className="form-group mt-3 pb-3 border-bottom">
+
+              <div className="input-group border-bottom mb-1">
                 <button
                   className="btn btn-warning mr-4"
                   onClick={(e) => {
@@ -184,8 +187,10 @@ const Add = props => {
                   Reset
                 </button>
               </div>
+
               <hr />
-              <div className="form-group mt-3 text-center">
+
+              <div className="input-group text-center mb-1">
                 <button
                   className="btn btn-success"
                   onClick={e => {
@@ -197,6 +202,7 @@ const Add = props => {
                   Submit
                 </button>
               </div>
+
               <hr />
               {
                 Object.values(error).length !== 0
@@ -206,11 +212,20 @@ const Add = props => {
                   : null
               }
             </form>
-          }
+            <div className='centered-block'>
+              {items && items.map(item => {
+                const lat = item.location.lat
+                const lng = item.location.lng
+                return <div key={lat+lng}>
+                  <h5>{item.country}</h5>
+                  <p>{lat}:{lng}</p>
+                </div>
+              })}
+            </div>
+          </>
+        }
+      </>
 
-        </React.Fragment>
-
-      </div>
     </main>
   )
 }
