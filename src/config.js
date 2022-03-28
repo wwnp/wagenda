@@ -48,7 +48,7 @@ export const urlYoutube = {
   'draw': 'https://www.youtube.com/embed/tH2w6Oxx0kQ',
 }
 
-export const adminUid = ['udGx7hhhLOMlpiwUOYZwNd4WquI3']
+export const adminUid = [process.env.REACT_APP_ADMIN_UID, ['1']]
 
 
 export function geIfAdminUid(adminUid, user){

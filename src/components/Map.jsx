@@ -5,7 +5,7 @@ import {
   LoadScriptNext,
   StreetViewPanorama
 } from "@react-google-maps/api";
-const APIkey = process.env.REACT_APP_API_KEY2;
+const APIkey = process.env.REACT_APP_API_KEY_MAP;
 // const APIkey = "AIzaSyBo6m4C52hgW-eRz-UKKh_yezXUN6gXHFw";
 const heightMap = '750px'
 const widthMap = '100%'

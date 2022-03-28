@@ -83,7 +83,6 @@ export const LoginPage = () => {
   const callback = () => {
     recaptchaInstance.reset();
   }
-  console.log(errors)
   return (
     <>
       <div className="background">

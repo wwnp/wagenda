@@ -7,7 +7,7 @@ import { CountryContex } from './../contex/contex';
 
 export const ProfilePage = () => {
   const { user } = useContext(CountryContex)
-  const [avatarUrl, setAvatarUrl] = useState(user.photoURL || '')
+  const [avatarUrl, setAvatarUrl] = useState(user?.photoURL || '')
   const [error, setError] = useState(null)
   const {
     changeMenu,
@@ -17,14 +17,17 @@ export const ProfilePage = () => {
 
   const updateProfileMy = async (data) => {
     setError(null)
-    const {displayName, photoURL} = data
+    const { displayName, photoURL } = data
     if (!avatarUrl) {
       setError('Error photo')
       return
     }
     await updateProfile(auth.currentUser, {
       displayName, photoURL
+    }).catch((err) => {
+      setError(err.message)
     })
+
   }
   const logout = async () => {
 
@@ -47,8 +50,8 @@ export const ProfilePage = () => {
   return (
     <div>
       <h1>ProfilePage</h1>
-      {!!user && <p>{user.displayName}</p>}
-      {!!user && <img src={user.photoURL} width={200} height='auto' alt='profile_pic' />}
+      {!!user && <p>{user?.displayName}</p>}
+      {!!user && <img src={user?.photoURL} width={200} height='auto' alt='profile_pic' />}
       <br />
       <form onSubmit={handleSubmit(updateProfileMy)}>
         <input type="text" {...register('displayName', { required: true })} />
@@ -64,6 +67,8 @@ export const ProfilePage = () => {
           Update Profile
         </button>
       </form>
+
+      { error && <p className="invalid">{error}</p> }
 
       <button className='btn btn-danger' style={{ marginLeft: '1rem' }} onClick={logout}>
         logout
