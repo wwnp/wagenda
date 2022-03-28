@@ -772,14 +772,19 @@
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
+  margin-top: 5px;
   font-size: 1rem;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: var(--colors-text);
+  background-color: var(--colors-section-even);
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-control::placeholder {
+  color: #ccc;
+  opacity: 0.7;
 }
 .input-group {
   position: relative;
@@ -792,7 +797,8 @@
   -ms-flex-align: stretch;
   align-items: stretch;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 .custom-select {
   display: inline-block;
@@ -887,4 +893,9 @@ input[type=checkbox], input[type=radio] {
 .img-fit {
   width: 100%;
   height: auto;
+}
+
+.system-text {
+  opacity: 0;
+  color: transparent;
 }

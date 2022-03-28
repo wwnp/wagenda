@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useRef, useState } from 'react'
-import { countriesFlags } from '../config';
+import { AMOUNT_TIMER, countriesFlags, LIMIT } from '../config';
 import { CSSTransition } from 'react-transition-group';
 import Loader from '../components/Loader';
 import { delay } from '../auxillary';
@@ -32,8 +32,7 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-const LIMIT = 3
-const AMOUNT_TIMER = 300
+
 export function Compare(props) {
   const { changeModal, modal, isMobile } = props
 

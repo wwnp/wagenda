@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import { Form } from '../../components/Form'
 import {
   createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, updateProfile, sendEmailVerification
 } from "firebase/auth";
 import { useContext } from 'react';
 import { CountryContex } from '../../contex/contex';
-import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import Cookies from 'js-cookie'
 import { actionCodeSettings, auth } from '../../firebase';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -15,6 +12,8 @@ import { emailPattern, passwordPattern } from '../../config';
 import { API_RECAPCHA } from './../../config';
 import Recaptcha from "react-recaptcha";
 import { Link } from 'react-router-dom';
+import { Balls } from '../../components/Balls';
+import { ErrorHelper } from '../../components/ErrorHelper';
 
 let recaptchaInstance;
 
@@ -38,27 +37,26 @@ export const SignupPage = ({ user, }) => {
     setSuccess(null)
     const { email, password, name } = data
     try {
-      const user = await createUserWithEmailAndPassword(
+      await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
+
       updateProfile(auth.currentUser, {
         displayName: name, photoURL: "https://www.pngitem.com/pimgs/m/661-6619328_default-avatar-png-blank-person-transparent-png.png"
       })
-      
+
       await sendSignInLinkToEmail(auth, email, actionCodeSettings)
         .then(() => {
           // The link was successfully sent. Inform the user.
           // Save the email locally so you don't need to ask the user for it again
           // if they open the link on the same device.
           window.localStorage.setItem('emailForSignIn', email);
-
-          // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
         });
 
       await signInWithEmailAndPassword(
@@ -93,94 +91,63 @@ export const SignupPage = ({ user, }) => {
 
   return (
     <>
-      <div className="background">
-        <motion.div
-          initial={{
-            rotate: 0,
-            x: 0,
-            y: 0
-          }}
-          animate={{
-            rotate: 360,
-            x: 400,
-            y: 500
-          }}
-          transition={{
-            delay: 0,
-            duration: 5,
-            repeat: Infinity,
-            repeatDelay: 0,
-            repeatType: 'reverse',
-            type: 'tween',
-            ease: 'easeInOut'
-          }}
-          className="shape"
-        ></motion.div>
-        <motion.div
-          initial={{
-            rotate: 0,
-            x: 0,
-            y: 0
-          }}
-          animate={{
-            rotate: 360,
-            x: -400,
-            y: -500
-          }}
-          transition={{
-            delay: 0,
-            duration: 5,
-            repeat: Infinity,
-            repeatDelay: 0,
-            repeatType: 'reverse',
-            type: 'tween',
-            ease: 'easeInOut'
-          }}
-          className="shape">
-        </motion.div>
-      </div>
+      <Balls></Balls>
       <form className='form-login' onSubmit={handleSubmit(handleSignup)}>
         <h3>Sign Up</h3>
-        <label className='login-label' htmlFor="username">Email</label>
+        <div className="input-group">
+          <label htmlFor="username">Email</label>
+          <input
+            {...register(
+              'email', {
+              required: 'Email is required',
+              pattern: {
+                value: emailPattern,
+                message: 'Email pattern be like: example@test.com'
+              }
+            })}
+            className='form-control'
+            type="email"
+            placeholder='Email'
+          />
+          <ErrorHelper type={errors?.email}></ErrorHelper>
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            {...register('password',
+              {
+                required: 'Password is required',
+                pattern: {
+                  value: passwordPattern,
+                  message: 'Minimum six in length'
+                }
+              })}
+            className='form-control'
+            type="password"
+            placeholder="Password"
+            id="password"
+          />
+          <ErrorHelper type={errors?.password}></ErrorHelper>
+        </div>
+
+
+        <label htmlFor="name">Name</label>
         <input
-          {...register(
-            'email', {
-            required: true,
-            pattern: {
-              value: emailPattern,
-              message: 'sex'
+          {...register('name', {
+            required: 'Name is required',
+            minLength: {
+              value: 2,
+              message: 'Minimum two letters'
             }
           })}
-          className='login-input'
-          type="email"
-          placeholder='Email'
-        />
-        {errors.email?.type === 'required' && <p className='country-invalid'>Email is required</p>}
-        {errors.email?.type === 'pattern' && <p className='country-invalid'>Email pattern be like: example@test.com</p>}
-
-        <label className='login-label' htmlFor="password">Password</label>
-        <input
-          {...register('password', { required: true, pattern: passwordPattern })}
-          className='login-input'
-          type="password"
-          placeholder="Password"
-          id="password"
-        />
-        {errors.password?.type === 'required' && <p className='country-invalid'>Password is required</p>}
-        {errors.password?.type === 'pattern' && <p className='country-invalid'>Minimum six in length</p>}
-
-        <label className='login-label' htmlFor="name">Name</label>
-        <input
-          {...register('name', { required: true, min: 2 })}
-          className='login-input'
+          className='form-control'
           type="text"
           placeholder="Name"
           id="name"
         />
 
-
-        {errors.name?.type === 'required' && <p className='country-invalid'>Name is required</p>}
-        {errors.name?.type === 'min' && <p className='country-invalid'>Minimum two letters</p>}
+        <ErrorHelper type={errors?.name}></ErrorHelper>
 
         <Recaptcha
           className="g-recaptcha mt-1"

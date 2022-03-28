@@ -51,7 +51,7 @@ export const urlYoutube = {
 export const adminUid = [process.env.REACT_APP_ADMIN_UID, ['1']]
 
 
-export function geIfAdminUid(adminUid, user){
+export function geIfAdminUid(adminUid, user) {
   return adminUid.find(i => i === user.uid)
 }
 
@@ -59,4 +59,6 @@ export const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)
 export const passwordPattern = /.{6,}/
 
 export const API_RECAPCHA = process.env.REACT_APP_API_RECAPCHA
-// export const RECAPTCHA = require('react-recaptcha');
+
+export const LIMIT = 3
+export const AMOUNT_TIMER = 300

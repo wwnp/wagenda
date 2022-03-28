@@ -26,7 +26,7 @@ export default function App() {
   }
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const isMobile = windowWidth <= 700;
+  const isMobile = windowWidth <= 965;
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);

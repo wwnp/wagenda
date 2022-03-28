@@ -27,7 +27,7 @@ export const ProfilePage = () => {
     })
 
   }
-  
+
   const logout = async () => {
     await signOut(auth);
   }
@@ -62,19 +62,61 @@ export const ProfilePage = () => {
             <form onSubmit={handleSubmit(updateProfileMy)}>
               <div className="input-group">
                 <label htmlFor="username">Name</label>
-                <input className='form-control' type="text" {...register('displayName', { required: true })} />
-                <small id="emailHelp" class="form-text text-muted">
-                  {
-                    errors?.type
-                  }
-                </small>
+                <input
+                  className='form-control'
+                  type="text"
+                  {...register('displayName', {
+                    required: "Not empty",
+                    minLength: {
+                      value: 5,
+                      message: "5 chars need"
+                    }
+                  })}
+                />
+                {
+                  errors?.displayName
+                    ? (
+                      <small id="emailHelp" className="form-text invalid">
+                        {errors?.displayName.message}
+                      </small>
+                    )
+                    : (
+                      <small id="emailHelp" className="form-text system-text">
+                        [system_text]
+                      </small>
+                    )
+                }
               </div>
               <div className="input-group">
                 <label htmlFor="username">Photo Url</label>
-                <input className='form-control' type="url"  {...register('photoURL', { required: true })} />
-1                <small id="emailHelp" class="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
+                <input
+                  className='form-control'
+                  type="url"
+                  {...register('photoURL', {
+                    required: "Not empty",
+                    minLength: {
+                      value: 10,
+                      message: "10 chars need"
+                    },
+                    pattern: {
+                      value: /https?:\/\//,
+                      message: "Url link"
+                    }
+                  })}
+                />
+                {
+                  errors?.photoURL
+                    ? (
+                      <small id="emailHelp" className="form-text invalid invalid">
+                        {errors?.photoURL.message}
+                      </small>
+                    )
+                    : (
+                      <small id="emailHelp" className="form-text system-text">
+                        [system_text]asdsadsad
+                      </small>
+                    )
+                }
               </div>
               <button
                 disabled={!isValid}
