@@ -4,10 +4,11 @@ import { CountryContex } from "../contex/contex";
 
 function PrivateRoute({children}){
   const { user } = useContext(CountryContex)
-  return (
-    !!user
-      ? children
-      : <Navigate to='/countrycomparer'></Navigate>
-  )
+  return children
+  // return (
+  //   !!user
+  //     ? children
+  //     : <Navigate to='/countrycomparer'></Navigate>
+  // )
 }
 export default PrivateRoute;

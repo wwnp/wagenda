@@ -48,31 +48,49 @@ export const ProfilePage = () => {
   });
 
   return (
-    <div>
-      <h1>ProfilePage</h1>
-      {!!user && <p>{user?.displayName}</p>}
-      {!!user && <img src={user?.photoURL} width={200} height='auto' alt='profile_pic' />}
-      <br />
-      <form onSubmit={handleSubmit(updateProfileMy)}>
-        <input type="text" {...register('displayName', { required: true })} />
-        <input type="url"  {...register('photoURL', { required: true })} />
-        {/* <input type="text" defaultValue={user.displayName} {...register('displayName', { required: true })} />
-        <input type="url" defaultValue={user.photoURL} {...register('photoURL', { required: true })} /> */}
+    <div className='container'>
+      <div className="profile__block mt-3">
+        <div className="row">
 
-        <button
-          disabled={!isValid}
-          className='btn btn-success'
-          style={{ marginLeft: '1rem' }}
-          type='submit'>
-          Update Profile
-        </button>
-      </form>
+          <div className="col-12 col-md-4 d-flex justify-center border-right">
+            {!!user && <img className='img-fit' src={user?.photoURL} alt='profile_pic' />}
+          </div>
 
-      { error && <p className="invalid">{error}</p> }
+          <div className="col-6 col-md-8">
+            {!!user && <h3 className='display-3 text-center'>{user?.displayName}</h3>}
+            <hr className='mt-1 mb-1'/>
+            <h5 className='display-5 mt-1 mb-1'>Edit info:</h5>
+            <form onSubmit={handleSubmit(updateProfileMy)}>
+              <div className="input-group">
+                <label htmlFor="username">Name</label>
+                <input className='form-control' type="text" {...register('displayName', { required: true })} />
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div className="input-group">
+                <label htmlFor="username">Photo Url</label>
+                <input className='form-control' type="url"  {...register('photoURL', { required: true })} />
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <button
+                disabled={!isValid}
+                className='btn btn-success mt-1'
+                type='submit'>
+                Update Profile
+              </button>
+            </form>
 
-      <button className='btn btn-danger' style={{ marginLeft: '1rem' }} onClick={logout}>
-        logout
-      </button>
+            {error && <p className="invalid form-text text-muted">{error}</p>}
+
+            <button className='btn btn-danger' style={{ marginLeft: '1rem', float: 'right' }} onClick={logout}>
+              logout
+            </button>
+          </div>
+
+          <br />
+
+        </div>
+      </div>
+
     </div>
   )
 }

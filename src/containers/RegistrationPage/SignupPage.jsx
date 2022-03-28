@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form } from '../../components/Form'
 import {
-  createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, updateProfile,
+  createUserWithEmailAndPassword, sendSignInLinkToEmail, signInWithEmailAndPassword, updateProfile, sendEmailVerification
 } from "firebase/auth";
 import { useContext } from 'react';
 import { CountryContex } from '../../contex/contex';
@@ -46,23 +46,32 @@ export const SignupPage = ({ user, }) => {
       updateProfile(auth.currentUser, {
         displayName: name, photoURL: "https://www.pngitem.com/pimgs/m/661-6619328_default-avatar-png-blank-person-transparent-png.png"
       })
+      
       await sendSignInLinkToEmail(auth, email, actionCodeSettings)
         .then(() => {
           // The link was successfully sent. Inform the user.
           // Save the email locally so you don't need to ask the user for it again
           // if they open the link on the same device.
           window.localStorage.setItem('emailForSignIn', email);
+
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
         });
+
       await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
+
+      await sendEmailVerification(auth.currentUser)
+        .then(() => {
+          console.log('Email verification sent!')
+        })
+
       setSuccess('Successfully registered')
     } catch (error) {
       setError(error.message)
@@ -201,9 +210,9 @@ export const SignupPage = ({ user, }) => {
         >
           Sign Up
         </motion.button>
-        
+
         <p className='mt-2'>Already have an account? <Link to='/login'>Sign up</Link></p>
-          
+
         {error && <p className='country-invalid'>{error}</p>}
         {success && <p className='country-valid'>{success}</p>}
       </form>
