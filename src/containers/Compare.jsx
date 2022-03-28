@@ -146,7 +146,7 @@ export function Compare(props) {
     <div className='Compare-wrapper hero-particles'>
       {
         state.loading
-          ? <Preloader color='linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 54%, rgba(255,0,0,1) 100%)'></Preloader>
+          ? <Loader></Loader>
           :
           state.currTest === state.filteredOne.length
             ? (

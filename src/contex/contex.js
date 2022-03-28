@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {  onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useReducer, useState } from "react";
 import { auth } from "../firebase";
 import { reducer } from "./reducer";
@@ -76,7 +76,6 @@ export const ContexProvider = (props) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(123)
       setUser(currentUser);
     });
   }, [])

@@ -275,10 +275,10 @@ code {
   top: 0;
   bottom: 0;
   width: 80%;
-  max-width: 150px;
+  max-width: 200px;
   /* padding: 20px 10px; */
   box-sizing: border-box;
-  background-color: var(--colors-bg2);
+  background-color: var(--colors-section-even);
   color: var(--colors-text);
   transform: translateX(0px);
   transition: transform .22s ease-in;
@@ -301,15 +301,6 @@ code {
   // height: 100vh;
   // overflow: hidden;
 }
-/* .Drawer ul li a {
-  color: #363d54;
-  font-size: 30px;
-  text-decoration: none;
-  background-color: #fff;
-  position: relative;
-  padding: 0 20px 10px 20px;
-  transition: opacity .3s;
-} */
 .Drawer ul li a:hover, .active {
   opacity: .7;
 }
@@ -340,7 +331,7 @@ code {
 }
 
 .MenuToggle.open {
-  left: 155px;
+  left: 205px;
 }
 
 .side-a {
@@ -373,10 +364,6 @@ code {
   z-index: 9999;
   background: rgba(0, 0, 0, 0.75);
 }
-
-// iframe {
-//   pointer-events: none;
-// }
 
 .sticky {
   position: fixed;
@@ -894,7 +881,6 @@ section {
   color: black;
 }
 
-
 .form-add {
   padding: 1rem;
   background-color: var(--colors-bg2);
@@ -906,13 +892,6 @@ section {
   box-shadow: var(--shadow);
   border-radius: 5px;
 }
-
-
-
-
-
-
-
 
 .background{
   width: 430px;
@@ -1033,14 +1012,6 @@ section {
   color: green;
   font-size: 0.8rem;
 }
-
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px,
-  xxl: 1320px
-);
 
 .contr-link {
   padding: 5px;

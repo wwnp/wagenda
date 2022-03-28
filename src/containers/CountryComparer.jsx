@@ -59,7 +59,7 @@ export function CountryComparer(props) {
     error
   } = useContext(CountryContex)
 
-  const {isMobile} = props 
+  const { isMobile } = props
 
   const navigate = useNavigate()
   useEffect(() => {
@@ -71,22 +71,22 @@ export function CountryComparer(props) {
       try {
         const response = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/countries.json')
         const response2 = await axios.get('https://comparecountries-default-rtdb.europe-west1.firebasedatabase.app/estimates.json')
-        // .catch(err => {
-        //   setError(err)
-        //   stopLoading()
-        // })
+
         const { data } = response
         const { data: data2 } = response2
+
         setCountries(data)
+
         const entries = Object.entries(data2)
+
         setEstimates(quickSort(entries).reverse())
-        stopLoading()
+
       } catch (error) {
         throw new Error('Network error, try later')
-        // setError(error)
-        // stopLoading()
       }
-
+      finally {
+        stopLoading()
+      }
     }
     fetchData().catch(err => {
       console.log(1231231)
@@ -139,7 +139,7 @@ export function CountryComparer(props) {
     }
   }
 
-  if(isMobile) {
+  if (isMobile) {
     return <Unavailable></Unavailable>
   }
   return (
@@ -147,7 +147,7 @@ export function CountryComparer(props) {
       <Video windowWidth={props.windowWidth}></Video>
       {
         loading
-          ? <Preloader color='linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,9,1) 54%, rgba(255,0,0,1) 100%)'></Preloader>
+          ? <Loader></Loader>
           : (
             <div className='container'>
               {
@@ -272,9 +272,7 @@ export function CountryComparer(props) {
                               <li key={index + item[0] + item[1]} style={{ position: 'relative' }}>
                                 <span>{item[0]} :</span><span style={{ float: 'right' }}>{item[1]}</span>
                                 {
-                                  medal
-                                    ? <img style={{ position: 'absolute', left: '-20px', top: '5px' }} src={medal} alt="" width={16} />
-                                    : null
+                                  medal && <img style={{ position: 'absolute', left: '-20px', top: '5px' }} src={medal} alt="" width={16} />
                                 }
                               </li>
                             )

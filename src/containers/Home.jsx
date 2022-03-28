@@ -2,9 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { CountryContex } from '../contex/contex';
 import carItem2 from '../assets/images/carItem2.png'
 import carItem3 from '../assets/images/carItem3.jpg'
-import carItem4 from '../assets/images/bgWorld.png'
 import game1 from '../assets/images/game1.jpg'
-// import game2 from '../assets/images/game2.jpg'
 import game3 from '../assets/images/game3.jpg'
 import Slider from "react-slick";
 import Header from '../components/Header';
@@ -17,12 +15,8 @@ import { motion } from 'framer-motion';
 import { MCard } from '../components/Card';
 import travel from '../assets/images/travel.png'
 import { Link } from 'react-router-dom';
-import { Cookies } from 'js-cookie';
-
-
 
 const cardHeight = 175
-const ccImg = 'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/273-mckinsey-139.jpg?w=1000&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&auto=format&ixlib=js-2.2.1&s=59ed361046f1f9981077b030f532c6c5'
 const cc2Img = 'https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274__480.jpg'
 const contrVarians = {
   hidden: {
@@ -110,18 +104,20 @@ export default function Home(props) {
     changeMenu,
     menu,
   } = useContext(CountryContex)
+
   const settings = {
     // dots: true,
     infinite: true,
     speed: 750,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
     cssEase: "linear",
     arrows: false
   };
+
   const toTOpRef = useRef(null)
   const carouselRef = useRef(null)
 
@@ -195,12 +191,8 @@ export default function Home(props) {
                 <img src={carItem3} alt="carItem1" />
               </motion.div>
               <div className='slide' >
-                <div className="slide-caption">Text for slide 2</div>
+                <div className="slide-caption">Enjoy diversity ot this world</div>
                 <img src={carItem2} alt="carItem2" />
-              </div>
-              <div className='slide' >
-                <div className="slide-caption">Text for slide 2</div>
-                <img src={carItem4} alt="carItem2" />
               </div>
             </Slider>
           </section>
@@ -342,7 +334,7 @@ export default function Home(props) {
                 About Project
               </motion.h2>
               <div className='container'>
-                <AccordionItem title='What about our service'>
+                <AccordionItem title='What about our service?'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                   veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -351,7 +343,7 @@ export default function Home(props) {
                   cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
                   est laborum.
                 </AccordionItem>
-                <AccordionItem title='What about our service'>
+                <AccordionItem title='Is Wagenda free to play?'>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                   veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

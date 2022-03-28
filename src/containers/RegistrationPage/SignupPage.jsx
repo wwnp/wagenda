@@ -19,11 +19,11 @@ import { Link } from 'react-router-dom';
 let recaptchaInstance;
 
 export const SignupPage = ({ user, }) => {
-  const navigate = useNavigate()
   const {
     changeMenu,
     menu,
   } = useContext(CountryContex)
+
   useEffect(() => {
     if (menu === true) {
       changeMenu(false)
@@ -86,16 +86,9 @@ export const SignupPage = ({ user, }) => {
     mode: 'all'
   });
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
-
   const [recaptcha, setRecaptcha] = useState(null)
   const verifyCallback = (token) => {
     setRecaptcha(token)
-  }
-  const callback = () => {
-    recaptchaInstance.reset();
   }
 
   return (
@@ -196,7 +189,6 @@ export const SignupPage = ({ user, }) => {
           verifyCallback={verifyCallback}
           // onloadCallback={callback}
           size="recaptcha"
-        // size="invisible"
         />
 
         <motion.button
