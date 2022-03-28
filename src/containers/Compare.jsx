@@ -32,7 +32,6 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-
 export function Compare(props) {
   const { changeModal, modal, isMobile } = props
 

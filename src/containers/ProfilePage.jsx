@@ -52,11 +52,9 @@ export const ProfilePage = () => {
     <div className='container'>
       <div className="profile__block mt-3">
         <div className="row">
-
           <div className="col-12 col-md-4 d-flex justify-center border-right">
             {!!user && <img className='img-fit' src={user?.photoURL} alt='profile_pic' />}
           </div>
-
           <div className="col-12 col-md-8">
             {!!user && <h3 className='display-3 text-center'>{user?.displayName}</h3>}
             <hr className='mt-1 mb-1' />
@@ -130,14 +128,10 @@ export const ProfilePage = () => {
                 Update Profile
               </button>
             </form>
-
-
-
             <button className='btn btn-danger' style={{ marginLeft: '1rem', float: 'right' }} onClick={logout}>
               Logout
             </button>
           </div>
-
         </div>
       </div>
     </div>

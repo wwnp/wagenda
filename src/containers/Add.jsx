@@ -8,7 +8,7 @@ import { CAPITAL, PROVINCE } from '../config';
 import { useForm } from "react-hook-form";
 import { ErrorHelper } from '../components/ErrorHelper';
 
-const Add = props => {
+const Add = (props) => {
   const [urbanType, setUrbanType] = useState(null)
   const [location, setLocation] = useState('')
   const [error, setError] = useState({})
