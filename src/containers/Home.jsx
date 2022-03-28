@@ -87,17 +87,6 @@ const titlesVariants = {
     y: 0
   })
 }
-const opacityVariants = {
-  hidden: {
-    opacity: 0
-  },
-  visible: (index) => ({
-    opacity: 1,
-    transition: {
-      duration: .5,
-    },
-  })
-}
 
 export default function Home(props) {
   const {
@@ -308,7 +297,7 @@ export default function Home(props) {
                           opacity: 1
                         }}
                       >
-                        <a className='contr-link' href={homeImages[item][1]} target={'_blank'} rel="noreferrer"><img style={{ objectFit: 'contain',width:'150px',height:'100px'}} src={homeImages[item][0]} alt={item[0]} /></a>
+                        <a className='contr-link' href={homeImages[item][1]} target={'_blank'} rel="noreferrer"><img style={{ objectFit: 'contain', width: '150px', height: '100px' }} src={homeImages[item][0]} alt={item[0]} /></a>
 
                       </motion.div>
                     </motion.div>

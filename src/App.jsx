@@ -8,15 +8,13 @@ import Add from "./containers/Add";
 import { CountryComparer } from './containers/CountryComparer';
 import { CountryContex } from "./contex/contex.js";
 import { LoginPage } from "./containers/LoginPage/LoginPage";
-// import { getItem } from "./hooks/useCookie";
 import GuestRoute from './routes/GuestRoute';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
 import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from "./routes/PrivateRoute";
 import { ProfilePage } from "./containers/ProfilePage";
 import { SignupPage } from "./containers/RegistrationPage/SignupPage";
 import TestPage from "./containers/TestPage";
+import { WINDOW_SIZE } from "./config";
 
 export default function App() {
   const navigate = useNavigate()
@@ -26,7 +24,7 @@ export default function App() {
   }
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const isMobile = windowWidth <= 965;
+  const isMobile = windowWidth <= WINDOW_SIZE;
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowSizeChange);

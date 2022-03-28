@@ -151,7 +151,6 @@ export const LoginPage = () => {
         </motion.button>
         <p className='mt-2'>Don't have an account? <Link to='/signup'>Sign up</Link></p>
 
-
         {error && <p className='country-invalid mt-1'>{error}</p>}
         {success && <p className='country-valid mt-1'>{success}</p>}
       </form>

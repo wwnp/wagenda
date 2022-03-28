@@ -1,6 +1,7 @@
 import { signOut, updateProfile } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { HTTP_PATTERN } from '../config';
 import { auth } from '../firebase';
 import { CountryContex } from './../contex/contex';
 
@@ -55,7 +56,7 @@ export const ProfilePage = () => {
             {!!user && <img className='img-fit' src={user?.photoURL} alt='profile_pic' />}
           </div>
 
-          <div className="col-6 col-md-8">
+          <div className="col-12 col-md-8">
             {!!user && <h3 className='display-3 text-center'>{user?.displayName}</h3>}
             <hr className='mt-1 mb-1' />
             <h5 className='display-5 mt-1 mb-1'>Edit info:</h5>
@@ -99,7 +100,7 @@ export const ProfilePage = () => {
                       message: "10 chars need"
                     },
                     pattern: {
-                      value: /https?:\/\//,
+                      value: HTTP_PATTERN,
                       message: "Url link"
                     }
                   })}
@@ -118,6 +119,9 @@ export const ProfilePage = () => {
                     )
                 }
               </div>
+
+              {error && <p className="invalid form-text text-muted">{error}</p>}
+
               <button
                 disabled={!isValid}
                 className='btn btn-success mt-1'
@@ -126,10 +130,10 @@ export const ProfilePage = () => {
               </button>
             </form>
 
-            {error && <p className="invalid form-text text-muted">{error}</p>}
+
 
             <button className='btn btn-danger' style={{ marginLeft: '1rem', float: 'right' }} onClick={logout}>
-              logout
+              Logout
             </button>
           </div>
 

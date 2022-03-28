@@ -1,28 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
 import { CountryContex } from '../contex/contex';
 import { Backdrop } from './Backdrop';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import Cookies from 'js-cookie';
-import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
-import { adminUid, geIfAdminUid } from '../config';
-import { Modal } from './Modal';
-import { AnimatePresence } from 'framer-motion';
+import { adminUid } from '../config';
+import { geIfAdminUid } from '../auxillary';
 
 export const Drawer = props => {
   const {
     theme,
     changeTheme,
     user,
-    modal,
-    changeModal
   } = useContext(CountryContex)
 
-  // console.log(user)
-
-  const navigate = useNavigate()
-  const { menu, changeMenu, onToggleHandler, } = props
+  const { menu, onToggleHandler, } = props
 
   useEffect(() => {
     document.body.setAttribute('data-theme', Cookies.get('theme'))
@@ -31,21 +23,12 @@ export const Drawer = props => {
   useEffect(() => {
     document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
   }, [])
-  // const logout = async () => {
-  //   await signOut(auth);
-  // }
+
   const cls = [
     'Drawer',
     menu ? null : 'close'
   ]
 
-  const isWannaLoginShowed = Cookies.get('wanna-login')
-  // console.log(isWannaLoginShowed)
-  // if(!isWannaLoginShowed){
-  //   changeModal(true)
-  // }
-
-  
   return (
     <>
       <nav className={cls.join(' ')}>
@@ -54,7 +37,6 @@ export const Drawer = props => {
             <NavLink
               to='/'
               className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-            // onClick={e => changeMenu(!menu)}
             >Home
             </NavLink>
           </li>
@@ -62,7 +44,6 @@ export const Drawer = props => {
             <NavLink
               to='/countrycomparer'
               className={({ isActive }) => (isActive ? 'side-a active-side' : 'side-a')}
-            // onClick={e => changeMenu(!menu)}
             >
               Country Comparer
             </NavLink>
@@ -107,7 +88,6 @@ export const Drawer = props => {
             <span
               className='side-a'
               onClick={() => {
-                console.log(123)
                 Cookies.set('theme', Cookies.get('theme') === 'dark' ? 'light' : 'dark')
                 changeTheme(Cookies.get('theme'))
               }}
@@ -126,16 +106,6 @@ export const Drawer = props => {
             </span>
           </li>
 
-          {/* <li>
-            <span
-              className='side-a'
-              onClick={logout}
-            >
-              <span style={{ marginLeft: '1rem' }}>
-                logout
-              </span>
-            </span>
-          </li> */}
           {
             !!user
               ? geIfAdminUid(adminUid, user)
@@ -158,19 +128,6 @@ export const Drawer = props => {
         ? <Backdrop onToggleHandler={onToggleHandler}></Backdrop>
         : null
       }
-      {/* {!isWannaLoginShowed && <Modal>
-        Wanna Sing Up. We have a cookie :D
-      </Modal>} */}
-
-      {/* <AnimatePresence>
-        {
-          modal && !isWannaLoginShowed && (
-            <Modal>
-              <p>Wanna Sing Up. We have a cookie :D</p>
-            </Modal>
-          )
-        }
-      </AnimatePresence> */}
     </>
   )
 }

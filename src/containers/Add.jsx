@@ -4,14 +4,11 @@ import { CountryContex } from '../contex/contex'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import Cookies from 'js-cookie';
+import { CAPITAL, PROVINCE } from '../config';
+import { useForm } from "react-hook-form";
+import { ErrorHelper } from '../components/ErrorHelper';
 
-
-const CAPITAL = 'Capital'
-const PROVINCE = 'Province'
 const Add = props => {
-  const navigate = useNavigate()
   const [urbanType, setUrbanType] = useState(null)
   const [location, setLocation] = useState('')
   const [error, setError] = useState({})
@@ -23,13 +20,8 @@ const Add = props => {
     setCountries,
     countries,
     loading,
-    stopLoading,
-    theme
+    stopLoading
   } = useContext(CountryContex);
-
-  // useEffect(() => {
-  //   document.body.setAttribute('data-theme', Cookies.get('theme') || 'dark')
-  // }, [theme])
 
   useEffect(() => {
     if (menu === true) {
@@ -46,7 +38,14 @@ const Add = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors, isValid },
+  //   reset
+  // } = useForm({
+  //   mode: "onBlur"
+  // });
 
   const addHook = () => {
     const errorLog = {}
@@ -102,6 +101,8 @@ const Add = props => {
           ? <Loader></Loader>
           : <>
             <form className='form-add'>
+
+
               <div className='input-group mb-1'>
                 <label htmlFor="">Countries</label>
                 <select
@@ -182,7 +183,10 @@ const Add = props => {
                 </button>
                 <button
                   className="btn btn-warning"
-                  onClick={(e) => setItems([])}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setItems([])
+                  }}
                 >
                   Reset
                 </button>
@@ -216,7 +220,7 @@ const Add = props => {
               {items && items.map(item => {
                 const lat = item.location.lat
                 const lng = item.location.lng
-                return <div key={lat+lng}>
+                return <div key={lat + lng}>
                   <h5>{item.country}</h5>
                   <p>{lat}:{lng}</p>
                 </div>
@@ -225,8 +229,38 @@ const Add = props => {
           </>
         }
       </>
-
     </main>
   )
 }
 export default Add
+
+/* <div className="input-group">
+                <label htmlFor="countries">Countries</label>
+                <select
+                  {...register(
+                    'country', {
+                    required: 'Country is required',
+                  })}
+                  className='custom-select'
+                  name="countries"
+                  id="countries"
+                  onChange={e => {
+                    setCountry(e.target.value)
+                  }}
+                >
+                  {loading
+                    ? null
+                    : countries.map((country, index) => {
+                      return (
+                        <option
+                          value={country}
+                          key={index}
+                        >
+                          {country}
+                        </option>
+                      )
+                    })
+                  }
+                </select>
+                <ErrorHelper type={errors?.country}></ErrorHelper>
+              </div> */

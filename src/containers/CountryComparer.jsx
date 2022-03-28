@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group';
 import Loader from '../components/Loader';
 import noImage from '../assets/images/noImage.png'
@@ -11,12 +11,10 @@ import { countriesFlags } from '../config';
 import medalGold from '../assets/images/medalGold.png'
 import medalSilver from '../assets/images/medalSilver.png'
 import medalBronze from '../assets/images/medalBronze.png'
-import { delay } from '../auxillary';
 import { Modal } from '../components/Modal';
-import { Preloader } from '../components/Preloader';
 import { AnimatePresence, motion } from 'framer-motion'
-import Cookies from 'js-cookie';
 import { Unavailable } from '../components/Unavailable';
+import { quickSort } from '../auxillary';
 
 const cbAnimation = {
   hidden: {
@@ -306,25 +304,4 @@ export function CountryComparer(props) {
     </ >
   )
 }
-function quickSort(arr) {
-  if (arr.length < 1) {
-    return arr
-  }
-  let pivot = arr[Math.floor(arr.length / 2)][1]
-  let less = []
-  let equal = []
-  let greater = []
-  let common = []
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i][1] < pivot) {
-      less.push(arr[i])
-    }
-    if (arr[i][1] === pivot) {
-      equal.push(arr[i])
-    }
-    if (arr[i][1] > pivot) {
-      greater.push(arr[i])
-    }
-  }
-  return common.concat(quickSort(less), equal, quickSort(greater))
-}
+

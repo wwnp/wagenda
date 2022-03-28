@@ -26,7 +26,6 @@ export const homeImages = {
   ricons: [ricons, 'https://react-icons.github.io/react-icons/'],
   github: [github, 'https://github.com/'],
 }
-
 export const countriesFlags = {
   'france': france,
   'russia': russia,
@@ -36,7 +35,6 @@ export const countriesFlags = {
   'ukraine': ukraine,
   'norway': norway,
 }
-
 export const urlYoutube = {
   'france': 'https://www.youtube.com/embed/4K1q9Ntcr5g',
   'russia': 'https://www.youtube.com/embed/AOAtz8xWM0w',
@@ -47,18 +45,14 @@ export const urlYoutube = {
   'norway': 'https://www.youtube.com/embed/VRS6cbLOrPQ',
   'draw': 'https://www.youtube.com/embed/tH2w6Oxx0kQ',
 }
-
 export const adminUid = [process.env.REACT_APP_ADMIN_UID, ['1']]
-
-
-export function geIfAdminUid(adminUid, user) {
-  return adminUid.find(i => i === user.uid)
-}
-
 export const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 export const passwordPattern = /.{6,}/
-
 export const API_RECAPCHA = process.env.REACT_APP_API_RECAPCHA
-
 export const LIMIT = 3
 export const AMOUNT_TIMER = 300
+export const WINDOW_SIZE = 965
+export const CAPITAL = 'Capital'
+export const PROVINCE = 'Province'
+export const LAT_LNG_PATTERN = /^(\()([-+]?)([\d]{1,2})(((\.)(\d+)(,)))(\s*)(([-+]?)([\d]{1,3})((\.)(\d+))?(\)))$/
+export const HTTP_PATTERN = /https?:\/\//
