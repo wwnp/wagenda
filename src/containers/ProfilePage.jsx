@@ -7,8 +7,8 @@ import { CountryContex } from './../contex/contex';
 
 export const ProfilePage = () => {
   const { user } = useContext(CountryContex)
-  // const [avatarUrl, setAvatarUrl] = useState(user?.photoURL || '')
   const [error, setError] = useState(null)
+
   const {
     changeMenu,
     menu,
@@ -37,6 +37,7 @@ export const ProfilePage = () => {
     if (menu === true) {
       changeMenu(!menu)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const {
