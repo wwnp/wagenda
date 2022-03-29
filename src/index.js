@@ -10,7 +10,7 @@ import './firebase'
 
 const app = (
   <ContexProvider>
-    <BrowserRouter basename="/react-countries">
+    <BrowserRouter basename="/wagenda">
       <App />
     </BrowserRouter>
   </ContexProvider>

@@ -79,6 +79,7 @@ export const LoginPage = () => {
   // const callback = () => {
   //   recaptchaInstance.reset();
   // }
+  console.log(API_RECAPCHA)
   return (
     <>
       <Balls></Balls>

@@ -1,6 +1,6 @@
 {
-  "name": "react_countries",
-  "homepage": "https://wwnp.github.io/react-countries",
+  "name": "wagenda",
+  "homepage": "https://wwnp.github.io/wagenda",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
