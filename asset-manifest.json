@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/react-countries/static/css/main.6fd756fb.chunk.css",
-    "main.js": "/react-countries/static/js/main.3acbfd47.chunk.js",
-    "main.js.map": "/react-countries/static/js/main.3acbfd47.chunk.js.map",
-    "runtime-main.js": "/react-countries/static/js/runtime-main.afb2b1f1.js",
-    "runtime-main.js.map": "/react-countries/static/js/runtime-main.afb2b1f1.js.map",
-    "static/css/2.e78d4262.chunk.css": "/react-countries/static/css/2.e78d4262.chunk.css",
-    "static/js/2.ed40c3f3.chunk.js": "/react-countries/static/js/2.ed40c3f3.chunk.js",
-    "static/js/2.ed40c3f3.chunk.js.map": "/react-countries/static/js/2.ed40c3f3.chunk.js.map",
+    "main.css": "/react-countries/static/css/main.b18bd7fb.css",
+    "main.js": "/react-countries/static/js/main.250a314d.js",
+    "static/media/bgCountry.mp4": "/react-countries/static/media/bgCountry.aa2dc7041959f3b798da.mp4",
+    "static/media/carItem2.png": "/react-countries/static/media/carItem2.8ad248d0c77f6b0a3c2d.png",
+    "static/media/travel.png": "/react-countries/static/media/travel.941834864e0eae72eeb3.png",
+    "static/media/carItem3.jpg": "/react-countries/static/media/carItem3.39254946bd4178925325.jpg",
+    "static/media/rboot.png": "/react-countries/static/media/rboot.d7a792fb89936a6446d3.png",
+    "static/media/game3.jpg": "/react-countries/static/media/game3.7f9f012f29e118fd1e20.jpg",
+    "static/media/game1.jpg": "/react-countries/static/media/game1.66db64a5f89d3e96354b.jpg",
+    "static/media/github.png": "/react-countries/static/media/github.b44e22ef76a0a4eed01f.png",
+    "static/media/framer.png": "/react-countries/static/media/framer.abb93c1aab5270870aca.png",
+    "static/media/gmaps.png": "/react-countries/static/media/gmaps.9cd98cdf6cc619102a9b.png",
+    "static/media/wagenda.png": "/react-countries/static/media/wagenda.16967a02dbfae6d890ae.png",
+    "static/media/ball-wed.svg": "/react-countries/static/media/ball-wed.c761c059b904a45469e7.svg",
+    "static/media/stack.png": "/react-countries/static/media/stack.0123b8df35f2e7d20bc8.png",
+    "static/media/react.png": "/react-countries/static/media/react.9911848e6c15b84c4b0c.png",
+    "static/media/axios.png": "/react-countries/static/media/axios.65001127aa82accaabd5.png",
+    "static/media/ricons.svg": "/react-countries/static/media/ricons.436f72057a77e5b2a88b8573843b5dff.svg",
     "index.html": "/react-countries/index.html",
-    "static/css/2.e78d4262.chunk.css.map": "/react-countries/static/css/2.e78d4262.chunk.css.map",
-    "static/css/main.6fd756fb.chunk.css.map": "/react-countries/static/css/main.6fd756fb.chunk.css.map",
-    "static/js/2.ed40c3f3.chunk.js.LICENSE.txt": "/react-countries/static/js/2.ed40c3f3.chunk.js.LICENSE.txt",
-    "static/media/2.aa2dc704.mp4": "/react-countries/static/media/2.aa2dc704.mp4",
-    "static/media/index.scss": "/react-countries/static/media/ball-wed.4e2f236a.svg",
-    "static/media/carItem2.8ad248d0.png": "/react-countries/static/media/carItem2.8ad248d0.png",
-    "static/media/carItem3.39254946.jpg": "/react-countries/static/media/carItem3.39254946.jpg"
+    "main.b18bd7fb.css.map": "/react-countries/static/css/main.b18bd7fb.css.map",
+    "main.250a314d.js.map": "/react-countries/static/js/main.250a314d.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.afb2b1f1.js",
-    "static/css/2.e78d4262.chunk.css",
-    "static/js/2.ed40c3f3.chunk.js",
-    "static/css/main.6fd756fb.chunk.css",
-    "static/js/main.3acbfd47.chunk.js"
+    "static/css/main.b18bd7fb.css",
+    "static/js/main.250a314d.js"
   ]
 }
