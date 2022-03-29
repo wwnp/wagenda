@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/react-countries/static/css/main.b18bd7fb.css",
-    "main.js": "/react-countries/static/js/main.250a314d.js",
-    "static/media/bgCountry.mp4": "/react-countries/static/media/bgCountry.aa2dc7041959f3b798da.mp4",
-    "static/media/carItem2.png": "/react-countries/static/media/carItem2.8ad248d0c77f6b0a3c2d.png",
-    "static/media/travel.png": "/react-countries/static/media/travel.941834864e0eae72eeb3.png",
-    "static/media/carItem3.jpg": "/react-countries/static/media/carItem3.39254946bd4178925325.jpg",
-    "static/media/rboot.png": "/react-countries/static/media/rboot.d7a792fb89936a6446d3.png",
-    "static/media/game3.jpg": "/react-countries/static/media/game3.7f9f012f29e118fd1e20.jpg",
-    "static/media/game1.jpg": "/react-countries/static/media/game1.66db64a5f89d3e96354b.jpg",
-    "static/media/github.png": "/react-countries/static/media/github.b44e22ef76a0a4eed01f.png",
-    "static/media/framer.png": "/react-countries/static/media/framer.abb93c1aab5270870aca.png",
-    "static/media/gmaps.png": "/react-countries/static/media/gmaps.9cd98cdf6cc619102a9b.png",
-    "static/media/wagenda.png": "/react-countries/static/media/wagenda.16967a02dbfae6d890ae.png",
-    "static/media/ball-wed.svg": "/react-countries/static/media/ball-wed.c761c059b904a45469e7.svg",
-    "static/media/stack.png": "/react-countries/static/media/stack.0123b8df35f2e7d20bc8.png",
-    "static/media/react.png": "/react-countries/static/media/react.9911848e6c15b84c4b0c.png",
-    "static/media/axios.png": "/react-countries/static/media/axios.65001127aa82accaabd5.png",
-    "static/media/ricons.svg": "/react-countries/static/media/ricons.436f72057a77e5b2a88b8573843b5dff.svg",
-    "index.html": "/react-countries/index.html",
-    "main.b18bd7fb.css.map": "/react-countries/static/css/main.b18bd7fb.css.map",
-    "main.250a314d.js.map": "/react-countries/static/js/main.250a314d.js.map"
+    "main.css": "/wagenda/static/css/main.d59cd6a1.css",
+    "main.js": "/wagenda/static/js/main.f6797d07.js",
+    "static/media/bgCountry.mp4": "/wagenda/static/media/bgCountry.aa2dc7041959f3b798da.mp4",
+    "static/media/carItem2.png": "/wagenda/static/media/carItem2.8ad248d0c77f6b0a3c2d.png",
+    "static/media/travel.png": "/wagenda/static/media/travel.941834864e0eae72eeb3.png",
+    "static/media/carItem3.jpg": "/wagenda/static/media/carItem3.39254946bd4178925325.jpg",
+    "static/media/rboot.png": "/wagenda/static/media/rboot.d7a792fb89936a6446d3.png",
+    "static/media/game3.jpg": "/wagenda/static/media/game3.7f9f012f29e118fd1e20.jpg",
+    "static/media/game1.jpg": "/wagenda/static/media/game1.66db64a5f89d3e96354b.jpg",
+    "static/media/github.png": "/wagenda/static/media/github.b44e22ef76a0a4eed01f.png",
+    "static/media/framer.png": "/wagenda/static/media/framer.abb93c1aab5270870aca.png",
+    "static/media/gmaps.png": "/wagenda/static/media/gmaps.9cd98cdf6cc619102a9b.png",
+    "static/media/wagenda.png": "/wagenda/static/media/wagenda.16967a02dbfae6d890ae.png",
+    "static/media/ball-wed.svg": "/wagenda/static/media/ball-wed.c761c059b904a45469e7.svg",
+    "static/media/stack.png": "/wagenda/static/media/stack.0123b8df35f2e7d20bc8.png",
+    "static/media/react.png": "/wagenda/static/media/react.9911848e6c15b84c4b0c.png",
+    "static/media/axios.png": "/wagenda/static/media/axios.65001127aa82accaabd5.png",
+    "static/media/ricons.svg": "/wagenda/static/media/ricons.436f72057a77e5b2a88b8573843b5dff.svg",
+    "index.html": "/wagenda/index.html",
+    "main.d59cd6a1.css.map": "/wagenda/static/css/main.d59cd6a1.css.map",
+    "main.f6797d07.js.map": "/wagenda/static/js/main.f6797d07.js.map"
   },
   "entrypoints": [
-    "static/css/main.b18bd7fb.css",
-    "static/js/main.250a314d.js"
+    "static/css/main.d59cd6a1.css",
+    "static/js/main.f6797d07.js"
   ]
 }
