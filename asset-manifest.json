@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/wagenda/static/css/main.d59cd6a1.css",
-    "main.js": "/wagenda/static/js/main.f6797d07.js",
+    "main.css": "/wagenda/static/css/main.8733ac56.css",
+    "main.js": "/wagenda/static/js/main.1c7f5c30.js",
     "static/media/bgCountry.mp4": "/wagenda/static/media/bgCountry.aa2dc7041959f3b798da.mp4",
     "static/media/carItem2.png": "/wagenda/static/media/carItem2.8ad248d0c77f6b0a3c2d.png",
     "static/media/travel.png": "/wagenda/static/media/travel.941834864e0eae72eeb3.png",
@@ -19,11 +19,11 @@
     "static/media/axios.png": "/wagenda/static/media/axios.65001127aa82accaabd5.png",
     "static/media/ricons.svg": "/wagenda/static/media/ricons.436f72057a77e5b2a88b8573843b5dff.svg",
     "index.html": "/wagenda/index.html",
-    "main.d59cd6a1.css.map": "/wagenda/static/css/main.d59cd6a1.css.map",
-    "main.f6797d07.js.map": "/wagenda/static/js/main.f6797d07.js.map"
+    "main.8733ac56.css.map": "/wagenda/static/css/main.8733ac56.css.map",
+    "main.1c7f5c30.js.map": "/wagenda/static/js/main.1c7f5c30.js.map"
   },
   "entrypoints": [
-    "static/css/main.d59cd6a1.css",
-    "static/js/main.f6797d07.js"
+    "static/css/main.8733ac56.css",
+    "static/js/main.1c7f5c30.js"
   ]
 }
