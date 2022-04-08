@@ -313,8 +313,7 @@ code {
 
 .MenuToggle {
   position: fixed;
-  bottom: 100px;
-  /* left: 10px; */
+  bottom: 10px;
   left: 3px;
 
   width: 50px;
@@ -553,7 +552,6 @@ code {
 
 
 .hero-particles {
-  // background: var(--bg-particles);
   background: linear-gradient(0deg, rgb(32, 32, 32) 0%, rgba(32, 32, 32, 0.9) 10%, transparent 40%, transparent 100%), url("../src/assets/images/ball-wed.svg") center center, #242423;
   background-size: cover;
   margin-bottom: -25px;
@@ -610,8 +608,6 @@ code {
   background: rgba(255, 255, 255, 0.75);
   padding: .75rem;
   border-radius: 1rem;
-
-  // transform: rotate(-90deg);
 }
 
 .ToTop:hover {
