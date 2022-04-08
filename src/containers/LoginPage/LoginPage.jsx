@@ -54,12 +54,7 @@ export const LoginPage = () => {
         email,
         password
       );
-      // updateProfile(auth.currentUser, {
-      //   displayName: "Megan Rain", photoURL: "https://i.pinimg.com/originals/13/0f/cf/130fcf591707629116cf320e040d45d2.jpg"
-      // })
       setSuccess('Successfully login ')
-      // await delay(700)
-      // navigate('/countrycomparer')
     } catch (error) {
       setError(error.message)
     }
@@ -68,18 +63,11 @@ export const LoginPage = () => {
     }
   }
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
 
   const [recaptcha, setRecaptcha] = useState(null)
   const verifyCallback = (token) => {
     setRecaptcha(token)
   }
-  // const callback = () => {
-  //   recaptchaInstance.reset();
-  // }
-  console.log(API_RECAPCHA)
   return (
     <>
       <Balls></Balls>
@@ -132,14 +120,6 @@ export const LoginPage = () => {
         />
 
         <motion.button
-          // initial={{
-          //   opacity: 0,
-          //   x: -100
-          // }}
-          // animate={{
-          //   opacity: 1,
-          //   x: 0
-          // }}
           whileHover={isValid && {
             scale: 1.05
           }}

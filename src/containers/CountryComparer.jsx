@@ -141,8 +141,8 @@ export function CountryComparer(props) {
     return <Unavailable></Unavailable>
   }
   return (
-    <>
-      <Video windowWidth={props.windowWidth}></Video>
+    <div className='hero-particles'>
+      {/* <Video windowWidth={props.windowWidth}></Video> */}
       {
         loading
           ? <Loader></Loader>
@@ -301,7 +301,7 @@ export function CountryComparer(props) {
         }
       </AnimatePresence>
 
-    </ >
+    </div>
   )
 }
 

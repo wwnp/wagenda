@@ -313,7 +313,7 @@ code {
 
 .MenuToggle {
   position: fixed;
-  bottom: 10px;
+  bottom: 100px;
   /* left: 10px; */
   left: 3px;
 
@@ -558,6 +558,7 @@ code {
   background-size: cover;
   margin-bottom: -25px;
   overflow: hidden;
+  height: 100vh;
 }
 
 .youtubeVid {

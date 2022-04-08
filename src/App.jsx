@@ -13,7 +13,6 @@ import AdminRoute from './routes/AdminRoute';
 import PrivateRoute from "./routes/PrivateRoute";
 import { ProfilePage } from "./containers/ProfilePage";
 import { SignupPage } from "./containers/RegistrationPage/SignupPage";
-import TestPage from "./containers/TestPage";
 import { WINDOW_SIZE } from "./config";
 
 export default function App() {
@@ -62,16 +61,7 @@ export default function App() {
             <ProfilePage />
           </PrivateRoute>
         }></Route>
-
-        {/* <PrivateRoute></PrivateRoute> */}
-
-        {/* <Route path='signup' element={
-          <GuestRoute>
-            <RegistrationPage />
-          </GuestRoute>
-        }></Route> */}
       </Route>
-      <Route path='test' element={<TestPage />}></Route>
       <Route index element={<Home />}></Route>
     </Routes>
   )

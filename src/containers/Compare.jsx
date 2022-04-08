@@ -104,12 +104,9 @@ export function Compare(props) {
         time: state.time - 1
       })
     }
-    // }, null);
   }, isRunning ? delay : null);
 
   useEffect(() => {
-    // document.body.setAttribute('data-theme', 'dark')
-    // // await delay(2000)
 
     async function fetchLocations() {
       const countryOne = localStorage.getItem('countryOne')

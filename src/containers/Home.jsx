@@ -151,9 +151,6 @@ export default function Home(props) {
                   transition={{
                     delay: 0,
                     duration: 1,
-                    // repeat: Infinity,
-                    // repeatDelay: 0,
-                    // repeatType: 'reverse',
                     type: 'tween',
                     ease: 'easeInOut'
                   }}
@@ -191,12 +188,6 @@ export default function Home(props) {
             className='container section-odd'
             initial='hidden'
             whileInView='visible'
-          // className='d-flex travel-section'
-
-          // style={{
-          //   background:'var(--colors-bg-grad)',
-          //   // background:'linear-gradient(90deg, #080911 0%, #0d0d16 54%, rgba(5,0,15,1) 100%)'
-          // }}
           >
             <div className="row flex-wrap">
               <div className="col-12 col-md-6 d-flex justify-center">
